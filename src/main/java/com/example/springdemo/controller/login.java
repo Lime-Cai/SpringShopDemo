@@ -1,7 +1,6 @@
 package com.example.springdemo.controller;
 
 import com.example.springdemo.entity.HsUser;
-import com.example.springdemo.tool.systemTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +16,6 @@ public class login {
 
     @Autowired
     private HsUserService hsUserService;
-
-    systemTool systemTool =new systemTool();
 
 
     @GetMapping("/")
@@ -38,14 +35,14 @@ public class login {
 
 
     @GetMapping("/query/all")
-    public List<HsUser> allUser(Model model){
+    public String allUser(Model model){
         model.addAttribute("alluser",hsUserService.findAll());
         return "admin/query";
     }
 
-    @PostMapping("/save")
-    public void save(@ModelAttribute Model model){
-        System.out.println("FFFF");
+    @PostMapping("/add")
+    public void save(@ModelAttribute HsUser hsUser){
+        hsUserService.save(hsUser);
 
     }
 
