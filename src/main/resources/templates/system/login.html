@@ -1,88 +1,40 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8 ">
-    <title>login</title>
-
-
-    <script type="text/css " src="..\js\menu.js "></script>
-    <script src="../js/jquery.min.js "></script>
-    <script src="../js/util.js "></script>
-    <script src="../js/jquery.validate.min.js "></script>
-    <script src="../js/messages_zh_TW.min.js "></script>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- this is where we refer the css file from src/main/resources/static/main.css -->
     <base th:href="@{/}">
     <link rel="stylesheet " href="../../static/css/output.css ">
     <link rel="stylesheet " href="/css/output.css ">
-
 </head>
 
-<body style="padding: 10px">
-    <table style="width: 100%; background-color: aquamarine; ">
-        <tr>
-            <td style="width: 15%; height: 100px;">
-                <h2 class="text-5xl font-bold  text-blue-600  border-2 border-black rounded-3xl text-center ml-2" style="background-color: #b8ff00;"> HELLO </h2>
-            </td>
-            <td>
-                <div>
-                    <ul class="float-right flex mr-10 ">
-                        <li class="login_li" style="background-color: bisque;  "><a href="# ">首頁</a></li>
-                        <li class="header-ul px-4" style="background-color: bisque;  "><a href="# ">會員資料</a></li>
-                        <li class="header-ul px-4" style="background-color: bisque;  "><a href="# ">登陸</a></li>
-                        <li class="header-ul px-4" style="background-color: bisque; "><a href="# ">關於我</a></li>
-                    </ul>
-                </div>
-            </td>
-        </tr>
-    </table>
-
-    <div class="md:w-48 lg:w-5/12  mx-auto mt-20">
-        <form>
-            <!-- Email input -->
-            <div class="mb-6">
-                <input type="text" class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="Email address" />
+<body>
+<!-- component -->
+<div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat" style="background-image:url('https://images.unsplash.com/photo-1499123785106-343e69e68db1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1748&q=80')">
+    <div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+        <div class="text-white">
+            <div class="mb-8 flex flex-col items-center">
+                <img src="https://www.logo.wine/a/logo/Instagram/Instagram-Glyph-Color-Logo.wine.svg" width="150" alt="" srcset="" />
+                <h1 class="mb-2 text-2xl">Instagram</h1>
+                <span class="text-gray-300">Enter Login Details</span>
             </div>
-
-            <!-- Password input -->
-            <div class="mb-6">
-                <input type="password" class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    placeholder="Password" />
-            </div>
-
-            <div class="flex justify-between items-center mb-6">
-                <div class="form-group form-check ">
-                    <input type="checkbox" class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                        id="exampleCheck3" checked />
-                    <label class="form-check-label inline-block text-gray-800" for="exampleCheck2">Remember me</label
-                  >
+            <form th:action="@{/login/}" th:object="${hsUser}" th:method="${_method}">
+                <div class="mb-4 text-lg">
+                    <input class="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="text" name="name" placeholder="id@email.com" />
                 </div>
-                <a
-                  href="#!"
-                  class="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
-                  >Forgot password?</a
-                >
-              </div>
-    
-              <!-- Submit button -->
-              <button
-                type="submit"
-                class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
-                data-mdb-ripple="true"
-                data-mdb-ripple-color="light"
-              >
-                Sign in
-              </button>
-    
-              <div
-                class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
-              >
-    
-              </div>
-    
-              
+
+                <div class="mb-4 text-lg">
+                    <input class="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="Password" name="name" placeholder="*********" />
+                </div>
+                <div class="mt-8 flex justify-center text-lg text-black">
+                    <button type="submit" class="rounded-3xl bg-yellow-400 bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">Login</button>
+                </div>
             </form>
-          </div>
-    </body>
+        </div>
+    </div>
+</div>
+</body>
 
-    </html>
+</html>

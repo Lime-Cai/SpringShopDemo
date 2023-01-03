@@ -2,6 +2,7 @@ package com.example.springdemo.service.impl;
 
 import com.example.springdemo.dao.repository.HsUserRepository;
 import com.example.springdemo.entity.HsUser;
+import com.example.springdemo.tools.SystemTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.example.springdemo.service.model.HsUserService;
@@ -15,6 +16,8 @@ public class HsUserServiceImpl implements HsUserService {
     @Autowired
     private HsUserRepository hsUserRepository;
 
+    private SystemTools systemTools;
+
     @Override
     public Optional<HsUser> findById(Long id) {
         return hsUserRepository.findById(id);
@@ -26,8 +29,12 @@ public class HsUserServiceImpl implements HsUserService {
     }
 
     @Override
-    public HsUser save(HsUser user) {
-        return hsUserRepository.save(user);
+    public String save(HsUser hsUser) {
+        if (systemTools.isNullStringTools(hsUser,hsUser.getUsername(),"UserName")){
+            return "system/error";
+        }
+        hsUserRepository.save(hsUser);
+        return "system/success";
     }
 
     @Override

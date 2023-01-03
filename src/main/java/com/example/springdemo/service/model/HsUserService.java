@@ -9,6 +9,6 @@ import java.util.Optional;
 public interface HsUserService {
     Optional<HsUser> findById(Long id);
     List<HsUser> findAll();
-    HsUser save(HsUser user);
+    String save(HsUser user);
     void delete(Integer id);
 }
