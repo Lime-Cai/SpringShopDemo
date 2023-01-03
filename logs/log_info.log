@@ -1,0 +1,118 @@
+2023-01-03 03:58:39.518 INFO  --- [SpringApplicationShutdownHook] o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-01-03 03:58:39.522 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-01-03 03:58:39.527 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-01-03 03:58:42.341 INFO  --- [background-preinit] org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+2023-01-03 03:58:42.368 INFO  --- [restartedMain] com.example.springdemo.SpringDemoApplication - Starting SpringDemoApplication using Java 17.0.1 with PID 64348 (C:\Users\jp098\IdeaProjects\SpringDemo\build\classes\java\main started by jp098 in C:\Users\jp098\IdeaProjects\SpringDemo)
+2023-01-03 03:58:42.369 INFO  --- [restartedMain] com.example.springdemo.SpringDemoApplication - No active profile set, falling back to 1 default profile: "default"
+2023-01-03 03:58:42.410 INFO  --- [restartedMain] o.s.boot.devtools.restart.ChangeableUrls - The Class-Path manifest attribute in C:\Users\jp098\.gradle\caches\modules-2\files-2.1\com.sun.xml.bind\jaxb-impl\4.0.1\bad26cea1d483dda57b6f634cdeaca3238637aea\jaxb-impl-4.0.1.jar referenced one or more files that do not exist: file:/C:/Users/jp098/.gradle/caches/modules-2/files-2.1/com.sun.xml.bind/jaxb-impl/4.0.1/bad26cea1d483dda57b6f634cdeaca3238637aea/jaxb-core.jar,file:/C:/Users/jp098/.gradle/caches/modules-2/files-2.1/com.sun.xml.bind/jaxb-impl/4.0.1/bad26cea1d483dda57b6f634cdeaca3238637aea/angus-activation.jar
+2023-01-03 03:58:42.410 INFO  --- [restartedMain] o.s.boot.devtools.restart.ChangeableUrls - The Class-Path manifest attribute in C:\Users\jp098\.gradle\caches\modules-2\files-2.1\com.sun.xml.bind\jaxb-core\4.0.1\e8bf2d711d2d4250537199602bccae0cd4e62726\jaxb-core-4.0.1.jar referenced one or more files that do not exist: file:/C:/Users/jp098/.gradle/caches/modules-2/files-2.1/com.sun.xml.bind/jaxb-core/4.0.1/e8bf2d711d2d4250537199602bccae0cd4e62726/jakarta.activation-api.jar,file:/C:/Users/jp098/.gradle/caches/modules-2/files-2.1/com.sun.xml.bind/jaxb-core/4.0.1/e8bf2d711d2d4250537199602bccae0cd4e62726/jakarta.xml.bind-api.jar
+2023-01-03 03:58:42.410 INFO  --- [restartedMain] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-01-03 03:58:42.410 INFO  --- [restartedMain] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-01-03 03:58:42.958 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-01-03 03:58:42.958 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-01-03 03:58:43.004 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 40 ms. Found 1 JPA repository interfaces.
+2023-01-03 03:58:43.017 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-01-03 03:58:43.017 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-01-03 03:58:43.027 INFO  --- [restartedMain] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.springdemo.dao.repository.HsUserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-01-03 03:58:43.027 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 4 ms. Found 0 Redis repository interfaces.
+2023-01-03 03:58:43.246 INFO  --- [restartedMain] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-01-03 03:58:43.263 INFO  --- [restartedMain] o.s.w.s.a.server.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2023-01-03 03:58:43.498 INFO  --- [restartedMain] o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-01-03 03:58:43.505 INFO  --- [restartedMain] org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-01-03 03:58:43.505 INFO  --- [restartedMain] org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-01-03 03:58:43.505 INFO  --- [restartedMain] org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.1]
+2023-01-03 03:58:43.566 INFO  --- [restartedMain] o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-01-03 03:58:43.566 INFO  --- [restartedMain] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1155 ms
+2023-01-03 03:58:43.657 INFO  --- [restartedMain] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-01-03 03:58:43.869 INFO  --- [restartedMain] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2db10096
+2023-01-03 03:58:43.871 INFO  --- [restartedMain] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-01-03 03:58:43.896 INFO  --- [restartedMain] org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-01-03 03:58:43.931 INFO  --- [restartedMain] org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.5.Final
+2023-01-03 03:58:44.150 INFO  --- [restartedMain] SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-01-03 03:58:44.668 INFO  --- [restartedMain] o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-01-03 03:58:44.676 INFO  --- [restartedMain] o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-01-03 03:58:45.024 INFO  --- [restartedMain] o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page template: index
+2023-01-03 03:58:45.379 INFO  --- [restartedMain] o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-01-03 03:58:45.394 INFO  --- [restartedMain] org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-01-03 03:58:45.409 INFO  --- [restartedMain] o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-01-03 03:58:45.417 INFO  --- [restartedMain] com.example.springdemo.SpringDemoApplication - Started SpringDemoApplication in 3.442 seconds (process running for 4.375)
+2023-01-03 04:00:18.071 INFO  --- [SpringApplicationShutdownHook] o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-01-03 04:00:18.074 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-01-03 04:00:18.078 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-01-03 04:05:22.897 INFO  --- [background-preinit] org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+2023-01-03 04:05:22.932 INFO  --- [restartedMain] com.example.springdemo.SpringDemoApplication - Starting SpringDemoApplication using Java 17.0.1 with PID 59512 (C:\Users\jp098\IdeaProjects\SpringDemo\build\classes\java\main started by jp098 in C:\Users\jp098\IdeaProjects\SpringDemo)
+2023-01-03 04:05:22.934 INFO  --- [restartedMain] com.example.springdemo.SpringDemoApplication - No active profile set, falling back to 1 default profile: "default"
+2023-01-03 04:05:22.975 INFO  --- [restartedMain] o.s.boot.devtools.restart.ChangeableUrls - The Class-Path manifest attribute in C:\Users\jp098\.gradle\caches\modules-2\files-2.1\com.sun.xml.bind\jaxb-impl\4.0.1\bad26cea1d483dda57b6f634cdeaca3238637aea\jaxb-impl-4.0.1.jar referenced one or more files that do not exist: file:/C:/Users/jp098/.gradle/caches/modules-2/files-2.1/com.sun.xml.bind/jaxb-impl/4.0.1/bad26cea1d483dda57b6f634cdeaca3238637aea/jaxb-core.jar,file:/C:/Users/jp098/.gradle/caches/modules-2/files-2.1/com.sun.xml.bind/jaxb-impl/4.0.1/bad26cea1d483dda57b6f634cdeaca3238637aea/angus-activation.jar
+2023-01-03 04:05:22.976 INFO  --- [restartedMain] o.s.boot.devtools.restart.ChangeableUrls - The Class-Path manifest attribute in C:\Users\jp098\.gradle\caches\modules-2\files-2.1\com.sun.xml.bind\jaxb-core\4.0.1\e8bf2d711d2d4250537199602bccae0cd4e62726\jaxb-core-4.0.1.jar referenced one or more files that do not exist: file:/C:/Users/jp098/.gradle/caches/modules-2/files-2.1/com.sun.xml.bind/jaxb-core/4.0.1/e8bf2d711d2d4250537199602bccae0cd4e62726/jakarta.activation-api.jar,file:/C:/Users/jp098/.gradle/caches/modules-2/files-2.1/com.sun.xml.bind/jaxb-core/4.0.1/e8bf2d711d2d4250537199602bccae0cd4e62726/jakarta.xml.bind-api.jar
+2023-01-03 04:05:22.976 INFO  --- [restartedMain] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-01-03 04:05:22.976 INFO  --- [restartedMain] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-01-03 04:05:23.670 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-01-03 04:05:23.670 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-01-03 04:05:23.719 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 43 ms. Found 1 JPA repository interfaces.
+2023-01-03 04:05:23.733 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-01-03 04:05:23.734 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-01-03 04:05:23.744 INFO  --- [restartedMain] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.springdemo.dao.repository.HsUserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-01-03 04:05:23.744 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+2023-01-03 04:05:23.965 INFO  --- [restartedMain] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-01-03 04:05:23.980 INFO  --- [restartedMain] o.s.w.s.a.server.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2023-01-03 04:05:24.199 INFO  --- [restartedMain] o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-01-03 04:05:24.208 INFO  --- [restartedMain] org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-01-03 04:05:24.209 INFO  --- [restartedMain] org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-01-03 04:05:24.209 INFO  --- [restartedMain] org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.1]
+2023-01-03 04:05:24.261 INFO  --- [restartedMain] o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-01-03 04:05:24.261 INFO  --- [restartedMain] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1285 ms
+2023-01-03 04:05:24.348 INFO  --- [restartedMain] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-01-03 04:05:24.560 INFO  --- [restartedMain] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@600ad790
+2023-01-03 04:05:24.561 INFO  --- [restartedMain] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-01-03 04:05:24.586 INFO  --- [restartedMain] org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-01-03 04:05:24.621 INFO  --- [restartedMain] org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.5.Final
+2023-01-03 04:05:24.831 INFO  --- [restartedMain] SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-01-03 04:05:25.281 INFO  --- [restartedMain] o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-01-03 04:05:25.289 INFO  --- [restartedMain] o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-01-03 04:05:25.636 INFO  --- [restartedMain] o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page template: index
+2023-01-03 04:05:26.007 INFO  --- [restartedMain] o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-01-03 04:05:26.020 INFO  --- [restartedMain] org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-01-03 04:05:26.037 INFO  --- [restartedMain] o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-01-03 04:05:26.045 INFO  --- [restartedMain] com.example.springdemo.SpringDemoApplication - Started SpringDemoApplication in 3.581 seconds (process running for 4.206)
+2023-01-03 04:05:47.440 INFO  --- [SpringApplicationShutdownHook] o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-01-03 04:05:47.442 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-01-03 04:05:47.447 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-01-03 04:05:50.095 INFO  --- [background-preinit] org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.0.Final
+2023-01-03 04:05:50.126 INFO  --- [restartedMain] com.example.springdemo.SpringDemoApplication - Starting SpringDemoApplication using Java 17.0.1 with PID 34388 (C:\Users\jp098\IdeaProjects\SpringDemo\build\classes\java\main started by jp098 in C:\Users\jp098\IdeaProjects\SpringDemo)
+2023-01-03 04:05:50.126 INFO  --- [restartedMain] com.example.springdemo.SpringDemoApplication - No active profile set, falling back to 1 default profile: "default"
+2023-01-03 04:05:50.168 INFO  --- [restartedMain] o.s.boot.devtools.restart.ChangeableUrls - The Class-Path manifest attribute in C:\Users\jp098\.gradle\caches\modules-2\files-2.1\com.sun.xml.bind\jaxb-impl\4.0.1\bad26cea1d483dda57b6f634cdeaca3238637aea\jaxb-impl-4.0.1.jar referenced one or more files that do not exist: file:/C:/Users/jp098/.gradle/caches/modules-2/files-2.1/com.sun.xml.bind/jaxb-impl/4.0.1/bad26cea1d483dda57b6f634cdeaca3238637aea/jaxb-core.jar,file:/C:/Users/jp098/.gradle/caches/modules-2/files-2.1/com.sun.xml.bind/jaxb-impl/4.0.1/bad26cea1d483dda57b6f634cdeaca3238637aea/angus-activation.jar
+2023-01-03 04:05:50.168 INFO  --- [restartedMain] o.s.boot.devtools.restart.ChangeableUrls - The Class-Path manifest attribute in C:\Users\jp098\.gradle\caches\modules-2\files-2.1\com.sun.xml.bind\jaxb-core\4.0.1\e8bf2d711d2d4250537199602bccae0cd4e62726\jaxb-core-4.0.1.jar referenced one or more files that do not exist: file:/C:/Users/jp098/.gradle/caches/modules-2/files-2.1/com.sun.xml.bind/jaxb-core/4.0.1/e8bf2d711d2d4250537199602bccae0cd4e62726/jakarta.activation-api.jar,file:/C:/Users/jp098/.gradle/caches/modules-2/files-2.1/com.sun.xml.bind/jaxb-core/4.0.1/e8bf2d711d2d4250537199602bccae0cd4e62726/jakarta.xml.bind-api.jar
+2023-01-03 04:05:50.168 INFO  --- [restartedMain] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-01-03 04:05:50.168 INFO  --- [restartedMain] o.s.b.d.env.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-01-03 04:05:50.800 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-01-03 04:05:50.800 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-01-03 04:05:50.846 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 40 ms. Found 1 JPA repository interfaces.
+2023-01-03 04:05:50.858 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+2023-01-03 04:05:50.859 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-01-03 04:05:50.868 INFO  --- [restartedMain] o.s.d.r.c.RepositoryConfigurationExtensionSupport - Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.example.springdemo.dao.repository.HsUserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-01-03 04:05:50.868 INFO  --- [restartedMain] o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 3 ms. Found 0 Redis repository interfaces.
+2023-01-03 04:05:51.091 INFO  --- [restartedMain] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.ws.config.annotation.DelegatingWsConfiguration' of type [org.springframework.ws.config.annotation.DelegatingWsConfiguration$$SpringCGLIB$$0] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-01-03 04:05:51.108 INFO  --- [restartedMain] o.s.w.s.a.server.AnnotationActionEndpointMapping - Supporting [WS-Addressing August 2004, WS-Addressing 1.0]
+2023-01-03 04:05:51.319 INFO  --- [restartedMain] o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-01-03 04:05:51.326 INFO  --- [restartedMain] org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-01-03 04:05:51.326 INFO  --- [restartedMain] org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2023-01-03 04:05:51.326 INFO  --- [restartedMain] org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.1]
+2023-01-03 04:05:51.383 INFO  --- [restartedMain] o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-01-03 04:05:51.383 INFO  --- [restartedMain] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1215 ms
+2023-01-03 04:05:51.461 INFO  --- [restartedMain] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-01-03 04:05:51.677 INFO  --- [restartedMain] com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@71684783
+2023-01-03 04:05:51.680 INFO  --- [restartedMain] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-01-03 04:05:51.709 INFO  --- [restartedMain] org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-01-03 04:05:51.744 INFO  --- [restartedMain] org.hibernate.Version - HHH000412: Hibernate ORM core version 6.1.5.Final
+2023-01-03 04:05:51.956 INFO  --- [restartedMain] SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-01-03 04:05:52.394 INFO  --- [restartedMain] o.h.e.t.jta.platform.internal.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-01-03 04:05:52.401 INFO  --- [restartedMain] o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-01-03 04:05:52.739 INFO  --- [restartedMain] o.s.b.a.web.servlet.WelcomePageHandlerMapping - Adding welcome page template: index
+2023-01-03 04:05:53.118 INFO  --- [restartedMain] o.s.b.d.autoconfigure.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-01-03 04:05:53.138 INFO  --- [restartedMain] org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-01-03 04:05:53.159 INFO  --- [restartedMain] o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-01-03 04:05:53.169 INFO  --- [restartedMain] com.example.springdemo.SpringDemoApplication - Started SpringDemoApplication in 3.488 seconds (process running for 4.322)
+2023-01-03 04:06:06.400 INFO  --- [SpringApplicationShutdownHook] o.s.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-01-03 04:06:06.402 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-01-03 04:06:06.407 INFO  --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-01-03 04:07:03.135 ERROR --- [http-nio-8080-exec-1] com.example.springdemo.controller.userLogin - error test
