@@ -8,37 +8,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/test")
 @Slf4j
-public class userLogin {
-
+public class test {
     @Autowired
     private HsUserService hsUserService;
 
     @GetMapping("/")
-    public String index(Model model) {
-        model.addAttribute("hsUser",new HsUser());
+    public String index(@ModelAttribute HsUser hsUser , Model model) {
         model.addAttribute("_method","POST");
-        return "system/login";
-    }
-
-
-    @GetMapping("/add")
-    public String add(@ModelAttribute HsUser hsUser , Model model) {
-        model.addAttribute("_method","POST");
-        return "system/login_add";
-    }
-    @PostMapping("/save")
-    public String save( @ModelAttribute HsUser hsUser ,Model model) {
         model.addAttribute("hsUser",new HsUser());
-        System.out.println("SAVE");
-        log.info("註冊者 : {}",hsUser.getUsername());
-        return hsUserService.save(hsUser);
+        return "test";
     }
-
-
 }

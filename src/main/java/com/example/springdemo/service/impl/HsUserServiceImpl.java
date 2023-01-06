@@ -1,5 +1,6 @@
 package com.example.springdemo.service.impl;
 
+import com.example.springdemo.dao.mapper.base.HsUserMapper;
 import com.example.springdemo.dao.repository.HsUserRepository;
 import com.example.springdemo.entity.HsUser;
 import com.example.springdemo.tools.SystemTools;
@@ -15,6 +16,8 @@ public class HsUserServiceImpl implements HsUserService {
 
     @Autowired
     private HsUserRepository hsUserRepository;
+    @Autowired
+    private HsUserMapper hsUserMapper;
 
     private SystemTools systemTools;
 
@@ -30,11 +33,25 @@ public class HsUserServiceImpl implements HsUserService {
 
     @Override
     public String save(HsUser hsUser) {
-        if (systemTools.isNullStringTools(hsUser,hsUser.getUsername(),"UserName")){
-            return "system/error";
+        if (systemTools.isNullStringTools(hsUser,hsUser.getUsername(),"判斷UserName")){
+            return "system/login_error";
         }
+
+        if (systemTools.isNullStringTools(hsUser,hsUser.getPassword(),"判斷PassWord")){
+            return "system/login_error";
+        }
+
+        // 產生 token 如果重複再產生
+        String token = systemTools.uuidToken();
+        while (hsUserMapper.findToken(token) != 0){
+            token = systemTools.uuidToken();
+        }
+        hsUser.setToken(token);
+
+
+
         hsUserRepository.save(hsUser);
-        return "system/success";
+        return "system/login_success";
     }
 
     @Override

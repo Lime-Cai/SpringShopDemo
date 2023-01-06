@@ -10,4 +10,5 @@ import java.util.Optional;
 
 public interface HsUserRepository extends JpaRepository<HsUser, Integer> {
     Optional<HsUser> findById(Long id);
+
 }
