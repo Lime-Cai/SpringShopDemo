@@ -30,13 +30,14 @@ public class userLogin {
     @GetMapping("/add")
     public String add(@ModelAttribute HsUser hsUser , Model model) {
         model.addAttribute("_method","POST");
+        model.addAttribute("hsUser",new HsUser());
         return "system/login_add";
     }
     @PostMapping("/save")
     public String save( @ModelAttribute HsUser hsUser ,Model model) {
+        model.addAttribute("_method","POST");
         model.addAttribute("hsUser",new HsUser());
         System.out.println("SAVE");
-        log.info("註冊者 : {}",hsUser.getUsername());
         return hsUserService.save(hsUser);
     }
 

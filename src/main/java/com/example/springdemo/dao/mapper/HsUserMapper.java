@@ -1,14 +1,14 @@
-package com.example.springdemo.dao.mapper.base;
+package com.example.springdemo.dao.mapper;
 
 import com.example.springdemo.entity.HsUser;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 @Mapper
-@Component
+@Repository
 public interface HsUserMapper {
 
-    int findToken(String token);
+    Integer findToken(String token);
 
     HsUser insertHsUser(HsUser hsUser);
 }

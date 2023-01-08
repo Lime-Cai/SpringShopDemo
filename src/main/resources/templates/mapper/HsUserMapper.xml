@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.springdemo.dao.mapper.base.HsUserMapper">
+<mapper namespace="com.example.springdemo.dao.mapper.HsUserMapper">
 
     <resultMap id="BaseResultMap" type="com.example.springdemo.entity.HsUser">
     <id column="id" javaType="INTEGER" property="id"/>
@@ -19,7 +19,8 @@
     <sql id="all">
         id, username, password, name, mail, phone, add_time, last_login_time, token, is_admin
     </sql>
-    <select id="findToken" resultType="int">
+    <insert id="insertHsUser"></insert>
+    <select id="findToken" resultType="Integer" parameterType="String">
         select
             count(1)
         from hs_user
