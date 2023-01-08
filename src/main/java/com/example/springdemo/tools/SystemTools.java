@@ -2,12 +2,14 @@ package com.example.springdemo.tools;
 
 import com.example.springdemo.entity.HsUser;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Stream;
 
 @Slf4j
+@Component
 public class SystemTools {
 
 
@@ -23,10 +25,12 @@ public class SystemTools {
      * @return java.lang.Boolean
      */
     public Boolean isNullStringTools(HsUser hsUser,String s,String remark){
+        System.out.println(hsUser.getUsername()+remark+s);
         if (s.trim() == "" && s.equals("") && s == null){
             log.error("[ERROR] USER : {} 命中isNull : {}",hsUser.getUsername(),remark);
+            return true;
         };
-        return false;
+        return  false;
     }
 
     /**
