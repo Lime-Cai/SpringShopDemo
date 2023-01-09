@@ -46,7 +46,7 @@ public class HsUserServiceImpl implements HsUserService {
         }
 
         if (hsUserMapper.findUsername(hsUser.getUsername()) >0){
-            System.out.println("帳號重複");
+            log.error("[ERROR] 帳號重複 : [ "+hsUser.getUsername()+" ]");
             return "system/login_error";
         }
 
