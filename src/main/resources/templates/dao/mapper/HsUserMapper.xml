@@ -11,10 +11,13 @@
                 </if>
             </where>
     </select>
-    <select id="findPassword" resultType="java.lang.Integer">
+    <select id="findLogigCheck" resultType="java.lang.Integer">
         select count(*)
         from hs_user
             <where>
+                <if test="username != null">
+                    username =#{username jdbcType="VARCHAR"}
+                </if>
                 <if test="password != null">
                     password =#{password jdbcType="VARCHAR"}
                 </if>

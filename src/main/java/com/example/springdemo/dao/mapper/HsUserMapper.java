@@ -13,6 +13,6 @@ public interface HsUserMapper {
 
     Integer findUsername(@Param("username") String username);
 
-    // 再修正
-    Integer findPassword(@Param("password") String password);
+    // 確認帳號密碼是否正確
+    Integer findLogigCheck(String username, String password);
 }

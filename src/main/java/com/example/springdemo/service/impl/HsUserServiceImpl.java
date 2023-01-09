@@ -25,6 +25,18 @@ public class HsUserServiceImpl implements HsUserService {
     private SystemTools systemTools;
 
     @Override
+    public Boolean loginCheck(HsUser user) {
+        Integer count = hsUserMapper.findLogigCheck(user.getUsername(), user.getPassword());
+        if(count <=0){
+            log.error("[ERROR] 登陸失敗 帳號 : [ "+user.getUsername()+" ] 密碼 : [ "+user.getPassword()+" ]");
+            return false;
+        }
+        user.setLast_login_time(LocalDateTime.now());
+        log.info("使用者 : [ "+user.getUsername()+" ]" +" 登陸成功 "+LocalDateTime.now());
+        return true;
+    }
+
+    @Override
     public Optional<HsUser> findById(Long id) {
         return hsUserRepository.findById(id);
     }

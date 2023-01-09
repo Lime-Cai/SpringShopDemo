@@ -20,7 +20,7 @@ public class userLogin {
     private HsUserService hsUserService;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String login(Model model) {
         model.addAttribute("hsUser",new HsUser());
         model.addAttribute("_method","POST");
         return "system/login";

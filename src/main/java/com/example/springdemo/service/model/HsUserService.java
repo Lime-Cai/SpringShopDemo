@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface HsUserService {
+    Boolean loginCheck(HsUser user);
     Optional<HsUser> findById(Long id);
     List<HsUser> findAll();
     String save(HsUser user);
