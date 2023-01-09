@@ -46,19 +46,21 @@ public class HsUserServiceImpl implements HsUserService {
         }
 
 
+
         // 產生 token 如果重複再產生
         String token = systemTools.uuidToken();
         while (hsUserMapper.findToken(token) > 0){
             token = systemTools.uuidToken();
         }
-        hsUser.builder().
+       HsUser user = hsUser.builder().
+                username(hsUser.getUsername()).
+                password(hsUser.getPassword()).
                 token(token).
                 add_time(LocalDateTime.now()).
                 last_login_time(LocalDateTime.now()).
                 is_admin(0).build();
 
-        log.info("註冊成功 UserName : { " + hsUser.getUsername()+" }");
-        //hsUserRepository.save(hsUser);
+        log.info("註冊成功 UserName : { " + hsUser.getUsername()+" }");hsUserRepository.save(user);
         return "system/login_success";
     }
 
