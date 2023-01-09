@@ -45,7 +45,10 @@ public class HsUserServiceImpl implements HsUserService {
             return "system/login_error";
         }
 
-
+        if (hsUserMapper.findUsername(hsUser.getUsername()) >0){
+            System.out.println("帳號重複");
+            return "system/login_error";
+        }
 
         // 產生 token 如果重複再產生
         String token = systemTools.uuidToken();

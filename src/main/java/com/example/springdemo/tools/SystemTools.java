@@ -25,9 +25,8 @@ public class SystemTools {
      * @return java.lang.Boolean
      */
     public Boolean isNullStringTools(HsUser hsUser,String s,String remark){
-        System.out.println(hsUser.getUsername()+remark+s);
-        if (s.trim() == "" && s.equals("") && s == null){
-            log.error("[ERROR] USER : {} 命中isNull : {}",hsUser.getUsername(),remark);
+        if (s.trim() == "" || s.equals("") || s == null){
+            log.error("[ERROR] User : [ " + hsUser.getUsername() + " ] "+ remark + " 命中isNull 輸入內容 : { "+s+" }");
             return true;
         };
         return  false;
@@ -37,7 +36,7 @@ public class SystemTools {
      *  使用UUID 產生TOKEN
      *
      * @author Lime
-     * @param []
+     * @param
      * @return java.lang.String
      */
 
