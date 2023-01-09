@@ -12,9 +12,20 @@ create table hs_user
     `token`     VARCHAR(50)     NULL    DEFAULT NULL ,
     `add_time`  datetime        NULL    DEFAULT NULL        COMMENT '註冊時間',
     `last_time` datetime        NULL    DEFAULT NULL        COMMENT '最後登陸時間',
-    `is_admin`  INT             NULL    DEFAULT 0           COMMENT '0.不是、1.是、2.關閉',
+    `is_admin`  INT             NULL    DEFAULT 0           COMMENT '0不是、1是、2關閉',
+    `status`    INT             NULL    DEFAULT 0           COMMENT '0未驗證、1驗證、9登陸失敗次數高於X次封號'
     PRIMARY KEY (`user_id`) USING BTREE
 )DEFAULT CHARSET=utf8mb4 COMMENT = '使用者';
+
+CREATE TABLE user_login_log(
+    `id`            INTEGER         NOT NULL AUTO_INCREMENT,
+    `user_id`       INTEGER         NULL    DEFAULT NULL    COMMENT '使用者id',
+    `status`        INTEGER         NULL    DEFAULT NULL    COMMENT '0登陸成功、9登陸失敗',
+    `frequency`     INTEGER         NULL    DEFAULT NULL    COMMENT '失敗次數',
+    `remark`        VARCHAR(1024)   NULL    DEFAULT NULL    COMMENT '備註',
+    `login_time`    datetime        NULL    DEFAULT NULL    COMMEMT '登陸時間',
+    PRIMARY KEY (`id`) USING BTREE
+)DEFAULT CHARSET=utf8mb4 COMMENT = '使用者登陸狀況';
 
 
 CREATE TABLE admin_product

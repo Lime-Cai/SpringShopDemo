@@ -71,6 +71,7 @@ public class HsUserServiceImpl implements HsUserService {
                 username(hsUser.getUsername()).
                 password(hsUser.getPassword()).
                 token(token).
+                status(0).
                 add_time(LocalDateTime.now()).
                 last_login_time(LocalDateTime.now()).
                 is_admin(0).build();

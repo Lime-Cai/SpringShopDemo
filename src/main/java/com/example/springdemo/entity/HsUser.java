@@ -27,6 +27,8 @@ public class HsUser  implements Serializable {
 
     private String token;
 
+    private Integer status;
+
     private LocalDateTime add_time;
     private LocalDateTime last_login_time;
 
