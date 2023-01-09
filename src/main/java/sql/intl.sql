@@ -17,7 +17,7 @@ create table hs_user
     PRIMARY KEY (`user_id`) USING BTREE
 )DEFAULT CHARSET=utf8mb4 COMMENT = '使用者';
 
-CREATE TABLE user_login_log(
+CREATE TABLE hs_user_login_log(
     `id`            INTEGER         NOT NULL AUTO_INCREMENT,
     `user_id`       INTEGER         NULL    DEFAULT NULL    COMMENT '使用者id',
     `status`        INTEGER         NULL    DEFAULT NULL    COMMENT '0登陸成功、9登陸失敗',
