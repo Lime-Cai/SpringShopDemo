@@ -23,7 +23,7 @@ CREATE TABLE user_login_log(
     `status`        INTEGER         NULL    DEFAULT NULL    COMMENT '0登陸成功、9登陸失敗',
     `frequency`     INTEGER         NULL    DEFAULT NULL    COMMENT '失敗次數',
     `remark`        VARCHAR(1024)   NULL    DEFAULT NULL    COMMENT '備註',
-    `login_time`    datetime        NULL    DEFAULT NULL    COMMEMT '登陸時間',
+    `login_time`    datetime        NULL    DEFAULT NULL    COMMENT '登陸時間',
     PRIMARY KEY (`id`) USING BTREE
 )DEFAULT CHARSET=utf8mb4 COMMENT = '使用者登陸狀況';
 
