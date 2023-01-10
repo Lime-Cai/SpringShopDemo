@@ -1,8 +1,10 @@
 package com.example.springdemo.service.impl;
 
+import com.example.springdemo.dao.mapper.HsUserLoginLogMapper;
 import com.example.springdemo.dao.mapper.HsUserMapper;
 import com.example.springdemo.dao.repository.HsUserRepository;
 import com.example.springdemo.entity.HsUser;
+import com.example.springdemo.service.model.HsUserLoginLogService;
 import com.example.springdemo.tools.SystemTools;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,17 +25,32 @@ public class HsUserServiceImpl implements HsUserService {
     private HsUserMapper hsUserMapper;
     @Autowired
     private SystemTools systemTools;
+    @Autowired
+    private HsUserLoginLogService hsUserLoginLogService;
 
     @Override
-    public Boolean loginCheck(HsUser user) {
-        Integer count = hsUserMapper.findLogigCheck(user.getUsername(), user.getPassword());
+    public Integer loginCheck(HsUser hsUser) {
+        Boolean check =null;
+        // 1 = 帳號密碼符合
+        Integer count = hsUserMapper.findLogigCheck(hsUser.getUsername(), hsUser.getPassword());
         if(count <=0){
-            log.error("[ERROR] 登陸失敗 帳號 : [ "+user.getUsername()+" ] 密碼 : [ "+user.getPassword()+" ]");
-            return false;
+            log.error("[ERROR] 登陸失敗 帳號 : [ "+hsUser.getUsername()+" ] 密碼 : [ "+hsUser.getPassword()+" ]");
+            check =false;
+        }else {
+            check =true;
+            hsUser.setLast_login_time(LocalDateTime.now());
+            hsUserMapper.updateUser(hsUser.getId(),hsUser);
+            log.info("使用者 : [ "+hsUser.getUsername()+" ]" +" 登陸成功 "+LocalDateTime.now());
         }
-        user.setLast_login_time(LocalDateTime.now());
-        log.info("使用者 : [ "+user.getUsername()+" ]" +" 登陸成功 "+LocalDateTime.now());
-        return true;
+        hsUserLoginLogService.saveLog(hsUser,check);
+
+        if (hsUser.getStatus()==9){
+            return 9;
+        } else if (check){
+            return 1;
+        }else {
+            return 0;
+        }
     }
 
     @Override

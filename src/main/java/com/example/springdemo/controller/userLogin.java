@@ -1,6 +1,8 @@
 package com.example.springdemo.controller;
 
 import com.example.springdemo.entity.HsUser;
+import com.example.springdemo.entity.HsUserLoginLog;
+import com.example.springdemo.service.model.HsUserLoginLogService;
 import com.example.springdemo.service.model.HsUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +21,27 @@ public class userLogin {
     @Autowired
     private HsUserService hsUserService;
 
+    @Autowired
+    private HsUserLoginLogService hsUserLoginLogService;
+
     @GetMapping("/")
     public String login(Model model) {
         model.addAttribute("hsUser",new HsUser());
         model.addAttribute("_method","POST");
         return "system/login";
+    }
+
+    @PostMapping("/")
+    public String check(Model model,@ModelAttribute HsUser hsUser ) {
+        model.addAttribute("hsUser",new HsUser());
+        model.addAttribute("_method","POST");
+        String check= null;
+        switch (hsUserService.loginCheck(hsUser)){
+            case 0 : check="system/login_error";
+            case 1 : check="system/login_success";
+            case 9 : check="system/login_frequency";
+        }
+        return "system/login_error";
     }
 
 
