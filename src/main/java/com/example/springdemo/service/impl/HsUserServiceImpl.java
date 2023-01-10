@@ -50,16 +50,16 @@ public class HsUserServiceImpl implements HsUserService {
     public String save(HsUser hsUser) {
         System.out.println(hsUser.getUsername()+"  "+hsUser.getPassword());
         if (systemTools.isNullStringTools(hsUser,hsUser.getUsername(),"UserName")){
-            return "system/login_error";
+            return "system/login_save_error";
         }
 
         if (systemTools.isNullStringTools(hsUser,hsUser.getPassword(),"PassWord")){
-            return "system/login_error";
+            return "system/login_save_error";
         }
 
         if (hsUserMapper.findUsername(hsUser.getUsername()) >0){
             log.error("[ERROR] 帳號重複 : [ "+hsUser.getUsername()+" ]");
-            return "system/login_error";
+            return "system/login_save_error";
         }
 
         // 產生 token 如果重複再產生
@@ -77,7 +77,7 @@ public class HsUserServiceImpl implements HsUserService {
                 is_admin(0).build();
 
         log.info("註冊成功 UserName : { " + hsUser.getUsername()+" }");hsUserRepository.save(user);
-        return "system/login_success";
+        return "system/login_save_success";
     }
 
     @Override
