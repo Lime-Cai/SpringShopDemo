@@ -33,45 +33,48 @@ public class HsUserServiceImpl implements HsUserService {
         Boolean check = true;
         // 1 = 帳號密碼符合
         try {
-        Integer count = hsUserMapper.findLogigCheck(hsUser.getUsername(), hsUser.getPassword());
+            Integer count = hsUserMapper.findLogigCheck(hsUser.getUsername(), hsUser.getPassword());
 
-        // 登陸失敗
-        if (count == 0) {
-            HsUser user = hsUserRepository.findByUsername(hsUser.getUsername()).orElse(null);
-            // 沒有此帳號 不儲存
-            if (user == null) {
-                return 0;
-            } else{ // 有此帳號 進行紀錄
-                hsUserLoginLogService.saveLog(user, false);
-                log.error("[ERROR] 登陸失敗 帳號 : [ " + hsUser.getUsername() + " ] 密碼 : [ " + hsUser.getPassword() + " ]");
-                // 登陸失敗超過次數
-                if (user.getStatus() == 9) {
-                    return 9;
+            // 登陸失敗
+            if (count == 0) {
+                HsUser user = hsUserRepository.findByUsername(hsUser.getUsername()).orElse(null);
+                // 沒有此帳號 不儲存
+                if (user == null) {
+                    return 0;
+                } else { // 有此帳號 進行紀錄
+                    hsUserLoginLogService.saveLog(user, false);
+                    log.error("[ERROR] 登陸失敗 帳號 : [ " + hsUser.getUsername() + " ] 密碼 : [ " + hsUser.getPassword() + " ]");
+                    // 登陸失敗超過次數
+                    if (user.getStatus() == 9) {
+                        log.error("[ERROR] 登陸失敗 已被封鎖 帳號 : [ " + hsUser.getUsername() + " ]");
+                        return 9;
+                    }
+                    return 0;
                 }
+            }
+
+            // 登陸成功
+            HsUser user = hsUserRepository.findByUsernameAndPassword(hsUser.getUsername(), hsUser.getPassword());
+            if (user.getStatus() == 9) {
+                hsUserLoginLogService.saveLog(user, false);
+                log.error("[ERROR] 登陸成功 已被封鎖 帳號 : [ " + hsUser.getUsername() + " ]");
+                return 9;
+            }
+            user.setLast_login_time(LocalDateTime.now());
+            hsUserMapper.updateUser(user);
+
+            log.info("使用者 : [ " + user.getUsername() + " ]" + " 登陸成功 " + LocalDateTime.now());
+            hsUserLoginLogService.saveLog(user, check);
+
+            if (check) {
+                System.out.println("1");
+                return 1;
+            } else {
+                System.out.println("0");
                 return 0;
             }
-        }
-
-        // 登陸成功
-        HsUser user = hsUserRepository.findByUsernameAndPassword(hsUser.getUsername(), hsUser.getPassword());
-        if (user.getStatus() == 9) {
-            return 9;
-        }
-        user.setLast_login_time(LocalDateTime.now());
-        hsUserMapper.updateUser(user);
-
-        log.info("使用者 : [ " + user.getUsername() + " ]" + " 登陸成功 " + LocalDateTime.now());
-        hsUserLoginLogService.saveLog(user, check);
-
-        if (check) {
-            System.out.println("1");
-            return 1;
-        } else {
-            System.out.println("0");
-            return 0;
-        }
-        } catch (Exception e){
-            System.out.println(e+"登陸異常");
+        } catch (Exception e) {
+            System.out.println(e + "登陸異常");
             return 0;
         }
     }
