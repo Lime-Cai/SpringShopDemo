@@ -5,8 +5,6 @@ import com.example.springdemo.entity.HsUserLoginLog;
 
 public interface HsUserLoginLogService {
     void saveLog(HsUser hsUser,Boolean check);
+    void update(Integer user_id);
 
-    Integer getLastLoginFrequency(Integer user_id);
-
-    String checkLoginFrequency(HsUser hsUser);
 }

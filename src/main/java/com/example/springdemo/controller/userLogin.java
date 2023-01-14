@@ -5,13 +5,11 @@ import com.example.springdemo.entity.HsUserLoginLog;
 import com.example.springdemo.service.model.HsUserLoginLogService;
 import com.example.springdemo.service.model.HsUserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/login")
@@ -20,7 +18,6 @@ public class userLogin {
 
     @Autowired
     private HsUserService hsUserService;
-
     @Autowired
     private HsUserLoginLogService hsUserLoginLogService;
 
@@ -35,11 +32,11 @@ public class userLogin {
     public String check(Model model,@ModelAttribute HsUser hsUser ) {
         model.addAttribute("hsUser",new HsUser());
         model.addAttribute("_method","POST");
-        String check= null;
+
         switch (hsUserService.loginCheck(hsUser)){
-            case 0 : check="system/login_error";
-            case 1 : check="system/login_success";
-            case 9 : check="system/login_frequency";
+            case 0 :  return "system/login_error";
+            case 1 :  return "system/login_success";
+            case 9 :  return "system/login_frequency";
         }
         return "system/login_error";
     }
@@ -55,9 +52,15 @@ public class userLogin {
     public String save( @ModelAttribute HsUser hsUser ,Model model) {
         model.addAttribute("_method","POST");
         model.addAttribute("hsUser",new HsUser());
-        System.out.println("SAVE");
         return hsUserService.save(hsUser);
     }
 
-
+    @GetMapping("/status/{id}")
+    public String update(@PathVariable("id") Integer id,Model model){
+        model.addAttribute("_method","POST");
+        hsUserService.update(id);
+        hsUserLoginLogService.update(id);
+        log.info("帳號 : "+id+"重新認證 已解鎖");
+        return  "system/login";
+    }
 }

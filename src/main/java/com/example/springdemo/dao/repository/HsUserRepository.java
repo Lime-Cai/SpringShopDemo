@@ -10,5 +10,7 @@ import java.util.Optional;
 @Repository
 public interface HsUserRepository extends JpaRepository<HsUser, Integer> {
     Optional<HsUser> findById(Long id);
+    Optional<HsUser> findByUsername(String username);
+    HsUser findByUsernameAndPassword(String username,String password);
 
 }

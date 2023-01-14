@@ -12,4 +12,5 @@ public interface HsUserService {
     List<HsUser> findAll();
     String save(HsUser user);
     void delete(Integer id);
+    void update(Integer id);
 }

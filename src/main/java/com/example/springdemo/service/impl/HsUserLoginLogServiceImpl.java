@@ -26,7 +26,6 @@ public class HsUserLoginLogServiceImpl implements HsUserLoginLogService {
 
     @Override
     public void saveLog(HsUser hsUser ,Boolean check) {
-        HsUserLoginLog hsUserLoginLog =new HsUserLoginLog();
         Integer status = null;
         if (check){
             status = 0;
@@ -35,17 +34,20 @@ public class HsUserLoginLogServiceImpl implements HsUserLoginLogService {
         }
         Integer count = 0;
         if (status == 9){
-            count = hsUserLoginLogMapper.findFrequency(hsUser.getId());
+            count = hsUserLoginLogMapper.findFrequency(hsUser.getId()).orElse(null);
+            if(count == null){
+                count =1;
+            }else
             count++;
         }
         String remark = "帳號 : "+hsUser.getUsername()+" 登陸失敗 [ "+count+" ] 次";
 
         if (count >= 5){
             hsUser.setStatus(9);
-            hsUserMapper.updateUser(hsUser.getId(),hsUser);
+            hsUserMapper.updateUser(hsUser);
         }
 
-        hsUserLoginLog.builder().
+        HsUserLoginLog hsUserLoginLog = HsUserLoginLog.builder().
                 user_id(hsUser.getId()).
                 status(status).
                 frequency(count).
@@ -56,18 +58,15 @@ public class HsUserLoginLogServiceImpl implements HsUserLoginLogService {
     }
 
     @Override
-    public Integer getLastLoginFrequency(Integer user_id) {
-        return null;
+    public void update(Integer user_id) {
+        HsUserLoginLog hsUserLoginLog = HsUserLoginLog.builder().user_id(user_id).
+                frequency(0).
+                remark("登陸失敗封鎖 用戶已重新驗證").
+                login_time(LocalDateTime.now()).build();
+        hsUserLoginLogRepository.save(hsUserLoginLog);
     }
 
-    @Override
-    public String checkLoginFrequency(HsUser hsUser) {
-        Integer count = hsUserLoginLogMapper.findFrequency(hsUser.getId());
-        if (count >= 5){
-            return "login_frequency";
-        }
-        return null;
-    }
+
 
 
 }
