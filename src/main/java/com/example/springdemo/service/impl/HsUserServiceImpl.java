@@ -32,7 +32,7 @@ public class HsUserServiceImpl implements HsUserService {
     public Integer loginCheck(HsUser hsUser) {
         Boolean check = true;
         // 1 = 帳號密碼符合
-//        try {
+        try {
         Integer count = hsUserMapper.findLogigCheck(hsUser.getUsername(), hsUser.getPassword());
 
         // 登陸失敗
@@ -41,18 +41,18 @@ public class HsUserServiceImpl implements HsUserService {
             // 沒有此帳號 不儲存
             if (user == null) {
                 return 0;
-            } else// 有此帳號
-            {
+            } else{ // 有此帳號 進行紀錄
                 hsUserLoginLogService.saveLog(user, false);
                 log.error("[ERROR] 登陸失敗 帳號 : [ " + hsUser.getUsername() + " ] 密碼 : [ " + hsUser.getPassword() + " ]");
-
-                // 有此帳號 登陸失敗超過次數
+                // 登陸失敗超過次數
                 if (user.getStatus() == 9) {
                     return 9;
                 }
                 return 0;
             }
         }
+
+        // 登陸成功
         HsUser user = hsUserRepository.findByUsernameAndPassword(hsUser.getUsername(), hsUser.getPassword());
         if (user.getStatus() == 9) {
             return 9;
@@ -70,10 +70,10 @@ public class HsUserServiceImpl implements HsUserService {
             System.out.println("0");
             return 0;
         }
-//        } catch (Exception e){
-//            System.out.println(e+"登陸異常");
-//            return 0;
-//        }
+        } catch (Exception e){
+            System.out.println(e+"登陸異常");
+            return 0;
+        }
     }
 
     @Override
