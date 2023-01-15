@@ -50,8 +50,6 @@ public class userLogin {
     }
     @PostMapping("/save")
     public String save( @ModelAttribute HsUser hsUser ,Model model) {
-        model.addAttribute("_method","POST");
-        model.addAttribute("hsUser",new HsUser());
         return hsUserService.save(hsUser);
     }
 

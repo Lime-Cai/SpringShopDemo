@@ -13,38 +13,38 @@
 <body>
     <!-- component -->
     <div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat">
-        <div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+        <div class="rounded-xl bg-gray-800 bg-opacity-50 px-32 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
             <div class="text-white">
                 <div class="mb-8 flex flex-col items-center">
                     <a th:href="@{/index/}">
-                        <img src="../../img/LOGO.png" width="150" alt="" srcset="" />
+                        <img src="../../static/img/logo.png" th:src="@{/img/logo.png}" width="150" alt="" srcset="" />
                     </a>
                     <h1 class="mb-2 text-2xl"></h1>
                     <span class="text-gray-300"> </span>
+                    <!-- </div> -->
+                    <form th:action="@{/login/}" th:object="${hsUser}" th:method="${_method}">
+                        <div class="mb-4 text-lg">
+                            <input th:filed="${username}" class="rounded-3xl border-none bg-green-600  px-20 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="text" name="username" placeholder="id@email.com" />
+                        </div>
+
+                        <div class="mb-4 text-lg">
+                            <input th:filed="${password}" class="rounded-3xl border-none bg-green-600  px-20 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="Password" name="password" placeholder="*********" />
+                        </div>
+                        <div class="mt-8 flex justify-center text-lg text-black">
+                            <button type="submit" class="rounded-3xl bg-green-300 bg-opacity-50 px-16 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">登錄</button>
+                        </div>
+                        <div>　</div>
+                        <div>　</div>
+                    </form>
+                    <table class="table-fixed min-w-full divide-y divide-gray-200 space-x-16">
+                        <th class="rounded-3xl bg-blue-400 bg-opacity-50 px-0.5 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-blue-600"><a href="">忘記密碼</a></th>
+                        <th>　</th>
+                        <th class="rounded-3xl bg-blue-400 bg-opacity-50 px-0.5 py-2 text-white shadow-x1 backdrop-blur-md transition-colors duration-300 hover:bg-blue-600"><a th:href="@{/login/add}">會員註冊</a></th>
+                    </table>
+
                 </div>
-                <form th:action="@{/login/}" th:object="${hsUser}" th:method="${_method}">
-                    <div class="mb-4 text-lg">
-                        <input th:filed="${username}" class="rounded-3xl border-none bg-green-600  px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="text" name="username" placeholder="id@email.com" />
-                    </div>
-
-                    <div class="mb-4 text-lg">
-                        <input th:filed="${password}" class="rounded-3xl border-none bg-green-600  px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="Password" name="password" placeholder="*********" />
-                    </div>
-                    <div class="mt-8 flex justify-center text-lg text-black">
-                        <button type="submit" class="rounded-3xl bg-green-300 bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">登錄</button>
-                    </div>
-                    <div>　</div>
-                    <div>　</div>
-                </form>
-                <table class="table-fixed min-w-full divide-y divide-gray-200　">
-                    <th class="rounded-3xl bg-blue-400 bg-opacity-50 px-0.5 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-blue-600"><a href="">忘記密碼</a></th>
-                    <th>　</th>
-                    <th class="rounded-3xl bg-blue-400 bg-opacity-50 px-0.5 py-2 text-white shadow-x1 backdrop-blur-md transition-colors duration-300 hover:bg-blue-600"><a th:href="@{/index/add}">會員註冊</a></th>
-                </table>
-
             </div>
         </div>
-    </div>
 </body>
 
 </html>

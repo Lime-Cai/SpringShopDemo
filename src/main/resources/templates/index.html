@@ -16,66 +16,47 @@
 
 </head>
 
-<body style="padding: 10px">
-<table style="width: 100%; background-color: aquamarine; ">
-    <tr>
-        <td style="width: 15%; height: 100px;">
-            <h2 class="text-5xl font-bold  text-blue-600  border-2 border-black rounded-3xl text-center ml-2" style="background-color: #b8ff00;"> HELLO </h2>
-        </td>
-        <td>
-            <div>
-                <ul class="float-right flex mr-10 ">
-                    <li class="login_li" style="background-color: bisque;  "><a href="# ">首頁</a></li>
-                    <li class="header-ul px-4" style="background-color: bisque;  "><a href="# ">會員資料</a></li>
-                    <li class="header-ul px-4" style="background-color: bisque;  "><a href="# ">登陸</a></li>
-                    <li class="header-ul px-4" style="background-color: bisque; "><a href="# ">關於我</a></li>
-                </ul>
-            </div>
-        </td>
-    </tr>
-</table>
+<body class="px-1 mt-1">
+    <table style="width: 100%; background-color:orange ; " class="rounded-xl overflow-x-scroll">
+        <tr>
+            <td class="box-border h-20 w-35  ">
+                <img src="../static/img/logo.png" th:src="@{/img/logo.png}" class="object-contain h-32  w-full md:box-content static " />
+            </td>
+            <td class="object-contain h-30 w-60 min-h-max min-w-max ">
+                <img src="../static/img/logo.png" th:src="@{/img/logo.png}" class="object-contain h-32  w-full md:box-content static " />
+            </td>
+            <td>
+                <table class="float-right flex px-2  space-x-20 border-separate">
+                    <a href="#" th:ref="@{/index/}" class="px-20">
+                        <th class="rounded-lg  bg-blue-400 bg-opacity-60 px-3  text-white shadow-x1 backdrop-blur-md transition-colors duration-300 hover:bg-blue-600 ">首頁</th>
+                    </a>
+                    <a href="#" th:ref="@{/index/}">
+                        <th class="rounded-lg  bg-blue-400 bg-opacity-60 px-3 py-1 text-white shadow-x1 backdrop-blur-md transition-colors duration-300 hover:bg-blue-600">會員資料</th>
+                    </a>
+                    <a href="#" th:ref="@{/index/}">
+                        <th class="rounded-lg bg-blue-400 bg-opacity-60 px-3 py-1 text-white shadow-x1 backdrop-blur-md transition-colors duration-300 hover:bg-blue-600">登陸</th>
+                    </a>
+                    <a href="#" th:ref="@{/index/}">
+                        <th class="rounded-lg bg-blue-400 bg-opacity-60 px-3 py-1 text-white shadow-x1 backdrop-blur-md transition-colors duration-300 hover:bg-blue-600">關於我</th>
+                    </a>
+                </table>
+            </td>
+        </tr>
+    </table>
 
-<div class="md:w-48 lg:w-5/12  mx-auto mt-20">
+    <div class="rounded-xl flex space-x-3  bg-gray-800 bg-opacity-50 px-20 py-20 shadow-lg backdrop-blur-md max-sm:px-8 mt-2">
+        <div class="border-4 block border-red-600">a
+            <ul>
 
-    <form action="#" th:action="@{/login/save}" th:object="${hsUser}" th:method="${_method}" >
-        <!-- Email input -->
-        <div class="mb-6">
-
-            <input type="text" th:field="${username}" class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                   placeholder="Email address" />
+            </ul>
         </div>
-
-        <!-- Password input -->
-        <div class="mb-6">
-            <input type="password" th:field="${password}"  class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                   placeholder="Password" />
-        </div>
-
-        <div class="flex justify-between items-center mb-6">
-            <div class="form-group form-check ">
-                <input type="checkbox" class="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                       id="exampleCheck3" checked />
-                <label class="form-check-label inline-block text-gray-800" for="exampleCheck2">Remember me</label
-                >
-            </div>
-            <a href="#!"
-               class="text-blue-600 hover:text-blue-700 focus:text-blue-700 active:text-blue-800 duration-200 transition ease-in-out"
-            >Forgot password?</a
-            >
-        </div>
-
-        <!-- Submit button -->
-        <button type="submit" class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
-                data-mdb-ripple="true" data-mdb-ripple-color="light" th:value="${_method}"> Sign in  </button>
-
-        <div  class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
-        >
-
+        <div class="border-4 border-red-600">
+            <div>1</div>
+            <div>2</div>
         </div>
 
 
-    </form>
-</div>
+    </div>
 </body>
 
 </html>
