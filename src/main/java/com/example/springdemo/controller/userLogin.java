@@ -33,12 +33,7 @@ public class userLogin {
         model.addAttribute("hsUser",new HsUser());
         model.addAttribute("_method","POST");
 
-        switch (hsUserService.loginCheck(hsUser)){
-            case 0 :  return "system/login_error";
-            case 1 :  return "system/login_success";
-            case 9 :  return "system/login_frequency";
-        }
-        return "system/login_error";
+        return hsUserService.loginCheck(hsUser);
     }
 
 

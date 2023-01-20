@@ -29,7 +29,7 @@ public class HsUserServiceImpl implements HsUserService {
     private HsUserLoginLogService hsUserLoginLogService;
 
     @Override
-    public Integer loginCheck(HsUser hsUser) {
+    public String loginCheck(HsUser hsUser) {
         Boolean check = true;
         // 1 = 帳號密碼符合
         try {
@@ -40,16 +40,16 @@ public class HsUserServiceImpl implements HsUserService {
                 HsUser user = hsUserRepository.findByUsername(hsUser.getUsername()).orElse(null);
                 // 沒有此帳號 不儲存
                 if (user == null) {
-                    return 0;
+                    return "system/login_error";
                 } else { // 有此帳號 進行紀錄
                     hsUserLoginLogService.saveLog(user, false);
                     log.error("[ERROR] 登陸失敗 帳號 : [ " + hsUser.getUsername() + " ] 密碼 : [ " + hsUser.getPassword() + " ]");
                     // 登陸失敗超過次數
                     if (user.getStatus() == 9) {
                         log.error("[ERROR] 登陸失敗 已被封鎖 帳號 : [ " + hsUser.getUsername() + " ]");
-                        return 9;
+                        return "system/login_frequency";
                     }
-                    return 0;
+                    return "system/login_error";
                 }
             }
 
@@ -58,7 +58,7 @@ public class HsUserServiceImpl implements HsUserService {
             if (user.getStatus() == 9) {
                 hsUserLoginLogService.saveLog(user, false);
                 log.error("[ERROR] 登陸成功 已被封鎖 帳號 : [ " + hsUser.getUsername() + " ]");
-                return 9;
+                return "system/login_frequency";
             }
             user.setLast_login_time(LocalDateTime.now());
             hsUserMapper.updateUser(user);
@@ -67,15 +67,14 @@ public class HsUserServiceImpl implements HsUserService {
             hsUserLoginLogService.saveLog(user, check);
 
             if (check) {
-                System.out.println("1");
-                return 1;
-            } else {
-                System.out.println("0");
-                return 0;
+                return "1";
             }
+
+            return "system/login_error";
+
         } catch (Exception e) {
             System.out.println(e + "登陸異常");
-            return 0;
+            return "system/login_error";
         }
     }
 
