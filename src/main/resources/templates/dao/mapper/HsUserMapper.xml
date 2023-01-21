@@ -10,7 +10,7 @@
             <if test="phone != null">phone = #{phone} , </if>
             <if test="status != null">status = #{status} , </if>
             <if test="token != null">token = #{token} , </if>
-            <if test="is_admin != null">is_admin = #{is_admin} , </if>
+            <if test="is_store != null">is_store = #{is_admin} , </if>
             <if test="last_login_time != null">last_login_time = #{last_login_time}</if>
         </set>
         <where>

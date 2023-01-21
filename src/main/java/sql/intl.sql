@@ -12,7 +12,7 @@ create table hs_user
     `token`     VARCHAR(50)     NULL    DEFAULT NULL ,
     `add_time`  datetime        NULL    DEFAULT NULL        COMMENT '註冊時間',
     `last_time` datetime        NULL    DEFAULT NULL        COMMENT '最後登陸時間',
-    `is_admin`  INT             NULL    DEFAULT 0           COMMENT '0不是、1是、2關閉',
+    `is_store`  INT             NULL    DEFAULT 0           COMMENT '0不是、1是、2關閉',
     `status`    INT             NULL    DEFAULT 0           COMMENT '0未驗證、1驗證、9登陸失敗次數高於X次封號'
     PRIMARY KEY (`user_id`) USING BTREE
 )DEFAULT CHARSET=utf8mb4 COMMENT = '使用者';
@@ -27,11 +27,17 @@ CREATE TABLE hs_user_login_log(
     PRIMARY KEY (`id`) USING BTREE
 )DEFAULT CHARSET=utf8mb4 COMMENT = '使用者登陸狀況';
 
+CREATE TABLE store_user(
 
-CREATE TABLE admin_product
+
+
+)COMMENT ''
+
+
+CREATE TABLE store_product
 (
     `id`            INT             not null  AUTO_INCREMENT,
-    `admin_id`      INT             not null                                            COMMENT 'admin_id',
+    `store_id`      INT             not null                                            COMMENT 'admin_id',
     `product_name`  VARCHAR (20)    NULL    DEFAULT NULL                                COMMENT '商品名',
     `token`         INT             NULL    DEFAULT NULL                                COMMENT '商品ID',
     `type`          VARCHAR (30)    NULL    DEFAULT NULL                                COMMENT '類型',

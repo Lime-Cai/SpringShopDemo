@@ -116,7 +116,7 @@ public class HsUserServiceImpl implements HsUserService {
                 status(0).
                 add_time(LocalDateTime.now()).
                 last_login_time(LocalDateTime.now()).
-                is_admin(0).build();
+                is_store(0).build();
 
         log.info("註冊成功 UserName : { " + hsUser.getUsername() + " }");
         hsUserRepository.save(user);

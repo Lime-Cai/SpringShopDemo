@@ -32,6 +32,6 @@ public class HsUser  implements Serializable {
     private LocalDateTime add_time;
     private LocalDateTime last_login_time;
 
-    private Integer is_admin;
+    private Integer is_store;
 
 }
