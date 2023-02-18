@@ -15,7 +15,7 @@ public interface HsUserMapper {
     Integer findUsername(@Param("username") String username);
 
     // 確認帳號密碼是否正確
-    Integer findLogigCheck(String username, String password);
+    Boolean findLoginCheck(String username, String password);
 
     void updateUser( HsUser hsUser);
 }

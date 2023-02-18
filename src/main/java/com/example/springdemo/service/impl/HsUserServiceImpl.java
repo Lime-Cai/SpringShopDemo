@@ -30,19 +30,18 @@ public class HsUserServiceImpl implements HsUserService {
 
     @Override
     public String loginCheck(HsUser hsUser) {
-        Boolean check = true;
+
         // 1 = 帳號密碼符合
         try {
-            Integer count = hsUserMapper.findLogigCheck(hsUser.getUsername(), hsUser.getPassword());
-
+            Boolean check = hsUserMapper.findLoginCheck(hsUser.getUsername(), hsUser.getPassword());
             // 登陸失敗
-            if (count == 0) {
-                HsUser user = hsUserRepository.findByUsername(hsUser.getUsername()).orElse(null);
+            if (!check) {
+                HsUser user = hsUserRepository.findByUsername(hsUser.getUsername()).orElseGet(HsUser::new);
                 // 沒有此帳號 不儲存
                 if (user == null) {
                     return "system/login_error";
                 } else { // 有此帳號 進行紀錄
-                    hsUserLoginLogService.saveLog(user, false);
+                    hsUserLoginLogService.saveLog(user, check);
                     log.error("[ERROR] 登陸失敗 帳號 : [ " + hsUser.getUsername() + " ] 密碼 : [ " + hsUser.getPassword() + " ]");
                     // 登陸失敗超過次數
                     if (user.getStatus() == 9) {
@@ -55,22 +54,19 @@ public class HsUserServiceImpl implements HsUserService {
 
             // 登陸成功
             HsUser user = hsUserRepository.findByUsernameAndPassword(hsUser.getUsername(), hsUser.getPassword());
-            if (user.getStatus() == 9) {
-                hsUserLoginLogService.saveLog(user, false);
-                log.error("[ERROR] 登陸成功 已被封鎖 帳號 : [ " + hsUser.getUsername() + " ]");
-                return "system/login_frequency";
-            }
             user.setLast_login_time(LocalDateTime.now());
             hsUserMapper.updateUser(user);
 
-            log.info("使用者 : [ " + user.getUsername() + " ]" + " 登陸成功 " + LocalDateTime.now());
-            hsUserLoginLogService.saveLog(user, check);
-
-            if (check) {
-                return "1";
+            if (user.getStatus() == 9) {
+                hsUserLoginLogService.saveLog(user, check);
+                log.error("[ERROR] 登陸成功 已被封鎖 帳號 : [ " + hsUser.getUsername() + " ]");
+                return "system/login_frequency";
             }
 
-            return "system/login_error";
+
+            log.info("使用者 : [ " + user.getUsername() + " ]" + " 登陸成功 " + LocalDateTime.now());
+            hsUserLoginLogService.saveLog(user, check);
+            return "1";
 
         } catch (Exception e) {
             System.out.println(e + "登陸異常");

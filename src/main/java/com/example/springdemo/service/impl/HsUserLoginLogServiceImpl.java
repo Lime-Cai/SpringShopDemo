@@ -20,29 +20,22 @@ public class HsUserLoginLogServiceImpl implements HsUserLoginLogService {
     private HsUserLoginLogRepository hsUserLoginLogRepository;
     @Autowired
     private HsUserLoginLogMapper hsUserLoginLogMapper;
-
     @Autowired
     private HsUserMapper hsUserMapper;
 
     @Override
     public void saveLog(HsUser hsUser, Boolean check) {
-        Integer status = null;
-        if (check) {
-            status = 0;
-        } else {
-            status = 9;
-        }
+        int status = 1;
         Integer count = 0;
         String remark = "";
         // 登錄失敗
-        if (status == 9) {
-            count = hsUserLoginLogMapper.findFrequency(hsUser.getId()).orElse(null);
-            if (count == null) {
-                count = 1;
-            } else
+        if (!check) {
+            count = hsUserLoginLogMapper.findFrequency(hsUser.getId()).orElseGet(() -> 1);
+            if (count >1) {
                 count++;
-            remark = "帳號 : " + hsUser.getUsername() + " 登陸失敗 [ " + count + " ] 次";
-
+                remark = "帳號 : " + hsUser.getUsername() + " 登陸失敗 [ " + count + " ] 次";
+                status = 9;
+            }
             // 登錄失敗超過次數封鎖
             if (count >= 5) {
                 hsUser.setStatus(9);
@@ -71,6 +64,4 @@ public class HsUserLoginLogServiceImpl implements HsUserLoginLogService {
                 login_time(LocalDateTime.now()).build();
         hsUserLoginLogRepository.save(hsUserLoginLog);
     }
-
-
 }

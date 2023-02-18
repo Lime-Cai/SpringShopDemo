@@ -28,7 +28,7 @@
                 </if>
             </where>
     </select>
-    <select id="findLogigCheck" resultType="java.lang.Integer">
+    <select id="findLoginCheck" resultType="boolean">
         select count(*)
         from hs_user
             <where>
