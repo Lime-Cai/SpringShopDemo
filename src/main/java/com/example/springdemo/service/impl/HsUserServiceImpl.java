@@ -38,9 +38,7 @@ public class HsUserServiceImpl implements HsUserService {
             if (!check) {
                 HsUser user = hsUserRepository.findByUsername(hsUser.getUsername()).orElseGet(HsUser::new);
                 // 沒有此帳號 不儲存
-                if (user == null) {
-                    return "system/login_error";
-                } else { // 有此帳號 進行紀錄
+                if (user != null) {
                     hsUserLoginLogService.saveLog(user, check);
                     log.error("[ERROR] 登陸失敗 帳號 : [ " + hsUser.getUsername() + " ] 密碼 : [ " + hsUser.getPassword() + " ]");
                     // 登陸失敗超過次數
@@ -48,6 +46,7 @@ public class HsUserServiceImpl implements HsUserService {
                         log.error("[ERROR] 登陸失敗 已被封鎖 帳號 : [ " + hsUser.getUsername() + " ]");
                         return "system/login_frequency";
                     }
+                } else { // 有此帳號 進行紀錄
                     return "system/login_error";
                 }
             }
@@ -62,11 +61,9 @@ public class HsUserServiceImpl implements HsUserService {
                 log.error("[ERROR] 登陸成功 已被封鎖 帳號 : [ " + hsUser.getUsername() + " ]");
                 return "system/login_frequency";
             }
-
-
             log.info("使用者 : [ " + user.getUsername() + " ]" + " 登陸成功 " + LocalDateTime.now());
             hsUserLoginLogService.saveLog(user, check);
-            return "1";
+            return "system/login_success";
 
         } catch (Exception e) {
             System.out.println(e + "登陸異常");
@@ -129,7 +126,5 @@ public class HsUserServiceImpl implements HsUserService {
         HsUser hsUser = hsUserRepository.getById(id);
         hsUser.setStatus(1);
         hsUserMapper.updateUser(hsUser);
-
-
     }
 }
