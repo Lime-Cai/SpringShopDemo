@@ -25,7 +25,7 @@ public class HsUserLoginLogServiceImpl implements HsUserLoginLogService {
 
     @Override
     public void saveLog(HsUser hsUser, Boolean check) {
-        int status = 1;
+        int status = 0;
         Integer count = 0;
         String remark = "";
         // 登錄失敗
