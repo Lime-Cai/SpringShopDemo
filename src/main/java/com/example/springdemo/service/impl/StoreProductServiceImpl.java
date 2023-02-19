@@ -1,6 +1,5 @@
 package com.example.springdemo.service.impl;
 
-import com.example.springdemo.entity.StoreProduct;
 import com.example.springdemo.service.model.StoreProductService;
 
 import java.util.List;

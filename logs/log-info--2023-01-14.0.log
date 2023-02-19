@@ -734,7 +734,7 @@ org.apache.ibatis.binding.BindingException: Parameter 'password' not found. Avai
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 2023-01-14 16:27:24.889 ERROR --- [http-nio-8080-exec-1] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.mybatis.spring.MyBatisSystemException] with root cause
-org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'user' in 'class com.example.springdemo.entity.HsUser'
+org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'user' in 'class com.example.springdemo.dao.domain.HsUser'
 	at org.apache.ibatis.reflection.Reflector.getGetInvoker(Reflector.java:387)
 	at org.apache.ibatis.reflection.MetaClass.getGetInvoker(MetaClass.java:164)
 	at org.apache.ibatis.reflection.wrapper.BeanWrapper.getBeanProperty(BeanWrapper.java:162)
@@ -846,7 +846,7 @@ org.apache.ibatis.reflection.ReflectionException: There is no getter for propert
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 2023-01-14 16:27:32.684 ERROR --- [http-nio-8080-exec-4] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.mybatis.spring.MyBatisSystemException] with root cause
-org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'user' in 'class com.example.springdemo.entity.HsUser'
+org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'user' in 'class com.example.springdemo.dao.domain.HsUser'
 	at org.apache.ibatis.reflection.Reflector.getGetInvoker(Reflector.java:387)
 	at org.apache.ibatis.reflection.MetaClass.getGetInvoker(MetaClass.java:164)
 	at org.apache.ibatis.reflection.wrapper.BeanWrapper.getBeanProperty(BeanWrapper.java:162)
@@ -958,7 +958,7 @@ org.apache.ibatis.reflection.ReflectionException: There is no getter for propert
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 2023-01-14 16:28:45.748 ERROR --- [http-nio-8080-exec-6] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.mybatis.spring.MyBatisSystemException] with root cause
-org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'user' in 'class com.example.springdemo.entity.HsUser'
+org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'user' in 'class com.example.springdemo.dao.domain.HsUser'
 	at org.apache.ibatis.reflection.Reflector.getGetInvoker(Reflector.java:387)
 	at org.apache.ibatis.reflection.MetaClass.getGetInvoker(MetaClass.java:164)
 	at org.apache.ibatis.reflection.wrapper.BeanWrapper.getBeanProperty(BeanWrapper.java:162)
@@ -1070,7 +1070,7 @@ org.apache.ibatis.reflection.ReflectionException: There is no getter for propert
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 2023-01-14 16:29:42.803 ERROR --- [http-nio-8080-exec-2] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.mybatis.spring.MyBatisSystemException] with root cause
-org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'user_id' in 'class com.example.springdemo.entity.HsUser'
+org.apache.ibatis.reflection.ReflectionException: There is no getter for property named 'user_id' in 'class com.example.springdemo.dao.domain.HsUser'
 	at org.apache.ibatis.reflection.Reflector.getGetInvoker(Reflector.java:387)
 	at org.apache.ibatis.reflection.MetaClass.getGetInvoker(MetaClass.java:164)
 	at org.apache.ibatis.reflection.wrapper.BeanWrapper.getBeanProperty(BeanWrapper.java:162)
@@ -2363,8 +2363,8 @@ java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check th
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2023-01-14 17:02:11.523 ERROR --- [http-nio-8080-exec-2] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdemo.dao.mapper.HsUserMapper.updateUser' has an unsupported return type: class com.example.springdemo.entity.HsUser] with root cause
-org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdemo.dao.mapper.HsUserMapper.updateUser' has an unsupported return type: class com.example.springdemo.entity.HsUser
+2023-01-14 17:02:11.523 ERROR --- [http-nio-8080-exec-2] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdemo.dao.mapper.HsUserMapper.updateUser' has an unsupported return type: class com.example.springdemo.dao.domain.HsUser] with root cause
+org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdemo.dao.mapper.HsUserMapper.updateUser' has an unsupported return type: class com.example.springdemo.dao.domain.HsUser
 	at org.apache.ibatis.binding.MapperMethod.rowCountResult(MapperMethod.java:118)
 	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:67)
 	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:145)
@@ -2433,8 +2433,8 @@ org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdem
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2023-01-14 17:02:49.405 ERROR --- [http-nio-8080-exec-1] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdemo.dao.mapper.HsUserMapper.updateUser' has an unsupported return type: class com.example.springdemo.entity.HsUser] with root cause
-org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdemo.dao.mapper.HsUserMapper.updateUser' has an unsupported return type: class com.example.springdemo.entity.HsUser
+2023-01-14 17:02:49.405 ERROR --- [http-nio-8080-exec-1] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdemo.dao.mapper.HsUserMapper.updateUser' has an unsupported return type: class com.example.springdemo.dao.domain.HsUser] with root cause
+org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdemo.dao.mapper.HsUserMapper.updateUser' has an unsupported return type: class com.example.springdemo.dao.domain.HsUser
 	at org.apache.ibatis.binding.MapperMethod.rowCountResult(MapperMethod.java:118)
 	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:67)
 	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:145)
@@ -2503,8 +2503,8 @@ org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdem
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2023-01-14 17:02:53.418 ERROR --- [http-nio-8080-exec-3] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdemo.dao.mapper.HsUserMapper.updateUser' has an unsupported return type: class com.example.springdemo.entity.HsUser] with root cause
-org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdemo.dao.mapper.HsUserMapper.updateUser' has an unsupported return type: class com.example.springdemo.entity.HsUser
+2023-01-14 17:02:53.418 ERROR --- [http-nio-8080-exec-3] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdemo.dao.mapper.HsUserMapper.updateUser' has an unsupported return type: class com.example.springdemo.dao.domain.HsUser] with root cause
+org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdemo.dao.mapper.HsUserMapper.updateUser' has an unsupported return type: class com.example.springdemo.dao.domain.HsUser
 	at org.apache.ibatis.binding.MapperMethod.rowCountResult(MapperMethod.java:118)
 	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:67)
 	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:145)
@@ -2573,8 +2573,8 @@ org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdem
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2023-01-14 17:02:59.550 ERROR --- [http-nio-8080-exec-8] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdemo.dao.mapper.HsUserMapper.updateUser' has an unsupported return type: class com.example.springdemo.entity.HsUser] with root cause
-org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdemo.dao.mapper.HsUserMapper.updateUser' has an unsupported return type: class com.example.springdemo.entity.HsUser
+2023-01-14 17:02:59.550 ERROR --- [http-nio-8080-exec-8] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdemo.dao.mapper.HsUserMapper.updateUser' has an unsupported return type: class com.example.springdemo.dao.domain.HsUser] with root cause
+org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdemo.dao.mapper.HsUserMapper.updateUser' has an unsupported return type: class com.example.springdemo.dao.domain.HsUser
 	at org.apache.ibatis.binding.MapperMethod.rowCountResult(MapperMethod.java:118)
 	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:67)
 	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:145)
@@ -2643,8 +2643,8 @@ org.apache.ibatis.binding.BindingException: Mapper method 'com.example.springdem
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2023-01-14 17:03:53.230 ERROR --- [http-nio-8080-exec-2] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "com.example.springdemo.entity.HsUser.getStatus()" is null] with root cause
-java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "com.example.springdemo.entity.HsUser.getStatus()" is null
+2023-01-14 17:03:53.230 ERROR --- [http-nio-8080-exec-2] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "com.example.springdemo.dao.domain.HsUser.getStatus()" is null] with root cause
+java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "com.example.springdemo.dao.domain.HsUser.getStatus()" is null
 	at com.example.springdemo.service.impl.HsUserServiceImpl.loginCheck(HsUserServiceImpl.java:50)
 	at com.example.springdemo.controller.userLogin.check(userLogin.java:39)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -2697,8 +2697,8 @@ java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" bec
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2023-01-14 17:04:54.399 ERROR --- [http-nio-8080-exec-1] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "com.example.springdemo.entity.HsUser.getStatus()" is null] with root cause
-java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "com.example.springdemo.entity.HsUser.getStatus()" is null
+2023-01-14 17:04:54.399 ERROR --- [http-nio-8080-exec-1] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "com.example.springdemo.dao.domain.HsUser.getStatus()" is null] with root cause
+java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "com.example.springdemo.dao.domain.HsUser.getStatus()" is null
 	at com.example.springdemo.service.impl.HsUserServiceImpl.loginCheck(HsUserServiceImpl.java:50)
 	at com.example.springdemo.controller.userLogin.check(userLogin.java:39)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -2751,8 +2751,8 @@ java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" bec
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2023-01-14 17:04:57.959 ERROR --- [http-nio-8080-exec-3] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "com.example.springdemo.entity.HsUser.getStatus()" is null] with root cause
-java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "com.example.springdemo.entity.HsUser.getStatus()" is null
+2023-01-14 17:04:57.959 ERROR --- [http-nio-8080-exec-3] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "com.example.springdemo.dao.domain.HsUser.getStatus()" is null] with root cause
+java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" because the return value of "com.example.springdemo.dao.domain.HsUser.getStatus()" is null
 	at com.example.springdemo.service.impl.HsUserServiceImpl.loginCheck(HsUserServiceImpl.java:50)
 	at com.example.springdemo.controller.userLogin.check(userLogin.java:39)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -2806,8 +2806,8 @@ java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" bec
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 2023-01-14 17:18:50.076 ERROR --- [http-nio-8080-exec-2] c.e.springdemo.service.impl.HsUserServiceImpl - [ERROR] 登陸失敗 帳號 : [ test ] 密碼 : [ 1 ]
-2023-01-14 17:18:50.085 ERROR --- [http-nio-8080-exec-2] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "com.example.springdemo.entity.HsUser.setLast_login_time(java.time.LocalDateTime)" because "user" is null] with root cause
-java.lang.NullPointerException: Cannot invoke "com.example.springdemo.entity.HsUser.setLast_login_time(java.time.LocalDateTime)" because "user" is null
+2023-01-14 17:18:50.085 ERROR --- [http-nio-8080-exec-2] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "com.example.springdemo.dao.domain.HsUser.setLast_login_time(java.time.LocalDateTime)" because "user" is null] with root cause
+java.lang.NullPointerException: Cannot invoke "com.example.springdemo.dao.domain.HsUser.setLast_login_time(java.time.LocalDateTime)" because "user" is null
 	at com.example.springdemo.service.impl.HsUserServiceImpl.loginCheck(HsUserServiceImpl.java:43)
 	at com.example.springdemo.controller.userLogin.check(userLogin.java:35)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -2861,8 +2861,8 @@ java.lang.NullPointerException: Cannot invoke "com.example.springdemo.entity.HsU
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 2023-01-14 17:19:17.589 ERROR --- [http-nio-8080-exec-7] c.e.springdemo.service.impl.HsUserServiceImpl - [ERROR] 登陸失敗 帳號 : [ test ] 密碼 : [ 111111 ]
-2023-01-14 17:19:17.592 ERROR --- [http-nio-8080-exec-7] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "com.example.springdemo.entity.HsUser.setLast_login_time(java.time.LocalDateTime)" because "user" is null] with root cause
-java.lang.NullPointerException: Cannot invoke "com.example.springdemo.entity.HsUser.setLast_login_time(java.time.LocalDateTime)" because "user" is null
+2023-01-14 17:19:17.592 ERROR --- [http-nio-8080-exec-7] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "com.example.springdemo.dao.domain.HsUser.setLast_login_time(java.time.LocalDateTime)" because "user" is null] with root cause
+java.lang.NullPointerException: Cannot invoke "com.example.springdemo.dao.domain.HsUser.setLast_login_time(java.time.LocalDateTime)" because "user" is null
 	at com.example.springdemo.service.impl.HsUserServiceImpl.loginCheck(HsUserServiceImpl.java:43)
 	at com.example.springdemo.controller.userLogin.check(userLogin.java:35)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -2916,8 +2916,8 @@ java.lang.NullPointerException: Cannot invoke "com.example.springdemo.entity.HsU
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 2023-01-14 17:20:49.193 ERROR --- [http-nio-8080-exec-4] c.e.springdemo.service.impl.HsUserServiceImpl - [ERROR] 登陸失敗 帳號 : [ test ] 密碼 : [ 11 ]
-2023-01-14 17:20:49.277 ERROR --- [http-nio-8080-exec-4] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "com.example.springdemo.entity.HsUser.setLast_login_time(java.time.LocalDateTime)" because "user" is null] with root cause
-java.lang.NullPointerException: Cannot invoke "com.example.springdemo.entity.HsUser.setLast_login_time(java.time.LocalDateTime)" because "user" is null
+2023-01-14 17:20:49.277 ERROR --- [http-nio-8080-exec-4] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "com.example.springdemo.dao.domain.HsUser.setLast_login_time(java.time.LocalDateTime)" because "user" is null] with root cause
+java.lang.NullPointerException: Cannot invoke "com.example.springdemo.dao.domain.HsUser.setLast_login_time(java.time.LocalDateTime)" because "user" is null
 	at com.example.springdemo.service.impl.HsUserServiceImpl.loginCheck(HsUserServiceImpl.java:43)
 	at com.example.springdemo.controller.userLogin.check(userLogin.java:35)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -2973,8 +2973,8 @@ java.lang.NullPointerException: Cannot invoke "com.example.springdemo.entity.HsU
 2023-01-14 17:21:18.903 ERROR --- [http-nio-8080-exec-1] c.e.springdemo.service.impl.HsUserServiceImpl - [ERROR] 登陸失敗 帳號 : [ test ] 密碼 : [ 11 ]
 2023-01-14 17:21:23.052 ERROR --- [http-nio-8080-exec-1] c.e.springdemo.service.impl.HsUserServiceImpl - [ERROR] 登陸失敗 帳號 : [ t ] 密碼 : [ 1 ]
 2023-01-14 17:21:32.728 ERROR --- [http-nio-8080-exec-1] c.e.springdemo.service.impl.HsUserServiceImpl - [ERROR] 登陸失敗 帳號 : [ test ] 密碼 : [ 1 ]
-2023-01-14 17:39:02.683 ERROR --- [http-nio-8080-exec-3] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "com.example.springdemo.entity.HsUser.getId()" because "hsUser" is null] with root cause
-java.lang.NullPointerException: Cannot invoke "com.example.springdemo.entity.HsUser.getId()" because "hsUser" is null
+2023-01-14 17:39:02.683 ERROR --- [http-nio-8080-exec-3] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "com.example.springdemo.dao.domain.HsUser.getId()" because "hsUser" is null] with root cause
+java.lang.NullPointerException: Cannot invoke "com.example.springdemo.dao.domain.HsUser.getId()" because "hsUser" is null
 	at com.example.springdemo.service.impl.HsUserLoginLogServiceImpl.saveLog(HsUserLoginLogServiceImpl.java:37)
 	at com.example.springdemo.service.impl.HsUserServiceImpl.loginCheck(HsUserServiceImpl.java:39)
 	at com.example.springdemo.controller.userLogin.check(userLogin.java:35)
@@ -3376,8 +3376,8 @@ java.lang.NullPointerException: Cannot invoke "java.lang.Integer.intValue()" bec
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
 2023-01-14 18:58:58.609 ERROR --- [http-nio-8080-exec-4] c.e.springdemo.service.impl.HsUserServiceImpl - [ERROR] 登陸失敗 帳號 : [ tttt ] 密碼 : [ 11 ]
-2023-01-14 18:59:04.436 ERROR --- [http-nio-8080-exec-4] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "com.example.springdemo.entity.HsUser.getStatus()" because "user" is null] with root cause
-java.lang.NullPointerException: Cannot invoke "com.example.springdemo.entity.HsUser.getStatus()" because "user" is null
+2023-01-14 18:59:04.436 ERROR --- [http-nio-8080-exec-4] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "com.example.springdemo.dao.domain.HsUser.getStatus()" because "user" is null] with root cause
+java.lang.NullPointerException: Cannot invoke "com.example.springdemo.dao.domain.HsUser.getStatus()" because "user" is null
 	at com.example.springdemo.service.impl.HsUserServiceImpl.loginCheck(HsUserServiceImpl.java:39)
 	at com.example.springdemo.controller.userLogin.check(userLogin.java:36)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

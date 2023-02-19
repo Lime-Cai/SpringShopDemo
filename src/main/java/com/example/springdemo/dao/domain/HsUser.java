@@ -1,4 +1,4 @@
-package com.example.springdemo.entity;
+package com.example.springdemo.dao.domain;
 
 
 import jakarta.persistence.Entity;

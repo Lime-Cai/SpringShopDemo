@@ -1,9 +1,8 @@
 package com.example.springdemo.service.impl;
 
-import com.example.springdemo.dao.mapper.HsUserLoginLogMapper;
 import com.example.springdemo.dao.mapper.HsUserMapper;
 import com.example.springdemo.dao.repository.HsUserRepository;
-import com.example.springdemo.entity.HsUser;
+import com.example.springdemo.dao.domain.HsUser;
 import com.example.springdemo.service.model.HsUserLoginLogService;
 import com.example.springdemo.tools.SystemTools;
 import lombok.extern.slf4j.Slf4j;

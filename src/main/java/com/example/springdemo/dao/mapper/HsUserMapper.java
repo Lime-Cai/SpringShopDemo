@@ -1,6 +1,6 @@
 package com.example.springdemo.dao.mapper;
 
-import com.example.springdemo.entity.HsUser;
+import com.example.springdemo.dao.domain.HsUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

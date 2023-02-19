@@ -1,10 +1,9 @@
 package com.example.springdemo.dao.repository;
 
-import com.example.springdemo.entity.HsUser;
+import com.example.springdemo.dao.domain.HsUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository

@@ -1,11 +1,9 @@
 package com.example.springdemo.controller;
 
-import com.example.springdemo.entity.HsUser;
-import com.example.springdemo.entity.HsUserLoginLog;
+import com.example.springdemo.dao.domain.HsUser;
 import com.example.springdemo.service.model.HsUserLoginLogService;
 import com.example.springdemo.service.model.HsUserService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

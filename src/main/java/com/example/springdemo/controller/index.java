@@ -1,6 +1,6 @@
 package com.example.springdemo.controller;
 
-import com.example.springdemo.entity.HsUser;
+import com.example.springdemo.dao.domain.HsUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

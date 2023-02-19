@@ -1,28 +1,26 @@
-package com.example.springdemo.entity;
+package com.example.springdemo.dao.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Builder
-public class HsUserLoginLog {
+public class MssSystem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer user_id;
-    private Integer status;
-    private Integer frequency;
+    private String keys;
+    private Integer value;
+    private Integer hide;
     private String remark;
-    private LocalDateTime login_time;
+    private LocalDateTime update_time;
 }

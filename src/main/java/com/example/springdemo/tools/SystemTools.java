@@ -1,12 +1,10 @@
 package com.example.springdemo.tools;
 
-import com.example.springdemo.entity.HsUser;
+import com.example.springdemo.dao.domain.HsUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Stream;
 
 @Slf4j
 @Component
