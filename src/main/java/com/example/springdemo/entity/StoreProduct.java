@@ -8,18 +8,27 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MssSystem {
+public class StoreProduct implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String keys;
-    private Integer value;
+    private Integer admin_id;
+    private Integer product_id;
+    private String product_name;
+    private String type;
+    private BigDecimal amount;
+    private BigDecimal quantity;
+    private String describe;
+    private LocalDateTime creat_time;
+    private Integer status;
     private Integer hide;
     private String remark;
     private LocalDateTime update_time;

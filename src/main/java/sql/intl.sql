@@ -37,16 +37,16 @@ CREATE TABLE store_user(
 CREATE TABLE store_product
 (
     `id`            INT             not null  AUTO_INCREMENT,
-    `store_id`      INT             not null                                            COMMENT 'admin_id',
-    `product_name`  VARCHAR (20)    NULL    DEFAULT NULL                                COMMENT '商品名',
-    `token`         INT             NULL    DEFAULT NULL                                COMMENT '商品ID',
+    `admin_id`      INT             not null                                            COMMENT 'admin_id',
+    `product_id`    INT             NULL    DEFAULT NULL                                COMMENT '商品ID',
+    `product_name`  VARCHAR (1024)  NULL    DEFAULT NULL                                COMMENT '商品名',
     `type`          VARCHAR (30)    NULL    DEFAULT NULL                                COMMENT '類型',
     `amount`        INT             NULL    DEFAULT 0                                   COMMENT '價格',
     `quantity`      INT             NULL    DEFAULT 0                                   COMMENT '數量',
     `describe`      VARCHAR(1024)   NULL    DEFAULT NULL                                COMMENT '描述',
-    `add_time`      datetime(0)     NULL    DEFAULT NULL                                COMMENT '新增時間',
+    `creat_time`    datetime(0)     NULL    DEFAULT NULL                                COMMENT '新增時間',
     `status`        INT             NULL    DEFAULT 0                                   COMMENT '0.下架、1.上架、2.庫存=0',
-    `hide`          INT             NULL    DEFAULT 1                                   COMMENT '0.隱藏、1.顯示',
+    `hide`          INT             NULL    DEFAULT 0                                   COMMENT '0.隱藏、1.顯示',
     `remark`        varchar(1024)   NULL    DEFAULT NULL                                COMMENT '备注',
     `update_time`   datetime(0)     NULL    DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间/回调时间',
     PRIMARY KEY (`id`) USING BTREE
