@@ -10,7 +10,7 @@
                 user_id = #{user_id}
             </if>
             order by id desc
-            limit 0,1
+            limit 1
         </where>
     </select>
 </mapper>

@@ -27,4 +27,11 @@
         status,hide,remark,
         update_time
     </sql>
+    <select id="selectAllByAdminId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from store_product
+        where
+        admin_id = #{adminId,jdbcType=NUMERIC}
+    </select>
 </mapper>
