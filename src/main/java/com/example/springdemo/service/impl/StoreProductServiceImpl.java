@@ -1,5 +1,6 @@
 package com.example.springdemo.service.impl;
 
+import com.example.springdemo.dao.domain.StoreProduct;
 import com.example.springdemo.service.model.StoreProductService;
 
 import java.util.List;

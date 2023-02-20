@@ -1,5 +1,7 @@
 package com.example.springdemo.service.model;
 
+import com.example.springdemo.dao.domain.StoreProduct;
+
 import java.util.List;
 
 public interface StoreProductService {
