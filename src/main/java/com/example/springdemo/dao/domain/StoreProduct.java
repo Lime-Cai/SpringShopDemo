@@ -6,19 +6,31 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 商品
  * @TableName store_product
  */
 @TableName(value ="store_product")
+@Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class StoreProduct implements Serializable {
     /**
      * 
      */
     @TableId(type = IdType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     /**
