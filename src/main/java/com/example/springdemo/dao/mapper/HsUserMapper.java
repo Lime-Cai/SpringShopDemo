@@ -1,21 +1,35 @@
 package com.example.springdemo.dao.mapper;
+import java.util.List;
 
-import com.example.springdemo.dao.domain.HsUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+
+import com.example.springdemo.dao.domain.HsUser;
 import org.springframework.stereotype.Repository;
 
+/**
+* @author jp098
+* @description 针对表【hs_user】的数据库操作Mapper
+* @createDate 2023-02-20 19:29:15
+* @Entity com.example.springdemo.dao.domain.HsUser
+*/
 @Mapper
 @Repository
 public interface HsUserMapper {
-    @Select("select count(1) from hs_user where token=#{token}")
-    int findToken(@Param("token") String token);
+    HsUser selectOneByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 
-    Integer findUsername(@Param("username") String username);
+    HsUser selectOneByUsername(@Param("username") String username);
 
-    // 確認帳號密碼是否正確
-    Boolean findLoginCheck(String username, String password);
+    HsUser selectOneByToken(@Param("token") String token);
 
-    void updateUser( HsUser hsUser);
+    List<HsUser> selectAllByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+
+    void updateHsUser(@Param("hsUser") HsUser hsUser,@Param("token")String token);
+
+
+
 }
+
+
+
+

@@ -1,37 +1,90 @@
 package com.example.springdemo.dao.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
+/**
+ * 
+ * @TableName hs_user
+ */
+@TableName(value ="hs_user")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class HsUser  implements Serializable {
+public class HsUser implements Serializable {
+    /**
+     * 
+     */
+    @TableId(type = IdType.AUTO)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.AUTO)
     private Integer id;
-    private  String name;
-    private  String username;
-    private  String password;
-    private  String mail;
-    private  Integer phone;
 
-    private String token;
+    /**
+     * 帳號
+     */
+    private String username;
 
+    /**
+     * 密碼
+     */
+    private String password;
+
+    /**
+     * 姓名
+     */
+    private String name;
+
+    /**
+     * 郵件
+     */
+    private String mail;
+
+    /**
+     * 電話
+     */
+    private Integer phone;
+
+    /**
+     * 
+     */
+    private Integer isStore;
+
+    /**
+     * 
+     */
     private Integer status;
 
-    private LocalDateTime add_time;
-    private LocalDateTime last_login_time;
+    /**
+     * 
+     */
+    private LocalDateTime lastLoginTime;
 
-    private Integer is_store;
+    /**
+     * 
+     */
+    private String token;
 
+    /**
+     * 
+     */
+    private LocalDateTime addTime;
+
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
 }

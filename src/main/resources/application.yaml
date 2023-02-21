@@ -15,8 +15,9 @@ spring:
     mode: HTML5
 
 mybatis:
-  mapper-locations: classpath*:templates/dao/mapper/**.xml
-  type-aliases-package: com/example/springdemo/entity
+  mapper-locations: classpath*:templates/mapper/**.xml
+  type-aliases-package: com/example/springdemo/dao/domain
+
 
 admin:
   host: //localhost:8080/
