@@ -29,32 +29,27 @@ public class HsUserServiceImpl implements HsUserService {
 
     @Override
     public String loginCheck(HsUser hsUser) {
-
-        // 1 = 帳號密碼符合
-        //try {
-            HsUser check = hsUserMapper.selectOneByUsernameAndPassword(hsUser.getUsername(), hsUser.getPassword());
+        try {
+            HsUser user = hsUserMapper.selectOneByUsernameAndPassword(hsUser.getUsername(), hsUser.getPassword());
             // 登陸失敗
-
-            if (check == null) {
-                HsUser user = Optional.ofNullable(hsUserMapper.selectOneByUsername(hsUser.getUsername())).orElseGet(HsUser::new);
+            if (user == null) {
+                HsUser failUser = hsUserMapper.selectOneByUsername(hsUser.getUsername());
                 // 沒有此帳號 不儲存
-                if (user != null) {
-                    hsUserLoginLogService.saveLog(user, false);
+                if (failUser == null) {
+                    return "system/login_error";
+                } else { // 有此帳號 進行紀錄
+                    hsUserLoginLogService.saveLog(failUser, false);
                     log.error("[ERROR] 登陸失敗 帳號 : [ " + hsUser.getUsername() + " ] 密碼 : [ " + hsUser.getPassword() + " ]");
                     // 登陸失敗超過次數
-                    if (user.getStatus() == 9) {
+                    if (failUser.getStatus() == 9) {
                         log.error("[ERROR] 登陸失敗 已被封鎖 帳號 : [ " + hsUser.getUsername() + " ]");
                         return "system/login_frequency";
                     }
-                } else { // 有此帳號 進行紀錄
-                    return "system/login_error";
                 }
             }
-
             // 登陸成功
-            HsUser user = hsUserRepository.findByUsernameAndPassword(hsUser.getUsername(), hsUser.getPassword());
-            user.setLastLoginTime(LocalDateTime.now());
-             hsUserMapper.updateHsUser(user,user.getToken());
+             user.setLastLoginTime(LocalDateTime.now());
+             hsUserMapper.updateHsUser(user);
 
             if (user.getStatus() == 9) {
                 hsUserLoginLogService.saveLog(user, true);
@@ -65,10 +60,10 @@ public class HsUserServiceImpl implements HsUserService {
             hsUserLoginLogService.saveLog(user, true);
             return "system/login_success";
 
-       // } catch (Exception e) {
-           // System.out.println(e + "登陸異常");
-            //return "system/login_error";
-       // }
+        } catch (Exception e) {
+            System.out.println(e + "登陸異常");
+            return "system/login_error";
+        }
     }
 
     @Override
@@ -125,6 +120,6 @@ public class HsUserServiceImpl implements HsUserService {
     public void update(Integer id) {
         HsUser hsUser = hsUserRepository.getById(id);
         hsUser.setStatus(1);
-        hsUserMapper.updateHsUser(hsUser,hsUser.getToken());
+        hsUserMapper.updateHsUser(hsUser);
     }
 }

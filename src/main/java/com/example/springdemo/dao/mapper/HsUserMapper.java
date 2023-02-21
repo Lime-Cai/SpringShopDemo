@@ -1,4 +1,5 @@
 package com.example.springdemo.dao.mapper;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -24,9 +25,9 @@ public interface HsUserMapper {
 
     List<HsUser> selectAllByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 
-    void updateHsUser(@Param("hsUser") HsUser hsUser,@Param("token")String token);
+    void updateHsUser(HsUser hsUser);
 
-
+    int updateLastLoginTime(@Param("lastLoginTime") LocalDateTime lastLoginTime);
 
 }
 

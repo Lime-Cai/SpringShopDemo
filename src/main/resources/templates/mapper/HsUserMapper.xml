@@ -30,15 +30,15 @@
             <if test="password != null"> password = #{password,jdbcType=VARCHAR},</if>
             <if test="username != null"> username = #{username,jdbcType=VARCHAR},</if>
             <if test="mail != null"> mail = #{mail,jdbcType=VARCHAR},</if>
-            <if test="last_login_time != null"> last_login_time = #{lastLoginTime},</if>
+            <if test="lastLoginTime != null"> last_login_time = #{lastLoginTime},</if>
             <if test="name != null"> name  = #{name,jdbcType=VARCHAR},</if>
             <if test="phone != null"> phone = #{phone,jdbcType=NUMERIC},</if>
             <if test="status != null"> status = #{status,jdbcType=NUMERIC},</if>
-            <if test="token != null"> token = #{token,jdbcType=VARCHAR}</if>
-            <if test="add_time != null"> add_time = #{HsUser.addTime},</if>
-            <if test="is_store != null"> is_store = #{isStore,jdbcType=NUMERIC},</if>
+            <if test="token != null"> token = #{token,jdbcType=VARCHAR},</if>
+            <if test="addTime != null"> add_time = #{addTime},</if>
+            <if test="isStore != null"> is_store = #{isStore,jdbcType=NUMERIC},</if>
         </set>
-        where token = #{username,jdbcType=VARCHAR}
+        where username = #{username,jdbcType=VARCHAR}
     </update>
     <select id="selectOneByUsernameAndPassword" resultMap="BaseResultMap">
         select
@@ -77,4 +77,8 @@
         username = #{username,jdbcType=VARCHAR}
         AND password = #{password,jdbcType=VARCHAR}
     </select>
+    <update id="updateLastLoginTime">
+        update hs_user
+        set last_login_time = #{lastLoginTime}
+    </update>
 </mapper>

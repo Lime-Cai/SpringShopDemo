@@ -39,7 +39,7 @@ public class HsUserLoginLogServiceImpl implements HsUserLoginLogService {
             // 登錄失敗超過次數封鎖
             if (count >= 5) {
                 hsUser.setStatus(9);
-                hsUserMapper.updateHsUser(hsUser, hsUser.getToken());
+                hsUserMapper.updateHsUser(hsUser);
             }
         } else {
             count = 0;

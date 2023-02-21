@@ -18,7 +18,6 @@ mybatis:
   mapper-locations: classpath*:templates/mapper/**.xml
   type-aliases-package: com/example/springdemo/dao/domain
 
-
 admin:
   host: //localhost:8080/
 
