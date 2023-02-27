@@ -23,7 +23,7 @@ public class userLogin {
     public String login(Model model) {
         model.addAttribute("hsUser",new HsUser());
         model.addAttribute("_method","POST");
-        return "login/system/login";
+        return "system/login/login";
     }
 
     @PostMapping("/")
@@ -39,7 +39,7 @@ public class userLogin {
     public String add(@ModelAttribute HsUser hsUser , Model model) {
         model.addAttribute("_method","POST");
         model.addAttribute("hsUser",new HsUser());
-        return "login/system/login_add";
+        return "system/login/login_add";
     }
     @PostMapping("/save")
     public String save( @ModelAttribute HsUser hsUser ,Model model) {
@@ -52,6 +52,6 @@ public class userLogin {
         hsUserService.update(id);
         hsUserLoginLogService.update(id);
         log.info("帳號 : "+id+"重新認證 已解鎖");
-        return  "login/system/login";
+        return  "system/login/login";
     }
 }
