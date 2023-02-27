@@ -10,11 +10,11 @@
     <script src="../js/jquery.validate.min.js "></script>
     <script src="../js/messages_zh_TW.min.js "></script>
     <base th:href="@{/}">
-    <link rel="stylesheet " href="../../static/css/output.css ">
+    <link rel="stylesheet " href="../../../static/css/output.css ">
     <link rel="stylesheet " href="/css/output.css ">
 </head>
 <body>
-    <div>ERROR</div>
-    <a th:href="@{/login/add}" class="btn btn-info">回到重新註冊頁面</a>
+    <div>登陸失敗超過5次，請重新驗證</div>
+    <a th:href="@{/login/}" class="btn btn-info">回到登陸頁</a>
 </body>
 </html>

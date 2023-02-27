@@ -36,14 +36,14 @@ public class HsUserServiceImpl implements HsUserService {
                 HsUser failUser = hsUserMapper.selectOneByUsername(hsUser.getUsername());
                 // 沒有此帳號 不儲存
                 if (failUser == null) {
-                    return "system/login_error";
+                    return "login/system/login_error";
                 } else { // 有此帳號 進行紀錄
                     hsUserLoginLogService.saveLog(failUser, false);
                     log.error("[ERROR] 登陸失敗 帳號 : [ " + hsUser.getUsername() + " ] 密碼 : [ " + hsUser.getPassword() + " ]");
                     // 登陸失敗超過次數
                     if (failUser.getStatus() == 9) {
                         log.error("[ERROR] 登陸失敗 已被封鎖 帳號 : [ " + hsUser.getUsername() + " ]");
-                        return "system/login_frequency";
+                        return "login/system/login_frequency";
                     }
                 }
             }
@@ -54,15 +54,15 @@ public class HsUserServiceImpl implements HsUserService {
             if (user.getStatus() == 9) {
                 hsUserLoginLogService.saveLog(user, true);
                 log.error("[ERROR] 登陸成功 已被封鎖 帳號 : [ " + hsUser.getUsername() + " ]");
-                return "system/login_frequency";
+                return "login/system/login_frequency";
             }
             log.info("使用者 : [ " + user.getUsername() + " ]" + " 登陸成功 " + LocalDateTime.now());
             hsUserLoginLogService.saveLog(user, true);
-            return "system/login_success";
+            return "login/system/login_success";
 
         } catch (Exception e) {
             System.out.println(e + "登陸異常");
-            return "system/login_error";
+            return "login/system/login_error";
         }
     }
 
@@ -80,16 +80,16 @@ public class HsUserServiceImpl implements HsUserService {
     public String save(HsUser hsUser) {
         System.out.println(hsUser.getUsername() + "  " + hsUser.getPassword());
         if (systemTools.isNullStringTools(hsUser, hsUser.getUsername(), "UserName")) {
-            return "system/login_save_error";
+            return "login/system/login_save_error";
         }
 
         if (systemTools.isNullStringTools(hsUser, hsUser.getPassword(), "PassWord")) {
-            return "system/login_save_error";
+            return "login/system/login_save_error";
         }
 
         if (hsUserMapper.selectOneByUsername(hsUser.getUsername()) != null) {
             log.error("[ERROR] 帳號重複 : [ " + hsUser.getUsername() + " ]");
-            return "system/login_save_error";
+            return "login/system/login_save_error";
         }
 
         // 產生 token 如果重複再產生
@@ -108,7 +108,7 @@ public class HsUserServiceImpl implements HsUserService {
 
         log.info("註冊成功 UserName : { " + hsUser.getUsername() + " }");
         hsUserRepository.save(user);
-        return "system/login_save_success";
+        return "login/system/login_save_success";
     }
 
     @Override

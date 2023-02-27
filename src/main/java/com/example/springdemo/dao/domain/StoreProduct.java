@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,8 +21,9 @@ import lombok.NoArgsConstructor;
  * @TableName store_product
  */
 @TableName(value ="store_product")
-@Entity
 @Data
+@Entity
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class StoreProduct implements Serializable {
@@ -41,7 +43,7 @@ public class StoreProduct implements Serializable {
     /**
      * 商品ID
      */
-    private Integer productId;
+    private String productId;
 
     /**
      * 商品名

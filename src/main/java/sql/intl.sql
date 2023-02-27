@@ -38,7 +38,7 @@ CREATE TABLE store_product
 (
     `id`            INT             not null  AUTO_INCREMENT,
     `admin_id`      INT             not null                                            COMMENT 'admin_id',
-    `product_id`    INT             NULL    DEFAULT NULL                                COMMENT '商品ID',
+    `product_id`    VARCHAR(1024)   NULL    DEFAULT NULL                                COMMENT '商品ID',
     `product_name`  VARCHAR (1024)  NULL    DEFAULT NULL                                COMMENT '商品名',
     `type`          VARCHAR (30)    NULL    DEFAULT NULL                                COMMENT '類型',
     `amount`        INT             NULL    DEFAULT 0                                   COMMENT '價格',
