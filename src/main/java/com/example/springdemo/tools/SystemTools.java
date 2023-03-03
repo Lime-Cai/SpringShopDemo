@@ -1,6 +1,8 @@
 package com.example.springdemo.tools;
 
 import com.example.springdemo.dao.domain.HsUser;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -41,7 +43,7 @@ public class SystemTools {
      * @return java.lang.String
      */
 
-    public String uuidToken(){
+    public static String uuidToken(){
         UUID randomUUID =UUID.randomUUID();
         String id =  randomUUID.toString();
         String token = id.replaceAll("-","");
@@ -62,5 +64,19 @@ public class SystemTools {
         }
         String hash = sb.toString();
         return hash;
+    }
+
+    public static Cookie setCookie(final HsUser hsUser) {
+        final Cookie cookie = new Cookie("login_", uuidToken());
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setMaxAge(60*5);
+        return cookie;
+    }
+    public static void delCookie(final HttpServletResponse response) {
+        Cookie cookie = new Cookie("login_", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
     }
 }

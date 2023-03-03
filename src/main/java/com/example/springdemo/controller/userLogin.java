@@ -3,6 +3,7 @@ package com.example.springdemo.controller;
 import com.example.springdemo.dao.domain.HsUser;
 import com.example.springdemo.service.model.HsUserLoginLogService;
 import com.example.springdemo.service.model.HsUserService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,11 +28,11 @@ public class userLogin {
     }
 
     @PostMapping("/")
-    public String check(Model model,@ModelAttribute HsUser hsUser ) {
+    public String check(Model model, @ModelAttribute HsUser hsUser , HttpServletResponse response) {
         model.addAttribute("hsUser",new HsUser());
         model.addAttribute("_method","POST");
 
-        return hsUserService.loginCheck(hsUser);
+        return hsUserService.loginCheck(hsUser,response);
     }
 
 
