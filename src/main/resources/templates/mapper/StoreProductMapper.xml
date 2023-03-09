@@ -9,10 +9,10 @@
             <result property="adminId" column="admin_id" jdbcType="INTEGER"/>
             <result property="productId" column="product_id" jdbcType="INTEGER"/>
             <result property="productName" column="product_name" jdbcType="VARCHAR"/>
-            <result property="type" column="type" jdbcType="VARCHAR"/>
+            <result property="type_" column="type_" jdbcType="VARCHAR"/>
             <result property="amount" column="amount" jdbcType="INTEGER"/>
             <result property="quantity" column="quantity" jdbcType="INTEGER"/>
-            <result property="describe" column="describe" jdbcType="VARCHAR"/>
+            <result property="describe_" column="describe_" jdbcType="VARCHAR"/>
             <result property="creatTime" column="creat_time" jdbcType="TIMESTAMP"/>
             <result property="status" column="status" jdbcType="INTEGER"/>
             <result property="hide" column="hide" jdbcType="INTEGER"/>
@@ -22,8 +22,8 @@
 
     <sql id="Base_Column_List">
         id,admin_id,product_id,
-        product_name,type,amount,
-        quantity,describe,creat_time,
+        product_name,type_,amount,
+        quantity,describe_,creat_time,
         status,hide,remark,
         update_time
     </sql>
@@ -31,10 +31,10 @@
         update store_product
         <set>
             <if test="productName != null">product_name = #{productName,jdbcType=VARCHAR}</if>
-            <if test="type != null">type = #{type,jdbcType=VARCHAR}</if>
+            <if test="type_ != null">type_ = #{type_,jdbcType=VARCHAR}</if>
             <if test="amount != null">amount = #{amount,jdbcType=INTEGER}</if>
             <if test="quantity != null">quantity = #{quantity,jdbcType=INTEGER}</if>
-            <if test="describe != null">describe = #{describe,jdbcType=VARCHAR}</if>
+            <if test="describe_ != null">describe_ = #{describe_,jdbcType=VARCHAR}</if>
             <if test="creatTime != null">creat_time = #{creatTime,jdbcType=TIMESTAMP}</if>
             <if test="status != null">status = #{status,jdbcType=INTEGER}</if>
             <if test="hide != null">hide = #{hide,jdbcType=INTEGER}</if>
@@ -45,4 +45,38 @@
             <if test="productId != null">product_id = #{productId,jdbcType=NUMERIC}</if>
         </where>
     </update>
+    <insert id="insertSelective">
+        insert into store_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="adminId != null">admin_id,</if>
+            <if test="productId != null">product_id,</if>
+            <if test="productName != null">product_name,</if>
+            <if test="type_ != null">type_,</if>
+            <if test="amount != null">amount,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="describe_ != null">describe_,</if>
+            <if test="creatTime != null">creat_time,</if>
+            <if test="status != null">status,</if>
+            <if test="hide != null">hide,</if>
+            <if test="remark != null">remark,</if>
+            <if test="updateTime != null">update_time,</if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id,jdbcType=INTEGER},</if>
+            <if test="adminId != null">#{adminId,jdbcType=INTEGER},</if>
+            <if test="productId != null">#{productId,jdbcType=INTEGER},</if>
+            <if test="productName != null">#{productName,jdbcType=VARCHAR},</if>
+            <if test="type_ != null">#{type_,jdbcType=VARCHAR},</if>
+            <if test="amount != null">#{amount,jdbcType=INTEGER},</if>
+            <if test="quantity != null">#{quantity,jdbcType=INTEGER},</if>
+            <if test="describe_ != null">#{describe_,jdbcType=VARCHAR},</if>
+            <if test="creatTime != null">#{creatTime,jdbcType=TIMESTAMP},</if>
+            <if test="status != null">#{status,jdbcType=INTEGER},</if>
+            <if test="hide != null">#{hide,jdbcType=INTEGER},</if>
+            <if test="remark != null">#{remark,jdbcType=VARCHAR},</if>
+            <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+        </trim>
+    </insert>
 </mapper>

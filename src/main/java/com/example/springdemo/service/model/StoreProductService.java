@@ -1,13 +1,14 @@
 package com.example.springdemo.service.model;
 
 import com.example.springdemo.dao.domain.StoreProduct;
+import com.example.springdemo.dao.domain.entity.StoreProductEntity;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public interface StoreProductService {
 
-    StoreProduct add(StoreProduct storeProduct) throws NoSuchAlgorithmException;
+    StoreProduct add(String token, StoreProductEntity storeProduct) ;
 
     void update(StoreProduct storeProduct);
 

@@ -5,6 +5,7 @@ import com.example.springdemo.dao.repository.HsUserRepository;
 import com.example.springdemo.dao.domain.HsUser;
 import com.example.springdemo.service.model.HsUserLoginLogService;
 import com.example.springdemo.tools.SystemTools;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.example.springdemo.service.model.HsUserService;
@@ -28,7 +29,7 @@ public class HsUserServiceImpl implements HsUserService {
     private HsUserLoginLogService hsUserLoginLogService;
 
     @Override
-    public String loginCheck(HsUser hsUser) {
+    public String loginCheck(HsUser hsUser, HttpServletResponse response) {
         try {
             HsUser user = hsUserMapper.selectOneByUsernameAndPassword(hsUser.getUsername(), hsUser.getPassword());
             // 登陸失敗
@@ -58,6 +59,9 @@ public class HsUserServiceImpl implements HsUserService {
             }
             log.info("使用者 : [ " + user.getUsername() + " ]" + " 登陸成功 " + LocalDateTime.now());
             hsUserLoginLogService.saveLog(user, true);
+
+            //登陸成功獲取 cookie token
+            response.addCookie(SystemTools.setCookie(user));
             return "system/login/login_success";
 
         } catch (Exception e) {

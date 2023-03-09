@@ -22,6 +22,10 @@
                     <h1 class="mb-2 text-2xl"></h1>
                     <span class="text-gray-300"> </span>
                     <!-- </div> -->
+                    <!--/*@thymesVar id="hsUser" type="java"*/-->
+                    <!--/*@thymesVar id="_method" type="java"*/-->
+                    <!--/*@thymesVar id="username" type="java"*/-->
+                    <!--/*@thymesVar id="password" type="java"*/-->
                     <form th:action="@{/login/}" th:object="${hsUser}" th:method="${_method}">
                         <div class="mb-4 text-lg">
                             <input th:filed="${username}" class="rounded-3xl border-none bg-green-600  px-20 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" type="text" name="username" placeholder="id@email.com" />
@@ -45,6 +49,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </body>
 
 </html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+</head>
+<body>
+<div class="ui text container">
+<table class="ui attached table">
+    <thead>
+    <tr><th>序號</th>
+        <th>商品名</th>
+        <th>類型</th>
+        <th>金額</th>
+        <th>數量</th>
+        <th>隱藏</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product, state : ${productList}">
+        <td th:text="${state.index} +1"></td>
+        <td th:text="${product.productName}"></td>
+        <td th:text="${product.type_}"></td>
+        <td th:text="${product.amount}"></td>
+        <td th:text="${product.quantity}"></td>
+        <td th:text="${product.hide}"></td>
+    </tr>
+    </tbody>
+</table>
+</div>
+
+
+
+</body>
+</html>

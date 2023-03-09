@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 商品
@@ -26,6 +27,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@RestController
 public class StoreProduct implements Serializable {
     /**
      * 
@@ -53,7 +55,7 @@ public class StoreProduct implements Serializable {
     /**
      * 類型
      */
-    private String type;
+    private String type_;
 
     /**
      * 價格
@@ -68,7 +70,7 @@ public class StoreProduct implements Serializable {
     /**
      * 描述
      */
-    private String describe;
+    private String describe_;
 
     /**
      * 新增時間
@@ -83,7 +85,7 @@ public class StoreProduct implements Serializable {
     /**
      * 0.隱藏、1.顯示
      */
-    private Integer hide;
+    private Boolean hide;
 
     /**
      * 备注

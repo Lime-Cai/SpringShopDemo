@@ -67,7 +67,7 @@ public class SystemTools {
     }
 
     public static Cookie setCookie(final HsUser hsUser) {
-        final Cookie cookie = new Cookie("login_", uuidToken());
+        final Cookie cookie = new Cookie("login_",hsUser.getToken());
         cookie.setPath("/");
         cookie.setHttpOnly(true);
         cookie.setSecure(true);

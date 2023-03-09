@@ -22,16 +22,12 @@ public class userLogin {
 
     @GetMapping("/")
     public String login(Model model) {
-        model.addAttribute("hsUser",new HsUser());
         model.addAttribute("_method","POST");
         return "system/login/login";
     }
 
     @PostMapping("/")
-    public String check(Model model, @ModelAttribute HsUser hsUser , HttpServletResponse response) {
-        model.addAttribute("hsUser",new HsUser());
-        model.addAttribute("_method","POST");
-
+    public String check(@ModelAttribute HsUser hsUser , HttpServletResponse response) {
         return hsUserService.loginCheck(hsUser,response);
     }
 
@@ -43,7 +39,7 @@ public class userLogin {
         return "system/login/login_add";
     }
     @PostMapping("/save")
-    public String save( @ModelAttribute HsUser hsUser ,Model model) {
+    public String save( @ModelAttribute HsUser hsUser) {
         return hsUserService.save(hsUser);
     }
 

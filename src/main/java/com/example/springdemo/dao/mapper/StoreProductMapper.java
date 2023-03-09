@@ -16,6 +16,8 @@ import org.springframework.stereotype.Repository;
 public interface StoreProductMapper {
 
     int updateProduct(StoreProduct storeProduct);
+
+    int insertSelective(StoreProduct storeProduct);
 }
 
 
