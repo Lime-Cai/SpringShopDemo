@@ -22,10 +22,12 @@ public class product {
 
 
     @GetMapping("/")
-    public String index(@ModelAttribute StoreProduct storeProduct, Model model) throws NoSuchAlgorithmException {
+    public String index(@ModelAttribute StoreProduct storeProduct,@ModelAttribute StoreProductEntity storeProductEntity, Model model) throws NoSuchAlgorithmException {
         model.addAttribute("storeProduct" ,new StoreProduct());
-        model.addAttribute("_method" ,"GET");
         model.addAttribute("productList",storeProductService.selectProduct());
+        model.addAttribute("storeProductEntity" ,new StoreProductEntity());
+        model.addAttribute("type" , ProductTypeEnum.values());
+        model.addAttribute("_method" ,"POST");
         return "system/product/product";
     }
 
@@ -40,6 +42,12 @@ public class product {
     @PostMapping("/add")
     public String add(@ModelAttribute StoreProductEntity storeProductEntity, @CookieValue(value = "login_")String token) {
         storeProductService.add(token,storeProductEntity);
-        return "index";
+        return "system/product/product";
+    }
+
+    @GetMapping("/update/{token}")
+    public String update(@PathVariable("token") String ProductToken ,Model model){
+        model.addAttribute("_method","POST");
+        return "system/product/product";
     }
 }
