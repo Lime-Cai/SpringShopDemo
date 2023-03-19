@@ -1,5 +1,6 @@
 package com.example.springdemo.service.impl;
 
+import com.example.springdemo.controller.system.excel;
 import com.example.springdemo.dao.domain.HsUser;
 import com.example.springdemo.dao.domain.StoreProduct;
 import com.example.springdemo.dao.domain.entity.StoreProductEntity;
@@ -8,12 +9,15 @@ import com.example.springdemo.dao.mapper.StoreProductMapper;
 import com.example.springdemo.dao.repository.StoreProductRepository;
 import com.example.springdemo.service.model.StoreProductService;
 import com.example.springdemo.tools.SystemTools;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -31,9 +35,9 @@ public class StoreProductServiceImpl implements StoreProductService {
 
 
     @Override
-    public StoreProduct add(String token, StoreProductEntity storeProduct)  {
+    public StoreProduct add(String token, StoreProductEntity storeProduct) {
 
-        HsUser user =hsUserMapper.selectOneByToken(token);
+        HsUser user = hsUserMapper.selectOneByToken(token);
         StoreProduct product = StoreProduct.builder()
                 .adminId(user.getId())
                 .productId(SystemTools.uuidToken())
@@ -50,7 +54,7 @@ public class StoreProductServiceImpl implements StoreProductService {
                 .build();
 
         storeProductMapper.insertSelective(product);
-        log.info("新增成功 時間 : {} 商品 : {} ",product.getUpdateTime(),product.toString());
+        log.info("新增成功 時間 : {} 商品 : {} ", product.getUpdateTime(), product.toString());
         return product;
     }
 
@@ -71,7 +75,7 @@ public class StoreProductServiceImpl implements StoreProductService {
                 .updateTime(LocalDateTime.now())
                 .build();
         storeProductMapper.updateProduct(product);
-        log.info("商品 : {} 更新成功 時間 : {}",storeProduct.getProductId(),storeProduct.getUpdateTime());
+        log.info("商品 : {} 更新成功 時間 : {}", storeProduct.getProductId(), storeProduct.getUpdateTime());
     }
 
     @Override
@@ -87,5 +91,43 @@ public class StoreProductServiceImpl implements StoreProductService {
     @Override
     public List<StoreProduct> selectProduct() {
         return storeProductRepository.findAll();
+    }
+
+    @Override
+    public void download(HttpServletResponse response) {
+
+        List<StoreProduct> list = storeProductRepository.findAll();
+        Workbook workbook = null;
+
+        List<String> headerNameList = new LinkedList<>();
+        headerNameList.add("商品名");
+        headerNameList.add("數量");
+        headerNameList.add("金額");
+        headerNameList.add("a");
+        headerNameList.add("bbb");
+        headerNameList.add("123");
+        for (StoreProduct product : list) {
+            List<List<String>> lists = toStringList(list);
+            workbook = excel.RegisterStatisticResponseToExcel(workbook, response, lists, product.getProductName(), headerNameList);
+        }
+
+//        excel.exportRegisterStatisticExcel(response, workbook);
+
+    }
+
+    public List<List<String>> toStringList(List<StoreProduct> list) {
+
+        List<List<String>> lists = new LinkedList<>();
+        List<String> stringList = new LinkedList<>();
+
+        for (StoreProduct product : list) {
+            stringList.add(product.getProductName());
+            stringList.add(String.valueOf(product.getQuantity()));
+            stringList.add(String.valueOf(product.getAmount()));
+
+            lists.add(stringList);
+        }
+
+        return lists;
     }
 }

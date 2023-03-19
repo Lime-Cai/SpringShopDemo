@@ -2,6 +2,7 @@ package com.example.springdemo.service.model;
 
 import com.example.springdemo.dao.domain.StoreProduct;
 import com.example.springdemo.dao.domain.entity.StoreProductEntity;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -17,4 +18,6 @@ public interface StoreProductService {
     void updateStatus(StoreProduct storeProduct);
 
     List<StoreProduct> selectProduct();
+
+    void download (HttpServletResponse response);
 }

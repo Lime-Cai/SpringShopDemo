@@ -4,6 +4,7 @@ import com.example.springdemo.dao.domain.StoreProduct;
 import com.example.springdemo.dao.domain.entity.ProductTypeEnum;
 import com.example.springdemo.dao.domain.entity.StoreProductEntity;
 import com.example.springdemo.service.model.StoreProductService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,6 +49,12 @@ public class product {
     @GetMapping("/update/{token}")
     public String update(@PathVariable("token") String ProductToken ,Model model){
         model.addAttribute("_method","POST");
+        return "system/product/product";
+    }
+
+    @GetMapping("/download")
+    public String download(HttpServletResponse response) {
+        storeProductService.download(response);
         return "system/product/product";
     }
 }
