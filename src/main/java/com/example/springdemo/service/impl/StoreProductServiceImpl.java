@@ -111,7 +111,7 @@ public class StoreProductServiceImpl implements StoreProductService {
             workbook = excel.RegisterStatisticResponseToExcel(workbook, response, lists, product.getProductName(), headerNameList);
         }
 
-//        excel.exportRegisterStatisticExcel(response, workbook);
+        excel.exportRegisterStatisticExcel(response, workbook);
 
     }
 

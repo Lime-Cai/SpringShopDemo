@@ -26,44 +26,26 @@ public class excel {
 //        // 设定索引为0
 //        workbook.setSheetOrder(sheet.getSheetName(), 0);
 
+
+        Row headerRow = sheet.createRow(0);
+
         // 创建表头行并设置表头单元格的值和样式
         for (int i = 0; i < headerNameList.size(); i++) {
-            Row headerRow = sheet.createRow(0);
             CellStyle headerCellStyle = createHeaderStyle(workbook);
             createHeaderCell(headerRow, i, headerNameList.get(i), headerCellStyle);
-            System.out.println(headerNameList.get(i));
         }
 
         // 写入全部数据
         int rowNum = 1;
         for (List<String> list : responseList) {
+            Row row = sheet.createRow(rowNum);
             for (int i = 0; i < list.size(); i++) {
-                Row row = sheet.createRow(rowNum);
                 row.createCell(i).setCellValue(list.get(i));
                 System.out.println(list. get(i));
             }
             ++rowNum;
         }
 
-        try {
-
-//            // 清除之前的設定
-//            httpServletResponse.reset();
-
-            // 将工作簿中的数据写入输出流
-            httpServletResponse.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-            httpServletResponse.setHeader("Content-Disposition", "attachment; filename=" + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")) + "_in-api-p001" + ".xlsx");
-
-            // 获取输出流
-            OutputStream outputStream = httpServletResponse.getOutputStream();
-
-            // 将 Excel 数据写入输出流
-            workbook.write(outputStream);
-            outputStream.flush();
-            outputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return workbook;
     }
 
