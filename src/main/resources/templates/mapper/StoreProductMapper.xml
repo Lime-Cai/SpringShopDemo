@@ -51,7 +51,7 @@
     <select id="selectByAdminIdStoreProduct" resultType="com.example.springdemo.dao.domain.StoreProduct">
         select
         <include refid="Base_Column_List"></include>
-            from hs_user
+            from store_product
         <where>
             <if test="adminId != null">admin_id = #{adminId,jdbcType=NUMERIC}</if>
         </where>
