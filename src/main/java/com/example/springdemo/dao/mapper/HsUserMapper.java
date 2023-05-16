@@ -1,4 +1,5 @@
 package com.example.springdemo.dao.mapper;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -9,11 +10,11 @@ import com.example.springdemo.dao.domain.HsUser;
 import org.springframework.stereotype.Repository;
 
 /**
-* @author jp098
-* @description 针对表【hs_user】的数据库操作Mapper
-* @createDate 2023-02-20 19:29:15
-* @Entity com.example.springdemo.dao.domain.HsUser
-*/
+ * @author jp098
+ * @description 针对表【hs_user】的数据库操作Mapper
+ * @createDate 2023-02-20 19:29:15
+ * @Entity com.example.springdemo.dao.domain.HsUser
+ */
 @Mapper
 @Repository
 public interface HsUserMapper {
@@ -27,7 +28,6 @@ public interface HsUserMapper {
 
     void updateHsUser(HsUser hsUser);
 
-    int updateLastLoginTime(@Param("lastLoginTime") LocalDateTime lastLoginTime);
 
 }
 

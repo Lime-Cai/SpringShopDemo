@@ -77,8 +77,5 @@
         username = #{username,jdbcType=VARCHAR}
         AND password = #{password,jdbcType=VARCHAR}
     </select>
-    <update id="updateLastLoginTime">
-        update hs_user
-        set last_login_time = #{lastLoginTime}
-    </update>
+
 </mapper>

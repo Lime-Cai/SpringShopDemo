@@ -7,7 +7,6 @@ import com.example.springdemo.service.model.HsUserLoginLogService;
 import com.example.springdemo.tools.SystemTools;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.example.springdemo.service.model.HsUserService;
 import org.springframework.stereotype.Service;
 
@@ -19,14 +18,15 @@ import java.util.Optional;
 @Slf4j
 public class HsUserServiceImpl implements HsUserService {
 
-    @Autowired
-    private HsUserRepository hsUserRepository;
-    @Autowired
-    private HsUserMapper hsUserMapper;
-    @Autowired
-    private SystemTools systemTools;
-    @Autowired
-    private HsUserLoginLogService hsUserLoginLogService;
+    private final HsUserRepository hsUserRepository;
+    private final HsUserMapper hsUserMapper;
+    private final HsUserLoginLogService hsUserLoginLogService;
+
+    public HsUserServiceImpl(HsUserLoginLogService hsUserLoginLogService, HsUserRepository hsUserRepository, HsUserMapper hsUserMapper, SystemTools systemTools) {
+        this.hsUserLoginLogService = hsUserLoginLogService;
+        this.hsUserRepository = hsUserRepository;
+        this.hsUserMapper = hsUserMapper;
+    }
 
     @Override
     public String loginCheck(HsUser hsUser, HttpServletResponse response) {
@@ -48,9 +48,10 @@ public class HsUserServiceImpl implements HsUserService {
                     }
                 }
             }
-            // 登陸成功
-             user.setLastLoginTime(LocalDateTime.now());
-             hsUserMapper.updateHsUser(user);
+            // 登陸成功 更改用户token、更新登录时间
+            user.setLastLoginTime(LocalDateTime.now());
+            user.setToken(SystemTools.uuidToken());
+            hsUserMapper.updateHsUser(user);
 
             if (user.getStatus() == 9) {
                 hsUserLoginLogService.saveLog(user, true);
@@ -83,11 +84,11 @@ public class HsUserServiceImpl implements HsUserService {
     @Override
     public String save(HsUser hsUser) {
         System.out.println(hsUser.getUsername() + "  " + hsUser.getPassword());
-        if (systemTools.isNullStringTools(hsUser, hsUser.getUsername(), "UserName")) {
+        if (SystemTools.isNullStringTools(hsUser, hsUser.getUsername(), "UserName")) {
             return "system/login/login_save_error";
         }
 
-        if (systemTools.isNullStringTools(hsUser, hsUser.getPassword(), "PassWord")) {
+        if (SystemTools.isNullStringTools(hsUser, hsUser.getPassword(), "PassWord")) {
             return "system/login/login_save_error";
         }
 
@@ -97,9 +98,9 @@ public class HsUserServiceImpl implements HsUserService {
         }
 
         // 產生 token 如果重複再產生
-        String token = systemTools.uuidToken();
+        String token = SystemTools.uuidToken();
         while (hsUserMapper.selectOneByToken(token) != null) {
-            token = systemTools.uuidToken();
+            token = SystemTools.uuidToken();
         }
         HsUser user = hsUser.builder().
                 username(hsUser.getUsername()).
