@@ -45,6 +45,24 @@
             <if test="productId != null">product_id = #{productId,jdbcType=NUMERIC}</if>
         </where>
     </update>
+    <select id="selectByAdminIdStoreProduct" resultType="java.util.List">
+        select id
+        ,admin_id
+        ,product_id
+        ,product_nam
+        ,type_
+        ,amount
+        ,quantity
+        ,describe_
+        ,creat_time
+        ,status
+        ,hide
+        ,remark
+        ,update_time
+        <where>
+            <if test="adminid != null">admin_id = #{adminid,jdbcType=NUMERIC}</if>
+        </where>
+    </select>
     <insert id="insertSelective">
         insert into store_product
         <trim prefix="(" suffix=")" suffixOverrides=",">

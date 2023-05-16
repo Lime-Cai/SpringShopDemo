@@ -19,6 +19,7 @@ public interface StoreProductService {
     void updateStatus(StoreProduct storeProduct);
 
     List<StoreProduct> selectProduct();
+    List<StoreProduct> selectProduct(HsUser hsUser);
 
     void download (HttpServletResponse response, String token);
 }

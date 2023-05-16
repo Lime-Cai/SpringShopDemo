@@ -5,6 +5,9 @@ import com.example.springdemo.dao.domain.StoreProduct;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 /**
 * @author jp098
 * @description 针对表【store_product(商品)】的数据库操作Mapper
@@ -18,6 +21,8 @@ public interface StoreProductMapper {
     int updateProduct(StoreProduct storeProduct);
 
     int insertSelective(StoreProduct storeProduct);
+
+    List<StoreProduct> selectByAdminIdStoreProduct(@Param("adminId") Integer adminId);
 }
 
 

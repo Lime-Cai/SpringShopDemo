@@ -98,6 +98,11 @@ public class StoreProductServiceImpl implements StoreProductService {
     }
 
     @Override
+    public List<StoreProduct> selectProduct(HsUser hsUser) {
+        return Optional.ofNullable(storeProductMapper.selectByAdminIdStoreProduct(hsUser.getId())).orElseGet(ArrayList::new);
+    }
+
+    @Override
     public void download(HttpServletResponse response, String token) {
 
         HsUser hsUser = hsUserMapper.selectOneByToken(token);
