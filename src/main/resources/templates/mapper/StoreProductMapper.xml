@@ -5,23 +5,24 @@
 <mapper namespace="com.example.springdemo.dao.mapper.StoreProductMapper">
 
     <resultMap id="BaseResultMap" type="com.example.springdemo.dao.domain.StoreProduct">
-            <id property="id" column="id" jdbcType="INTEGER"/>
-            <result property="adminId" column="admin_id" jdbcType="INTEGER"/>
-            <result property="productId" column="product_id" jdbcType="INTEGER"/>
-            <result property="productName" column="product_name" jdbcType="VARCHAR"/>
-            <result property="type_" column="type_" jdbcType="VARCHAR"/>
-            <result property="amount" column="amount" jdbcType="INTEGER"/>
-            <result property="quantity" column="quantity" jdbcType="INTEGER"/>
-            <result property="describe_" column="describe_" jdbcType="VARCHAR"/>
-            <result property="creatTime" column="creat_time" jdbcType="TIMESTAMP"/>
-            <result property="status" column="status" jdbcType="INTEGER"/>
-            <result property="hide" column="hide" jdbcType="INTEGER"/>
-            <result property="remark" column="remark" jdbcType="VARCHAR"/>
-            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="adminId" column="admin_id" jdbcType="INTEGER"/>
+        <result property="productId" column="product_id" jdbcType="INTEGER"/>
+        <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+        <result property="type_" column="type_" jdbcType="VARCHAR"/>
+        <result property="amount" column="amount" jdbcType="INTEGER"/>
+        <result property="quantity" column="quantity" jdbcType="INTEGER"/>
+        <result property="describe_" column="describe_" jdbcType="VARCHAR"/>
+        <result property="creatTime" column="creat_time" jdbcType="TIMESTAMP"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="hide" column="hide" jdbcType="INTEGER"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,admin_id,product_id,
+        id
+        ,admin_id,product_id,
         product_name,type_,amount,
         quantity,describe_,creat_time,
         status,hide,remark,
@@ -45,20 +46,11 @@
             <if test="productId != null">product_id = #{productId,jdbcType=NUMERIC}</if>
         </where>
     </update>
-    <select id="selectByAdminIdStoreProduct" resultType="java.util.List">
-        select id
-        ,admin_id
-        ,product_id
-        ,product_nam
-        ,type_
-        ,amount
-        ,quantity
-        ,describe_
-        ,creat_time
-        ,status
-        ,hide
-        ,remark
-        ,update_time
+
+
+    <select id="selectByAdminIdStoreProduct" resultType="com.example.springdemo.dao.domain.StoreProduct">
+        select
+        <include refid="Base_Column_List"></include>
         <where>
             <if test="adminid != null">admin_id = #{adminid,jdbcType=NUMERIC}</if>
         </where>
