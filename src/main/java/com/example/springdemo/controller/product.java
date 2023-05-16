@@ -18,8 +18,11 @@ import java.security.NoSuchAlgorithmException;
 
 public class product {
 
-    @Autowired
-    private StoreProductService storeProductService;
+    private final StoreProductService storeProductService;
+
+    public product(StoreProductService storeProductService) {
+        this.storeProductService = storeProductService;
+    }
 
 
     @GetMapping("/")
@@ -32,18 +35,12 @@ public class product {
         return "system/product/product";
     }
 
-    @GetMapping("/add")
-    public String addIndex(@ModelAttribute StoreProductEntity storeProductEntity, Model model ){
-        model.addAttribute("storeProductEntity" ,new StoreProductEntity());
-        model.addAttribute("type" , ProductTypeEnum.values());
-        model.addAttribute("_method" ,"POST");
-        return "system/product/add_product";
-    }
-
     @PostMapping("/add")
-    public String add(@ModelAttribute StoreProductEntity storeProductEntity, @CookieValue(value = "login_")String token) {
+    public String add(@ModelAttribute StoreProductEntity storeProductEntity, @CookieValue(value = "login_")String token,Model model) {
+        model.addAttribute("productList",storeProductService.selectProduct());
+        model.addAttribute("_method" ,"GET");
         storeProductService.add(token,storeProductEntity);
-        return "system/product/product";
+        return "redirect:./";
     }
 
     @GetMapping("/update/{token}")
@@ -53,8 +50,8 @@ public class product {
     }
 
     @GetMapping("/download")
-    public String download(HttpServletResponse response) {
-        storeProductService.download(response);
+    public String download(HttpServletResponse response,@CookieValue(value = "login_")String token) {
+        storeProductService.download(response,token);
         return "system/product/product";
     }
 }

@@ -1,5 +1,6 @@
 package com.example.springdemo.service.model;
 
+import com.example.springdemo.dao.domain.HsUser;
 import com.example.springdemo.dao.domain.StoreProduct;
 import com.example.springdemo.dao.domain.entity.StoreProductEntity;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,5 +20,5 @@ public interface StoreProductService {
 
     List<StoreProduct> selectProduct();
 
-    void download (HttpServletResponse response);
+    void download (HttpServletResponse response, String token);
 }

@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -15,9 +17,9 @@ public class StoreProductEntity {
 
     private String type;
 
-    private Integer amount;
+    private BigDecimal amount;
 
-    private Integer quantity;
+    private BigDecimal quantity;
 
     private String describe;
 

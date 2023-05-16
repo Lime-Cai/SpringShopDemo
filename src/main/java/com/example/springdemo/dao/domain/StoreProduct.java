@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Entity;
@@ -60,12 +61,12 @@ public class StoreProduct implements Serializable {
     /**
      * 價格
      */
-    private Integer amount;
+    private BigDecimal amount;
 
     /**
      * 數量
      */
-    private Integer quantity;
+    private BigDecimal quantity;
 
     /**
      * 描述

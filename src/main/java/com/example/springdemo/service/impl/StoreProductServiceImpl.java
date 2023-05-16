@@ -1,6 +1,7 @@
 package com.example.springdemo.service.impl;
 
-import com.example.springdemo.controller.system.excel;
+import com.example.springdemo.dao.domain.entity.excel.ProductView;
+import com.example.springdemo.tools.excel;
 import com.example.springdemo.dao.domain.HsUser;
 import com.example.springdemo.dao.domain.StoreProduct;
 import com.example.springdemo.dao.domain.entity.StoreProductEntity;
@@ -17,21 +18,24 @@ import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
 public class StoreProductServiceImpl implements StoreProductService {
 
-    @Autowired
-    private StoreProductRepository storeProductRepository;
-    @Autowired
-    private StoreProductMapper storeProductMapper;
-    @Autowired
-    private SystemTools systemTools;
-    @Autowired
-    private HsUserMapper hsUserMapper;
+    private final StoreProductRepository storeProductRepository;
+    private final StoreProductMapper storeProductMapper;
+    private final HsUserMapper hsUserMapper;
+
+    public StoreProductServiceImpl(HsUserMapper hsUserMapper, StoreProductRepository storeProductRepository, StoreProductMapper storeProductMapper, SystemTools systemTools) {
+        this.hsUserMapper = hsUserMapper;
+        this.storeProductRepository = storeProductRepository;
+        this.storeProductMapper = storeProductMapper;
+    }
 
 
     @Override
@@ -94,40 +98,71 @@ public class StoreProductServiceImpl implements StoreProductService {
     }
 
     @Override
-    public void download(HttpServletResponse response) {
+    public void download(HttpServletResponse response, String token) {
 
-        List<StoreProduct> list = storeProductRepository.findAll();
-        Workbook workbook = null;
+        HsUser hsUser = hsUserMapper.selectOneByToken(token);
 
-        List<String> headerNameList = new LinkedList<>();
-        headerNameList.add("商品名");
-        headerNameList.add("數量");
-        headerNameList.add("金額");
-        headerNameList.add("a");
-        headerNameList.add("bbb");
-        headerNameList.add("123");
-        for (StoreProduct product : list) {
-            List<List<String>> lists = toStringList(list);
-            workbook = excel.RegisterStatisticResponseToExcel(workbook, response, lists, product.getProductName(), headerNameList);
+        if (Optional.ofNullable(hsUser).isEmpty()){
+
         }
 
-        excel.exportRegisterStatisticExcel(response, workbook);
+        List<StoreProduct> list = storeProductRepository.findAll();
+
+        List<ProductView.product> storeProductList = new LinkedList<>();
+
+
+        List<List<String>> sheetNameList= new LinkedList<>();
+        List<String> sheetName = new LinkedList<>();
+        for (StoreProduct storeProduct:list) {
+            sheetName.add(hsUser.getUsername());
+            sheetNameList.add(sheetName);
+        }
+        List<List<String>> callViewList = new LinkedList<>();
+        List<String> callView = new LinkedList<>();
+        for (StoreProduct storeProduct:list) {
+            callView.add(storeProduct.getProductName());
+            callView.add(storeProduct.getType_());
+            callView.add(storeProduct.getDescribe_());
+            callView.add(String.valueOf(storeProduct.getAmount()));
+            callView.add(String.valueOf(storeProduct.getQuantity()));
+            callView.add(String.valueOf(storeProduct.getCreatTime()));
+            callViewList.add(sheetName);
+        }
+
+
+
+        excel.ResponseToExcel(response,sheetNameList,headerName(),callViewList) ;
 
     }
 
-    public List<List<String>> toStringList(List<StoreProduct> list) {
-
-        List<List<String>> lists = new LinkedList<>();
-        List<String> stringList = new LinkedList<>();
-
-        for (StoreProduct product : list) {
-            stringList.add(product.getProductName());
-            stringList.add(String.valueOf(product.getQuantity()));
-            stringList.add(String.valueOf(product.getAmount()));
-
-            lists.add(stringList);
-        }
-
-        return lists;
+    public ProductView.product toProductView(StoreProduct storeProduct) {
+        return ProductView.product.builder()
+                .type(storeProduct.getType_())
+                .amount(storeProduct.getAmount())
+                .describe(storeProduct.getDescribe_())
+                .productName(storeProduct.getProductName())
+                .quantity(storeProduct.getQuantity())
+                .build();
+    }
+    // Header 命名
+    public static List<String> headerName() {
+        List<String> list = new LinkedList<>();
+        list.add("appName");
+        list.add("日期");
+        list.add("OTP发送量");
+        list.add("註冊量");
+        list.add("相冊认证數");
+        list.add("通讯录认证數");
+        list.add("AppList认证數");
+        list.add("短信通话认证數");
+        list.add("实名认证數");
+        list.add("紧急联系人认证數");
+        list.add("Face id认证數");
+        list.add("绑卡认证數");
+        list.add("內部风控通过數");
+        list.add("外部风控通过數");
+        list.add("订单申请量");
+        list.add("新客放款量");
+        return list;
     }
 }
