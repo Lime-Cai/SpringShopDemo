@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Slf4j
-@Component
 public class SystemTools {
 
 
@@ -27,7 +26,7 @@ public class SystemTools {
      * @param hsUser, s, remark
      * @return java.lang.Boolean
      */
-    public Boolean isNullStringTools(HsUser hsUser,String s,String remark){
+    public static Boolean isNullStringTools(HsUser hsUser, String s, String remark){
         if (s.trim() == "" || s.equals("") || s == null){
             log.error("[ERROR] User : [ " + hsUser.getUsername() + " ] "+ remark + " 命中isNull 輸入內容 : { "+s+" }");
             return true;
@@ -51,7 +50,7 @@ public class SystemTools {
         return token;
     }
 
-    public String md5Token(String tools) throws NoSuchAlgorithmException {
+    public static String md5Token(String tools) throws NoSuchAlgorithmException {
         String message = tools + LocalDateTime.now()+uuidToken();
         byte[] messageBytes = message.getBytes();
 
