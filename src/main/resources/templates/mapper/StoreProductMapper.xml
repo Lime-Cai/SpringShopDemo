@@ -52,7 +52,7 @@
         select
         <include refid="Base_Column_List"></include>
         <where>
-            <if test="adminid != null">admin_id = #{adminid,jdbcType=NUMERIC}</if>
+            <if test="adminId != null">admin_id = #{adminId,jdbcType=NUMERIC}</if>
         </where>
     </select>
     <insert id="insertSelective">
