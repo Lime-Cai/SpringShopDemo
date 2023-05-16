@@ -39,14 +39,14 @@ public class product {
         return "system/product/product";
     }
 
-    @GetMapping("seller/{token}")
-    public String index(@ModelAttribute StoreProduct storeProduct,@CookieValue(value = "login_") String token, Model model) {
+    @GetMapping("/seller")
+    public String index(@ModelAttribute StoreProduct storeProduct, @CookieValue(value = "login_") String token, Model model) {
         model.addAttribute("storeProduct", new StoreProduct());
         model.addAttribute("storeProductEntity", new StoreProductEntity());
         model.addAttribute("type", ProductTypeEnum.values());
         model.addAttribute("_method", "POST");
 
-        model.addAttribute("productList",storeProductService.selectProduct(hsUserMapper.selectOneByToken(token)));
+        model.addAttribute("productList", storeProductService.selectProduct(hsUserMapper.selectOneByToken(token)));
         return "system/product/product";
     }
 
