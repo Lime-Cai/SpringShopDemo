@@ -22,7 +22,7 @@ public class HsUserServiceImpl implements HsUserService {
     private final HsUserMapper hsUserMapper;
     private final HsUserLoginLogService hsUserLoginLogService;
 
-    public HsUserServiceImpl(HsUserLoginLogService hsUserLoginLogService, HsUserRepository hsUserRepository, HsUserMapper hsUserMapper, SystemTools systemTools) {
+    public HsUserServiceImpl(HsUserLoginLogService hsUserLoginLogService, HsUserRepository hsUserRepository, HsUserMapper hsUserMapper) {
         this.hsUserLoginLogService = hsUserLoginLogService;
         this.hsUserRepository = hsUserRepository;
         this.hsUserMapper = hsUserMapper;

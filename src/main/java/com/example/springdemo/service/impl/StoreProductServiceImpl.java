@@ -31,7 +31,7 @@ public class StoreProductServiceImpl implements StoreProductService {
     private final StoreProductMapper storeProductMapper;
     private final HsUserMapper hsUserMapper;
 
-    public StoreProductServiceImpl(HsUserMapper hsUserMapper, StoreProductRepository storeProductRepository, StoreProductMapper storeProductMapper, SystemTools systemTools) {
+    public StoreProductServiceImpl(HsUserMapper hsUserMapper, StoreProductRepository storeProductRepository, StoreProductMapper storeProductMapper) {
         this.hsUserMapper = hsUserMapper;
         this.storeProductRepository = storeProductRepository;
         this.storeProductMapper = storeProductMapper;
