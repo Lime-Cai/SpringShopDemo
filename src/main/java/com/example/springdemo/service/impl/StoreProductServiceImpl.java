@@ -1,5 +1,6 @@
 package com.example.springdemo.service.impl;
 
+import com.example.springdemo.controller.system.customizeDate;
 import com.example.springdemo.dao.domain.entity.excel.ProductView;
 import com.example.springdemo.tools.excel;
 import com.example.springdemo.dao.domain.HsUser;
@@ -12,16 +13,11 @@ import com.example.springdemo.service.model.StoreProductService;
 import com.example.springdemo.tools.SystemTools;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Slf4j
@@ -58,7 +54,7 @@ public class StoreProductServiceImpl implements StoreProductService {
                 .build();
 
         storeProductMapper.insertSelective(product);
-        log.info("新增成功 時間 : {} 商品 : {} ", product.getUpdateTime(), product.toString());
+        log.info("時間 : {} 商品 : {}  新增成功 ", product.getUpdateTime(), product.toString());
         return product;
     }
 
@@ -79,12 +75,22 @@ public class StoreProductServiceImpl implements StoreProductService {
                 .updateTime(LocalDateTime.now())
                 .build();
         storeProductMapper.updateProduct(product);
-        log.info("商品 : {} 更新成功 時間 : {}", storeProduct.getProductId(), storeProduct.getUpdateTime());
+        log.info("  時間 : {} 商品 : {} 更新成功", storeProduct.getUpdateTime(), storeProduct.getProductId());
     }
 
     @Override
-    public void productHide(StoreProduct storeProduct) {
+    public void productHide(String productId, String token) {
 
+        StoreProduct product = storeProductRepository.findByProductId(productId, token).orElseGet(() -> {
+            log.error(" 時間 : {} 商品 : {} 为空值", customizeDate.localToString(LocalDateTime.now()), productId);
+            return StoreProduct.builder().productName("ERROR").build();
+        });
+
+        if (!Objects.equals(product.getProductName(), "ERROR")) {
+            product.setStatus(9);
+            storeProductMapper.updateProduct(product);
+            log.info(" 時間 : {} 商品 : {} 已设为关闭", customizeDate.localToString(LocalDateTime.now()), productId);
+        }
     }
 
     @Override
@@ -107,7 +113,7 @@ public class StoreProductServiceImpl implements StoreProductService {
 
         HsUser hsUser = hsUserMapper.selectOneByToken(token);
 
-        if (Optional.ofNullable(hsUser).isEmpty()){
+        if (Optional.ofNullable(hsUser).isEmpty()) {
 
         }
 
@@ -116,15 +122,15 @@ public class StoreProductServiceImpl implements StoreProductService {
         List<ProductView.product> storeProductList = new LinkedList<>();
 
 
-        List<List<String>> sheetNameList= new LinkedList<>();
+        List<List<String>> sheetNameList = new LinkedList<>();
         List<String> sheetName = new LinkedList<>();
-        for (StoreProduct storeProduct:list) {
+        for (StoreProduct storeProduct : list) {
             sheetName.add(hsUser.getUsername());
             sheetNameList.add(sheetName);
         }
         List<List<String>> callViewList = new LinkedList<>();
         List<String> callView = new LinkedList<>();
-        for (StoreProduct storeProduct:list) {
+        for (StoreProduct storeProduct : list) {
             callView.add(storeProduct.getProductName());
             callView.add(storeProduct.getType_());
             callView.add(storeProduct.getDescribe_());
@@ -133,11 +139,7 @@ public class StoreProductServiceImpl implements StoreProductService {
             callView.add(String.valueOf(storeProduct.getCreatTime()));
             callViewList.add(sheetName);
         }
-
-
-
-        excel.ResponseToExcel(response,sheetNameList,headerName(),callViewList) ;
-
+        excel.ResponseToExcel(response, sheetNameList, headerName(), callViewList);
     }
 
     public ProductView.product toProductView(StoreProduct storeProduct) {
@@ -149,6 +151,7 @@ public class StoreProductServiceImpl implements StoreProductService {
                 .quantity(storeProduct.getQuantity())
                 .build();
     }
+
     // Header 命名
     public static List<String> headerName() {
         List<String> list = new LinkedList<>();

@@ -58,9 +58,22 @@ public class product {
         return "redirect:./";
     }
 
-    @GetMapping("/update/{token}")
-    public String update(@PathVariable("token") String ProductToken, Model model) {
+    @PutMapping("/update/{token}")
+    public String update(@PathVariable("token") String ProductToken,@CookieValue(value = "login_") String token, Model model) {
         model.addAttribute("_method", "POST");
+        return "system/product/product";
+    }
+
+    @DeleteMapping("/hide/{productId}")
+    public String delete(@PathVariable("productId")String productId,@CookieValue(value = "login_") String token,Model model){
+        model.addAttribute("storeProduct", new StoreProduct());
+        model.addAttribute("storeProductEntity", new StoreProductEntity());
+        model.addAttribute("type", ProductTypeEnum.values());
+        model.addAttribute("_method", "POST");
+
+        model.addAttribute("productList", storeProductService.selectProduct(hsUserMapper.selectOneByToken(token)));
+
+        storeProductService.productHide(productId,token);
         return "system/product/product";
     }
 

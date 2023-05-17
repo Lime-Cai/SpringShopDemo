@@ -45,7 +45,7 @@ CREATE TABLE store_product
     `quantity`      INT             NULL    DEFAULT 0                                   COMMENT '數量',
     `describe_`     VARCHAR(1024)   NULL    DEFAULT NULL                                COMMENT '描述',
     `creat_time`    datetime(0)     NULL    DEFAULT NULL                                COMMENT '新增時間',
-    `status`        INT             NULL    DEFAULT 0                                   COMMENT '0.下架、1.上架、2.庫存=0',
+    `status`        INT             NULL    DEFAULT 0                                   COMMENT '0.下架、1.上架、2.庫存=0、9.删除',
     `hide`          INT             NULL    DEFAULT 0                                   COMMENT '0.隱藏、1.顯示',
     `remark`        varchar(1024)   NULL    DEFAULT NULL                                COMMENT '备注',
     `update_time`   datetime(0)     NULL    DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间/回调时间',

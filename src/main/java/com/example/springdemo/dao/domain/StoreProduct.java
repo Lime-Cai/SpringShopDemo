@@ -79,7 +79,7 @@ public class StoreProduct implements Serializable {
     private LocalDateTime creatTime;
 
     /**
-     * 0.下架、1.上架、2.庫存=0
+     * 0.下架、1.上架、2.庫存=0、9.删除
      */
     private Integer status;
 

@@ -53,7 +53,8 @@
         <include refid="Base_Column_List"></include>
             from store_product
         <where>
-            <if test="adminId != null">admin_id = #{adminId,jdbcType=NUMERIC}</if>
+            <if test="adminId != null">admin_id = #{adminId,jdbcType=NUMERIC} ,</if>
+        and status <![CDATA[ <> ]]> 9
         </where>
     </select>
     <insert id="insertSelective">
