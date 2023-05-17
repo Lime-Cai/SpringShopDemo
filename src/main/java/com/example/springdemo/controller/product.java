@@ -64,8 +64,8 @@ public class product {
         return "system/product/product";
     }
 
-    @PutMapping("/hide/")
-    public String delete(@CookieValue(value = "login_") String token, StoreProduct storeProduct, Model model) {
+    @GetMapping ("/hide/{productId}")
+    public String delete(@PathVariable("productId")String productId,@CookieValue(value = "login_") String token,Model model){
         model.addAttribute("storeProduct", new StoreProduct());
         model.addAttribute("storeProductEntity", new StoreProductEntity());
         model.addAttribute("type", ProductTypeEnum.values());
@@ -73,8 +73,8 @@ public class product {
 
         model.addAttribute("productList", storeProductService.selectProduct(hsUserMapper.selectOneByToken(token)));
 
-        storeProductService.productHide(storeProduct.getProductId(), token);
-        return "system/product/product";
+        storeProductService.productHide(productId, token);
+        return "redirect:http://localhost:8080/product/seller";
     }
 
     @GetMapping("/download")

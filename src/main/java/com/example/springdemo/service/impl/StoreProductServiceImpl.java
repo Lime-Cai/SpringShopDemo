@@ -105,7 +105,7 @@ public class StoreProductServiceImpl implements StoreProductService {
 
     @Override
     public List<StoreProduct> selectProduct(HsUser hsUser) {
-        return Optional.ofNullable(storeProductMapper.selectByAdminIdStoreProduct(hsUser.getId())).orElseGet(ArrayList::new);
+        return Optional.ofNullable(storeProductRepository.findByAdminId(hsUser.getId())).orElseGet(ArrayList::new);
     }
 
     @Override
