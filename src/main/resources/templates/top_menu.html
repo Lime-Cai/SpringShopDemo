@@ -22,9 +22,18 @@
         <a class="item">
             <i class="grid layout icon"></i> Browse
         </a>
-        <a class="item">
-            <i class="mail icon"></i> Messages
+        <a th:href="@{/product/seller}"  class="item">
+            <i class="mail icon"></i> PRODUCT
         </a>
+        <div class="ui simple dropdown item">
+            PRODUCT
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a th:href="@{/product/seller}"  class="item"><i class="mail icon"></i> 產品狀況 </a>
+                <a class="item"><i class="globe icon"></i> 訂單 </a>
+                <a class="item"><i class="settings icon"></i> Account Settings</a>
+            </div>
+        </div>
         <div class="ui simple dropdown item">
             More
             <i class="dropdown icon"></i>

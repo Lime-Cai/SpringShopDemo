@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+
+
+    <style>
+        .ui.text.container {
+            margin-top: 75px;
+        }
+        
+        .ui.mini.modal>.header:not(.ui) {
+            font-size: 1.8em;
+        }
+        
+        .ui.table thead th {
+            text-align: center;
+        }
+        
+        .column {
+            text-align: center;
+        }
+    </style>
+
+    <style>
+        .table-container {
+            min-width: 600px;
+            overflow-x: auto;
+        }
+        
+        table {
+            table-layout: auto;
+            width: 100%;
+        }
+        
+        th,
+        td {
+            padding: 8px;
+            border: 1px solid black;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div th:replace="@{~/top_menu.html}"></div>
+
+    <div class="ui fluid container " style=" padding-bottom: 30px;">
+        <table>
+            <div class="container ui ten column table .table-container">
+                <table>
+                    <tr class="column ">
+                        <th>產品名</th>
+                        <th>價格</th>
+                        <th>介紹</th>
+                        <th class="">完整內容</th>
+                    </tr>
+
+                    <tbody class="text-align: center;">
+                        <tr th:each="product, state : ${productList}">
+                            <td th:text="${product.productName}"></td>
+                            <td th:text="${product.amount}"></td>
+                            <td th:text="${product.quantity}"></td>
+                            <td style="text-align: center;">
+                                <button class="ui button blue " style="width: 72px;" data-id-th="${product.productId}" data-productName-th="${product.productName}" onclick="openUpdate(this)">編輯</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </table>
+    </div>
+
+
+</body>
+
+
+</html>
