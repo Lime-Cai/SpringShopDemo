@@ -10,6 +10,6 @@ import java.util.Optional;
 @Repository
 public interface StoreProductRepository extends JpaRepository<StoreProduct, Integer> {
 
-    @Query(value = "select s.* from StoreProduct s left join hs_user u on u.id = s.admin_id where s.product_id :productId and u.token = token" ,nativeQuery = true)
+    @Query(value = "select s.* from store_product s left join hs_user u on u.id = s.admin_id where s.product_id :productId and u.token :token" ,nativeQuery = true)
     Optional<StoreProduct> findByProductId(String productId,String token);
 }
