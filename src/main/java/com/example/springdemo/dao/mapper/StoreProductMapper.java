@@ -1,12 +1,11 @@
 package com.example.springdemo.dao.mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.springdemo.dao.domain.StoreProduct;
+import com.example.springdemo.dao.entity.StoreProduct;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
 * @author jp098

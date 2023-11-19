@@ -1,8 +1,6 @@
 package com.example.springdemo.tools;
 
-import com.example.springdemo.dao.domain.entity.excel.ProductView;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.poi.ss.formula.functions.T;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -10,11 +8,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
-public class excel {
+public class excelToole {
 
     /**
      *  sheetViewList    幾個分頁

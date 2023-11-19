@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.springdemo.dao.mapper.StoreProductMapper">
 
-    <resultMap id="BaseResultMap" type="com.example.springdemo.dao.domain.StoreProduct">
+    <resultMap id="BaseResultMap" type="com.example.springdemo.dao.entity.StoreProduct">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="adminId" column="admin_id" jdbcType="INTEGER"/>
         <result property="productId" column="product_id" jdbcType="INTEGER"/>
@@ -48,7 +48,7 @@
     </update>
 
 
-    <select id="selectByAdminIdStoreProduct" resultType="com.example.springdemo.dao.domain.StoreProduct">
+    <select id="selectByAdminIdStoreProduct" resultType="com.example.springdemo.dao.entity.StoreProduct">
         select
         <include refid="Base_Column_List"></include>
             from store_product

@@ -1,11 +1,9 @@
 package com.example.springdemo.service.impl;
 
 import com.example.springdemo.tools.customizeDate;
-import com.example.springdemo.dao.domain.entity.excel.ProductView;
-import com.example.springdemo.tools.excel;
-import com.example.springdemo.dao.domain.HsUser;
-import com.example.springdemo.dao.domain.StoreProduct;
-import com.example.springdemo.dao.domain.entity.StoreProductEntity;
+import com.example.springdemo.tools.excelToole;
+import com.example.springdemo.dao.entity.HsUser;
+import com.example.springdemo.dao.entity.StoreProduct;
 import com.example.springdemo.dao.mapper.HsUserMapper;
 import com.example.springdemo.dao.mapper.StoreProductMapper;
 import com.example.springdemo.dao.repository.StoreProductRepository;
@@ -35,17 +33,17 @@ public class StoreProductServiceImpl implements StoreProductService {
 
 
     @Override
-    public StoreProduct add(String token, StoreProductEntity storeProduct) {
+    public StoreProduct add(String token, StoreProduct storeProduct) {
 
         HsUser user = hsUserMapper.selectOneByToken(token);
         StoreProduct product = StoreProduct.builder()
                 .adminId(user.getId())
                 .productId(SystemTools.uuidToken())
                 .productName(storeProduct.getProductName())
-                .type_(storeProduct.getType())
+                //.type_(storeProduct.getType())
                 .amount(storeProduct.getAmount())
                 .quantity(storeProduct.getQuantity())
-                .describe_(storeProduct.getDescribe())
+                //.describe_(storeProduct.getDescribe())
                 .creatTime(LocalDateTime.now())
                 .status(0)
                 .hide(storeProduct.getHide())
@@ -119,7 +117,7 @@ public class StoreProductServiceImpl implements StoreProductService {
 
         List<StoreProduct> list = storeProductRepository.findAll();
 
-        List<ProductView.product> storeProductList = new LinkedList<>();
+        //List<ProductView.product> storeProductList = new LinkedList<>();
 
 
         List<List<String>> sheetNameList = new LinkedList<>();
@@ -139,18 +137,18 @@ public class StoreProductServiceImpl implements StoreProductService {
             callView.add(String.valueOf(storeProduct.getCreatTime()));
             callViewList.add(sheetName);
         }
-        excel.ResponseToExcel(response, sheetNameList, headerName(), callViewList);
+        excelToole.ResponseToExcel(response, sheetNameList, headerName(), callViewList);
     }
 
-    public ProductView.product toProductView(StoreProduct storeProduct) {
-        return ProductView.product.builder()
-                .type(storeProduct.getType_())
-                .amount(storeProduct.getAmount())
-                .describe(storeProduct.getDescribe_())
-                .productName(storeProduct.getProductName())
-                .quantity(storeProduct.getQuantity())
-                .build();
-    }
+    //public ProductView.product toProductView(StoreProduct storeProduct) {
+    //    return ProductView.product.builder()
+    //            .type(storeProduct.getType_())
+    //            .amount(storeProduct.getAmount())
+    //            .describe(storeProduct.getDescribe_())
+    //            .productName(storeProduct.getProductName())
+    //            .quantity(storeProduct.getQuantity())
+    //            .build();
+    //}
 
     // Header 命名
     public static List<String> headerName() {

@@ -1,12 +1,12 @@
 package com.example.springdemo.dao.mapper;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.example.springdemo.dao.domain.HsUser;
+import com.example.springdemo.dao.entity.HsUser;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -18,9 +18,9 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface HsUserMapper {
-    HsUser selectOneByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+    Optional<HsUser> selectOneByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 
-    HsUser selectOneByUsername(@Param("username") String username);
+    Optional<HsUser>  selectOneByUsername(String username);
 
     HsUser selectOneByToken(@Param("token") String token);
 

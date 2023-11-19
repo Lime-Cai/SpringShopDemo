@@ -1,8 +1,6 @@
 package com.example.springdemo.controller;
 
-import com.example.springdemo.dao.domain.StoreProduct;
-import com.example.springdemo.dao.domain.entity.ProductTypeEnum;
-import com.example.springdemo.dao.domain.entity.StoreProductEntity;
+import com.example.springdemo.dao.entity.StoreProduct;
 import com.example.springdemo.dao.mapper.HsUserMapper;
 import com.example.springdemo.service.model.StoreProductService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,10 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 @Controller
-@RequestMapping("/product")
+@RequestMapping("/api/product")
 
 public class product {
 
@@ -27,54 +25,23 @@ public class product {
     }
 
 
-    @GetMapping("/")
-    public String index(@ModelAttribute StoreProduct storeProduct, @ModelAttribute StoreProductEntity storeProductEntity, Model model) throws NoSuchAlgorithmException {
-        model.addAttribute("storeProduct", new StoreProduct());
-        model.addAttribute("storeProductEntity", new StoreProductEntity());
-        model.addAttribute("type", ProductTypeEnum.values());
-        model.addAttribute("_method", "POST");
-
-        model.addAttribute("productList", storeProductService.selectProduct());
-
-        return "system/product/product";
-    }
-
-    @GetMapping("/seller")
-    public String index(@ModelAttribute StoreProduct storeProduct, @CookieValue(value = "login_") String token, Model model) {
-        model.addAttribute("storeProduct", new StoreProduct());
-        model.addAttribute("storeProductEntity", new StoreProductEntity());
-        model.addAttribute("type", ProductTypeEnum.values());
-        model.addAttribute("_method", "POST");
-
-        model.addAttribute("productList", storeProductService.selectProduct(hsUserMapper.selectOneByToken(token)));
-        return "system/product/product";
+    @GetMapping("/list")
+    public List<StoreProduct> index(@CookieValue(value = "login_") String token)  {
+        return storeProductService.selectProduct(hsUserMapper.selectOneByToken(token));
     }
 
     @PostMapping("/add")
-    public String add(@ModelAttribute StoreProductEntity storeProductEntity, @CookieValue(value = "login_") String token, Model model) {
-        model.addAttribute("productList", storeProductService.selectProduct());
-        model.addAttribute("_method", "GET");
+    public void add(StoreProduct storeProductEntity, @CookieValue(value = "login_") String token, Model model) {
         storeProductService.add(token, storeProductEntity);
-        return "redirect:./";
     }
 
     @PutMapping("/update/{token}")
-    public String update(@PathVariable("token") String ProductToken, @CookieValue(value = "login_") String token, Model model) {
-        model.addAttribute("_method", "POST");
-        return "system/product/product";
+    public void update() {
     }
 
-    @GetMapping ("/hide/{productId}")
-    public String delete(@PathVariable("productId")String productId,@CookieValue(value = "login_") String token,Model model){
-        model.addAttribute("storeProduct", new StoreProduct());
-        model.addAttribute("storeProductEntity", new StoreProductEntity());
-        model.addAttribute("type", ProductTypeEnum.values());
-        model.addAttribute("_method", "POST");
-
-        model.addAttribute("productList", storeProductService.selectProduct(hsUserMapper.selectOneByToken(token)));
-
+    @PutMapping ("/delete/{productId}")
+    public void delete(String productId,@CookieValue(value = "login_") String token){
         storeProductService.productHide(productId, token);
-        return "redirect:http://localhost:8080/product/seller";
     }
 
     @GetMapping("/download")

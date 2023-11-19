@@ -1,6 +1,6 @@
 2023-02-22 12:06:15.630 ERROR --- [http-nio-8080-exec-2] c.e.springdemo.service.impl.HsUserServiceImpl - [ERROR] 登陸失敗 帳號 : [ test ] 密碼 : [ 1 ]
-2023-02-22 12:06:15.666 ERROR --- [http-nio-8080-exec-2] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "com.example.springdemo.dao.domain.HsUser.setLastLoginTime(java.time.LocalDateTime)" because "user" is null] with root cause
-java.lang.NullPointerException: Cannot invoke "com.example.springdemo.dao.domain.HsUser.setLastLoginTime(java.time.LocalDateTime)" because "user" is null
+2023-02-22 12:06:15.666 ERROR --- [http-nio-8080-exec-2] o.a.c.c.C.[.[localhost].[/].[dispatcherServlet] - Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: java.lang.NullPointerException: Cannot invoke "com.example.springdemo.dao.entity.HsUser.setLastLoginTime(java.time.LocalDateTime)" because "user" is null] with root cause
+java.lang.NullPointerException: Cannot invoke "com.example.springdemo.dao.entity.HsUser.setLastLoginTime(java.time.LocalDateTime)" because "user" is null
 	at com.example.springdemo.service.impl.HsUserServiceImpl.loginCheck(HsUserServiceImpl.java:53)
 	at com.example.springdemo.controller.userLogin.check(userLogin.java:34)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)

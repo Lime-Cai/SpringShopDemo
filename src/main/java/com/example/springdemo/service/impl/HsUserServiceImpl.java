@@ -2,77 +2,117 @@ package com.example.springdemo.service.impl;
 
 import com.example.springdemo.dao.mapper.HsUserMapper;
 import com.example.springdemo.dao.repository.HsUserRepository;
-import com.example.springdemo.dao.domain.HsUser;
+import com.example.springdemo.dao.entity.HsUser;
 import com.example.springdemo.service.model.HsUserLoginLogService;
 import com.example.springdemo.tools.SystemTools;
-import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.example.springdemo.service.model.HsUserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class HsUserServiceImpl implements HsUserService {
 
     private final HsUserRepository hsUserRepository;
     private final HsUserMapper hsUserMapper;
     private final HsUserLoginLogService hsUserLoginLogService;
 
-    public HsUserServiceImpl(HsUserLoginLogService hsUserLoginLogService, HsUserRepository hsUserRepository, HsUserMapper hsUserMapper) {
-        this.hsUserLoginLogService = hsUserLoginLogService;
-        this.hsUserRepository = hsUserRepository;
-        this.hsUserMapper = hsUserMapper;
-    }
-
     @Override
-    public String loginCheck(HsUser hsUser, HttpServletResponse response) {
-        try {
-            HsUser user = hsUserMapper.selectOneByUsernameAndPassword(hsUser.getUsername(), hsUser.getPassword());
-            // 登陸失敗
-            if (user == null) {
-                HsUser failUser = hsUserMapper.selectOneByUsername(hsUser.getUsername());
-                // 沒有此帳號 不儲存
-                if (failUser == null) {
-                    return "system/login/login_error";
-                } else { // 有此帳號 進行紀錄
-                    hsUserLoginLogService.saveLog(failUser, false);
-                    log.error("[ERROR] 登陸失敗 帳號 : [ " + hsUser.getUsername() + " ] 密碼 : [ " + hsUser.getPassword() + " ]");
-                    // 登陸失敗超過次數
-                    if (failUser.getStatus() == 9) {
-                        log.error("[ERROR] 登陸失敗 已被封鎖 帳號 : [ " + hsUser.getUsername() + " ]");
-                        return "system/login/login_frequency";
-                    }
-                }
-            }
-            // 登陸成功 更改用户token、更新登录时间
-            user.setLastLoginTime(LocalDateTime.now());
-            user.setToken(SystemTools.uuidToken());
-            hsUserMapper.updateHsUser(user);
+    public ResponseEntity<String> register(HsUser hsUser) {
 
-            if (user.getStatus() == 9) {
-                hsUserLoginLogService.saveLog(user, true);
-                log.error("[ERROR] 登陸成功 已被封鎖 帳號 : [ " + hsUser.getUsername() + " ]");
-                return "system/login/login_frequency";
-            }
-            log.info("使用者 : [ " + user.getUsername() + " ]" + " 登陸成功 " + LocalDateTime.now());
-            hsUserLoginLogService.saveLog(user, true);
-
-            //登陸成功獲取 cookie token
-            response.addCookie(SystemTools.setCookie(user));
-            return "system/login/login_success";
-
-        } catch (Exception e) {
-            System.out.println(e + "登陸異常");
-            return "system/login/login_error";
+        if (StringUtils.hasText(hsUser.getUsername()) || StringUtils.hasText(hsUser.getPassword())) {
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase());
         }
+
+        if (hsUserMapper.selectOneByUsername(hsUser.getUsername()).isEmpty()) {
+            log.error("[ERROR] 帳號重複 : [ {} ]", hsUser.getUsername());
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase());
+        }
+
+        // TODO token要再思考
+        // 產生 token 如果重複再產生
+        //String token = SystemTools.uuidToken();
+        //while (hsUserMapper.selectOneByToken(token) != null) {
+        //    token = SystemTools.uuidToken();
+        //}
+        HsUser user = hsUser.builder().
+                username(hsUser.getUsername()).
+                password(hsUser.getPassword()).
+                //token(token).
+                        status(0).
+                addTime(LocalDateTime.now()).
+                lastLoginTime(LocalDateTime.now()).
+                isStore(0).build();
+
+        log.info("註冊成功 UserName : {}", hsUser.getUsername());
+        hsUserRepository.save(user);
+        return ResponseEntity.ok("Success");
     }
 
     @Override
-    public Optional<HsUser> findById(Long id) {
+    public ResponseEntity<String> login(String userName, String password) {
+
+        Optional<HsUser> hsUserByUserName = hsUserMapper.selectOneByUsername(userName);
+        // 没有这个账号
+        if (hsUserByUserName.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(HttpStatus.UNAUTHORIZED.getReasonPhrase());
+        }
+
+        Optional<HsUser> user = hsUserMapper.selectOneByUsernameAndPassword(userName, password);
+        // 有账号但密码不符合
+        if (user.isEmpty()) {
+            HsUser failUser = hsUserByUserName.get();
+            hsUserLoginLogService.saveLog(failUser, false);
+            log.error("[ERROR] 登陸失敗 帳號 : [ {} ] ", failUser.getUsername());
+            // 登陸失敗超過次數
+            if (failUser.getStatus() == 9) {
+                log.error("[ERROR] 登陸失敗 已被封鎖 帳號 : [ {} ]", failUser.getUsername());
+            }
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(HttpStatus.UNAUTHORIZED.getReasonPhrase());
+        }
+        HsUser resultUser = user.get();
+        // 登陸成功 更改用户token、更新登录时间
+        resultUser.setLastLoginTime(LocalDateTime.now());
+        resultUser.setToken(SystemTools.uuidToken());
+        hsUserMapper.updateHsUser(resultUser);
+
+        if (resultUser.getStatus() == 9) {
+            hsUserLoginLogService.saveLog(resultUser, true);
+            log.error("[ERROR] 登陸成功 已被封鎖 帳號 : [ " + resultUser.getUsername() + " ]");
+        }
+        log.info("使用者 : [ {} ] 登陸成功 登陸時間 : [ {} ]", resultUser.getUsername(), LocalDateTime.now(ZoneId.systemDefault()));
+        hsUserLoginLogService.saveLog(resultUser, true);
+
+        // TODO 改成使用Security来获取凭证
+        //登陸成功獲取 cookie token
+        //response.addCookie(SystemTools.setCookie(user));
+
+        return ResponseEntity.ok("Success");
+    }
+
+    @Override
+    public void unlock(String password) {
+
+    }
+
+    @Override
+    public void update(HsUser user) {
+        hsUserMapper.updateHsUser(user);
+    }
+
+
+    @Override
+    public Optional<HsUser> findById(int id) {
         return hsUserRepository.findById(id);
     }
 
@@ -81,40 +121,6 @@ public class HsUserServiceImpl implements HsUserService {
         return hsUserRepository.findAll();
     }
 
-    @Override
-    public String save(HsUser hsUser) {
-        System.out.println(hsUser.getUsername() + "  " + hsUser.getPassword());
-        if (SystemTools.isNullStringTools(hsUser, hsUser.getUsername(), "UserName")) {
-            return "system/login/login_save_error";
-        }
-
-        if (SystemTools.isNullStringTools(hsUser, hsUser.getPassword(), "PassWord")) {
-            return "system/login/login_save_error";
-        }
-
-        if (hsUserMapper.selectOneByUsername(hsUser.getUsername()) != null) {
-            log.error("[ERROR] 帳號重複 : [ " + hsUser.getUsername() + " ]");
-            return "system/login/login_save_error";
-        }
-
-        // 產生 token 如果重複再產生
-        String token = SystemTools.uuidToken();
-        while (hsUserMapper.selectOneByToken(token) != null) {
-            token = SystemTools.uuidToken();
-        }
-        HsUser user = hsUser.builder().
-                username(hsUser.getUsername()).
-                password(hsUser.getPassword()).
-                token(token).
-                status(0).
-                addTime(LocalDateTime.now()).
-                lastLoginTime(LocalDateTime.now()).
-                isStore(0).build();
-
-        log.info("註冊成功 UserName : { " + hsUser.getUsername() + " }");
-        hsUserRepository.save(user);
-        return "system/login/login_save_success";
-    }
 
     @Override
     public void delete(Integer id) {
@@ -123,8 +129,10 @@ public class HsUserServiceImpl implements HsUserService {
 
     @Override
     public void update(Integer id) {
-        HsUser hsUser = hsUserRepository.getById(id);
+        HsUser hsUser = hsUserRepository.findById(id).get();
         hsUser.setStatus(1);
         hsUserMapper.updateHsUser(hsUser);
+        hsUserLoginLogService.update(id);
+        log.info("帳號 : {} 已解鎖", hsUser.getName());
     }
 }

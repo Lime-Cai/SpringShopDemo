@@ -1,15 +1,15 @@
 package com.example.springdemo.service.model;
 
-import com.example.springdemo.dao.domain.HsUser;
-import com.example.springdemo.dao.domain.StoreProduct;
-import com.example.springdemo.dao.domain.entity.StoreProductEntity;
+import com.example.springdemo.dao.entity.HsUser;
+import com.example.springdemo.dao.entity.StoreProduct;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.List;
 
 public interface StoreProductService {
 
-    StoreProduct add(String token, StoreProductEntity storeProduct);
+
+    StoreProduct add(String token, StoreProduct storeProduct);
 
     void update(StoreProduct storeProduct);
 

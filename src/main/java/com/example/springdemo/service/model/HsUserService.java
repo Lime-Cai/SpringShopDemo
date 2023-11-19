@@ -1,17 +1,22 @@
 package com.example.springdemo.service.model;
 
 
-import com.example.springdemo.dao.domain.HsUser;
+import com.example.springdemo.dao.entity.HsUser;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface HsUserService {
-    String loginCheck(HsUser user, HttpServletResponse response);
-    Optional<HsUser> findById(Long id);
+    ResponseEntity<String> register(HsUser user);
+    ResponseEntity<String> login (String userName, String password);
+    void unlock ( String password);
+
+    Optional<HsUser> findById(int id);
     List<HsUser> findAll();
-    String save(HsUser user);
     void delete(Integer id);
+    void update(HsUser user);
+
     void update(Integer id);
 }
