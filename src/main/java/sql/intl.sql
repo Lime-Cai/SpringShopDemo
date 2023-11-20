@@ -28,11 +28,27 @@ create table hs_user
     PRIMARY KEY (`username`) USING BTREE,
 )DEFAULT CHARSET=utf8mb4 COMMENT = '使用者';
 
-CREATE TABLE store_user
-(
+CREATE TABLE hs_user_login_log(
+    `id`            INTEGER         NOT NULL AUTO_INCREMENT,
+    `user_id`       INTEGER         NULL    DEFAULT NULL    COMMENT '使用者id',
+    `status`        INTEGER         NULL    DEFAULT NULL    COMMENT '0登陸成功、9登陸失敗',
+    `frequency`     INTEGER         NULL    DEFAULT NULL    COMMENT '失敗次數',
+    `remark`        VARCHAR(1024)   NULL    DEFAULT NULL    COMMENT '備註',
+    `login_time`    datetime        NULL    DEFAULT NULL    COMMENT '登陸時間',
+    PRIMARY KEY (`id`) USING BTREE
+)DEFAULT CHARSET=utf8mb4 COMMENT = '使用者登陸狀況';
 
-
-)COMMENT ''
+CREATE TABLE store_admin(
+    `id`            INT             not null  AUTO_INCREMENT,
+    `admin_id`      INT             not null                                            COMMENT 'admin_id',
+    `mail`          varchar(50)     NULL    DEFAULT NULL                                COMMENT '郵件',
+    `mail_review`   INT             NULL    DEFAULT NULL                                COMMENT '郵件審查',
+    `status`        INT             NULL    DEFAULT 0                                   COMMENT '0.還未認證、1.已通過郵件認證、2.審核中、3.通過認證、4.認證失敗、5.封鎖',
+    `creat_time`    datetime(0)     NULL    DEFAULT NULL                                COMMENT '新增時間',
+    `remark`        varchar(2048)   NULL    DEFAULT NULL                                COMMENT '备注',
+    `update_time`   datetime(0)     NULL    DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间/回调时间',
+    PRIMARY KEY (`id`) USING BTREE
+)DEFAULT CHARSET=utf8mb4 COMMENT = '賣家認證';
 
 
 CREATE TABLE store_product
