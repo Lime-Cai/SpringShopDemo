@@ -73,6 +73,7 @@ public class HsUserServiceImpl implements HsUserService {
         if (user.isEmpty()) {
             HsUser failUser = hsUserByUserName.get();
             hsUserLoginLogService.saveLog(failUser, false);
+            update(failUser);
             log.error("[ERROR] 登陸失敗 帳號 : [ {} ] ", failUser.getUsername());
             // 登陸失敗超過次數
             if (failUser.getStatus() == 9) {
