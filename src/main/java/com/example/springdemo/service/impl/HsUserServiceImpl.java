@@ -98,7 +98,7 @@ public class HsUserServiceImpl implements HsUserService {
         //登陸成功獲取 cookie token
         //response.addCookie(SystemTools.setCookie(user));
 
-        return ResponseEntity.ok("Success");
+        return ResponseEntity.ok(HttpStatus.OK.getReasonPhrase());
     }
 
     @Override

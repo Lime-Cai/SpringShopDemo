@@ -11,6 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.slf4j.Logger;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
@@ -21,6 +22,9 @@ import java.util.Optional;
 import static org.mockito.Mockito.*;
 
 class HsUserServiceImplTest {
+    @InjectMocks
+    HsUserServiceImpl hsUserServiceImpl;
+
     @Mock
     HsUserRepository hsUserRepository;
     @Mock
@@ -29,51 +33,55 @@ class HsUserServiceImplTest {
     HsUserLoginLogService hsUserLoginLogService;
     @Mock
     Logger log;
-    @InjectMocks
-    HsUserServiceImpl hsUserServiceImpl;
 
+    private HsUser hsUser;
     @BeforeEach
     void setUp() {
+
         MockitoAnnotations.openMocks(this);
+        hsUser = new HsUser();
+        hsUser.setId(1);
+        hsUser.setUsername("userName");
+        hsUser.setPassword("password");
+        hsUser.setMail("test@demo.com");
+        hsUser.setToken("demodemo");
+        hsUser.setName("test");
+        hsUser.setStatus(0);
+        hsUser.setAddTime(LocalDateTime.now());
+        hsUser.setLastLoginTime(LocalDateTime.now());
+        hsUser.setIsLock(false);
+        hsUser.setIsStore(1);
+
     }
 
     @Test
     void testRegister() {
-        when(hsUserMapper.selectOneByUsername(anyString())).thenReturn(null);
+        when(hsUserMapper.selectOneByUsername(anyString())).thenReturn(Optional.ofNullable(hsUser));
 
-        ResponseEntity<String> result = hsUserServiceImpl.register(new HsUser(Integer.valueOf(0), "token", "username", "password", "name", "mail", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Boolean.TRUE, LocalDateTime.of(2023, Month.NOVEMBER, 21, 0, 12, 17), LocalDateTime.of(2023, Month.NOVEMBER, 21, 0, 12, 17)));
-        Assertions.assertEquals(null, result);
+        ResponseEntity<String> result = hsUserServiceImpl.register(hsUser);
+        Assertions.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase(), result.getBody());
+        Assertions.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, result.getBody());
+        Assertions.assertEquals(HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase(), result.getBody());
     }
 
     @Test
     void testLogin() {
-        when(hsUserMapper.selectOneByUsernameAndPassword(anyString(), anyString())).thenReturn(null);
-        when(hsUserMapper.selectOneByUsername(anyString())).thenReturn(null);
+        when(hsUserMapper.selectOneByUsernameAndPassword(hsUser.getUsername(), hsUser.getPassword())).thenReturn(Optional.of(hsUser));
+        when(hsUserMapper.selectOneByUsername(anyString())).thenReturn(Optional.of(hsUser));
 
-        ResponseEntity<String> result = hsUserServiceImpl.login("userName", "password");
-        Assertions.assertEquals(null, result);
+        // 登陆成功
+        ResponseEntity<String> successResult = hsUserServiceImpl.login("userName", "password");
+        Assertions.assertEquals(HttpStatus.OK, successResult.getStatusCode());
 
+        //hsUser.setStatus(9);
+        //when(hsUserMapper.selectOneByUsername(anyString())).thenReturn(Optional.of(hsUser));
+        // 登陆失败
+        ResponseEntity<String> failResult = hsUserServiceImpl.login("userName", "fail");
+        Assertions.assertEquals(HttpStatus.UNAUTHORIZED, failResult.getStatusCode());
 
-        // 创建 UserRepository 的模拟对象
-        HsUserMapper userRepository = mock(HsUserMapper.class);
-
-        // 创建 UserService 实例，注入模拟的 UserRepository
-        HsUser userService = new HsUser(userRepository);
-
-        // 创建一个模拟的用户对象
-        HsUser mockUser = new HsUser("userName", "password");
-
-        // 模拟 UserRepository 的行为，当调用 findByUsername 方法时返回包含模拟用户的 Optional
-        when(userRepository.findByUsername("userName")).thenReturn(Optional.of(mockUser));
-
-        // 执行测试
-        ResponseEntity<String> result = userService.login("userName", "password");
-
-        // 验证行为，确保 findByUsername 方法被调用了一次
-        verify(userRepository, times(1)).findByUsername("userName");
-
-        // 验证结果，确保返回了 OK 状态码
-        Assertions.assertEquals(HttpStatus.OK, result.getStatusCode());
+        // 没有此账号
+        ResponseEntity<String> noneUserNameResult = hsUserServiceImpl.login("fail", "password");
+        Assertions.assertEquals(HttpStatus.UNAUTHORIZED, noneUserNameResult.getStatusCode());
     }
 
     @Test
