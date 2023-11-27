@@ -1,17 +1,16 @@
 package com.example.springdemo.service.impl;
 
+import com.example.springdemo.dao.entity.HsUser;
+import com.example.springdemo.dao.entity.enums.RedisTypeEnum;
 import com.example.springdemo.dao.mapper.HsUserMapper;
 import com.example.springdemo.dao.repository.HsUserRepository;
-import com.example.springdemo.dao.entity.HsUser;
 import com.example.springdemo.service.model.HsUserLoginLogService;
+import com.example.springdemo.service.model.HsUserService;
 import com.example.springdemo.service.redis.RedisCash;
-import com.example.springdemo.service.redis.RedisCashImpl;
 import com.example.springdemo.tools.SystemTools;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import com.example.springdemo.service.model.HsUserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -94,7 +93,7 @@ public class HsUserServiceImpl implements HsUserService {
             log.error("[ERROR] 登陸成功 已被封鎖 帳號 : [ " + resultUser.getUsername() + " ]");
         }
         log.info("使用者 : [ {} ] 登陸成功 登陸時間 : [ {} ]", resultUser.getUsername(), LocalDateTime.now(ZoneId.systemDefault()));
-        redisCash.put(resultUser.getUsername(), token);
+        redisCash.putEnumDefaultTimeOut(RedisTypeEnum.TOKEN, resultUser.getUsername(), token);
         hsUserLoginLogService.saveLog(resultUser, true);
 
         //登陸成功獲取 cookie token

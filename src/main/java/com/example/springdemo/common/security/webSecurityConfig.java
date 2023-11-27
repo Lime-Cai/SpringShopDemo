@@ -36,7 +36,7 @@ public class webSecurityConfig {
         http
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/api/login/*", "/api/login/register").permitAll() // 允许所有人访问登录和注册
+                                .requestMatchers("/api/login/", "/api/login/register").permitAll() // 允许所有人访问登录和注册
                                 .anyRequest().authenticated() // 其他所有请求需要认证
                 )
                 .formLogin() // 启用默认登录页面

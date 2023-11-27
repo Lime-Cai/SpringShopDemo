@@ -13,8 +13,10 @@ import org.springframework.data.redis.core.ValueOperations;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.concurrent.TimeUnit;
 
 import static org.mockito.Mockito.*;
+
 //@SpringBootTest
 class RedisServiceTest {
     //@Autowired
@@ -32,7 +34,6 @@ class RedisServiceTest {
     //    // 进行断言
     //    Assertions.assertEquals("value", result);
     //}
-
 
 
     @Mock
@@ -64,19 +65,19 @@ class RedisServiceTest {
         hsUser.setIsStore(1);
     }
 
-        @Test
-        void testPut() {
-            when(redisTemplate.opsForValue()).thenReturn(valueOperations);
-            when(valueOperations.get("key")).thenReturn("value");
+    @Test
+    void testPut() {
+        when(redisTemplate.opsForValue()).thenReturn(valueOperations);
+        when(valueOperations.get("key")).thenReturn("value");
 
-            redisService.put("key", "value");
-            verify(valueOperations).set("key", "value");
+        redisService.put("key", "value", 60, TimeUnit.SECONDS);
+        verify(valueOperations).set("key", "value");
 
-            String result = redisService.get("key");
-            Assertions.assertEquals("value", result);
-            verify(valueOperations).get("key");
+        String result = redisService.get("key");
+        Assertions.assertEquals("value", result);
+        verify(valueOperations).get("key");
 
-        }
+    }
 
     @Test
     void testGet() {
