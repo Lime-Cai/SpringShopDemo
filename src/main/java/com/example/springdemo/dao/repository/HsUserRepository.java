@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 public interface HsUserRepository extends JpaRepository<HsUser, Integer>{
-    //Optional<HsUser> findByUsername(String username);
-    //HsUser findByUsernameAndPassword(String username,String password);
+
 
 }

@@ -1,14 +1,4 @@
 -- user
-CREATE TABLE hs_user_login_log
-(
-    `id`         INTEGER NOT NULL AUTO_INCREMENT,
-    `user_id`    INTEGER NULL DEFAULT NULL COMMENT '使用者id',
-    `status`     INTEGER NULL DEFAULT NULL COMMENT '0登陸成功、9登陸失敗',
-    `frequency`  INTEGER NULL DEFAULT NULL COMMENT '失敗次數',
-    `remark`     VARCHAR(1024) NULL DEFAULT NULL COMMENT '備註',
-    `login_time` datetime NULL DEFAULT NULL COMMENT '登陸時間',
-    PRIMARY KEY (`id`) USING BTREE
-)DEFAULT CHARSET=utf8mb4 COMMENT = '使用者登陸狀況';
 
 create table hs_user
 (
@@ -23,7 +13,7 @@ create table hs_user
     `status`    INT NULL DEFAULT 0 COMMENT '0未驗證、1驗證',
     `is_lock`   bollean NULL DEFAULT 0 COMMENT '0正常、1被封锁',
     `add_time`  datetime NULL DEFAULT NULL COMMENT '註冊時間',
-    `last_time` datetime NULL DEFAULT NULL COMMENT '最後登陸時間',
+    `last_login_time` datetime NULL DEFAULT NULL COMMENT '最後登陸時間',
     PRIMARY KEY (`id`) USING BTREE,
     PRIMARY KEY (`username`) USING BTREE,
 )DEFAULT CHARSET=utf8mb4 COMMENT = '使用者';

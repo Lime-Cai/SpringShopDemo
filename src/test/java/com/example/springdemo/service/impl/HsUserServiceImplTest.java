@@ -4,6 +4,8 @@ import com.example.springdemo.dao.entity.HsUser;
 import com.example.springdemo.dao.mapper.HsUserMapper;
 import com.example.springdemo.dao.repository.HsUserRepository;
 import com.example.springdemo.service.model.HsUserLoginLogService;
+import com.example.springdemo.service.redis.RedisCashImpl;
+import jakarta.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,6 +28,8 @@ class HsUserServiceImplTest {
     HsUserServiceImpl hsUserServiceImpl;
 
     @Mock
+    RedisCashImpl redisCash;
+    @Mock
     HsUserRepository hsUserRepository;
     @Mock
     HsUserMapper hsUserMapper;
@@ -33,12 +37,15 @@ class HsUserServiceImplTest {
     HsUserLoginLogService hsUserLoginLogService;
     @Mock
     Logger log;
+    @Mock
+    HttpServletResponse mockResponse;
 
     private HsUser hsUser;
     @BeforeEach
     void setUp() {
 
         MockitoAnnotations.openMocks(this);
+
         hsUser = new HsUser();
         hsUser.setId(1);
         hsUser.setUsername("userName");
@@ -70,17 +77,17 @@ class HsUserServiceImplTest {
         when(hsUserMapper.selectOneByUsername(anyString())).thenReturn(Optional.of(hsUser));
 
         // 登陆成功
-        ResponseEntity<String> successResult = hsUserServiceImpl.login("userName", "password");
+        ResponseEntity<String> successResult = hsUserServiceImpl.login(mockResponse, "userName", "password");
         Assertions.assertEquals(HttpStatus.OK, successResult.getStatusCode());
 
         //hsUser.setStatus(9);
         //when(hsUserMapper.selectOneByUsername(anyString())).thenReturn(Optional.of(hsUser));
         // 登陆失败
-        ResponseEntity<String> failResult = hsUserServiceImpl.login("userName", "fail");
+        ResponseEntity<String> failResult = hsUserServiceImpl.login(mockResponse, "userName", "fail");
         Assertions.assertEquals(HttpStatus.UNAUTHORIZED, failResult.getStatusCode());
 
         // 没有此账号
-        ResponseEntity<String> noneUserNameResult = hsUserServiceImpl.login("fail", "password");
+        ResponseEntity<String> noneUserNameResult = hsUserServiceImpl.login(mockResponse, "fail", "password");
         Assertions.assertEquals(HttpStatus.UNAUTHORIZED, noneUserNameResult.getStatusCode());
     }
 

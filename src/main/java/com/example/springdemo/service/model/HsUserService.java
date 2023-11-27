@@ -10,12 +10,17 @@ import java.util.Optional;
 
 public interface HsUserService {
     ResponseEntity<String> register(HsUser user);
-    ResponseEntity<String> login (String userName, String password);
-    void unlock ( String password);
+
+    ResponseEntity<String> login(final HttpServletResponse response, String userName, String password);
+
+    void unlock(String password);
 
     Optional<HsUser> findById(int id);
+
     List<HsUser> findAll();
+
     void delete(Integer id);
+
     void update(HsUser user);
 
     void update(Integer id);

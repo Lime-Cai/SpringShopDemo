@@ -12,6 +12,7 @@
             <result property="mail" column="mail" jdbcType="VARCHAR"/>
             <result property="phone" column="phone" jdbcType="INTEGER"/>
             <result property="isStore" column="is_store" jdbcType="INTEGER"/>
+            <result property="isLock" column="is_lock" jdbcType="BOOLEAN"/>
             <result property="status" column="status" jdbcType="INTEGER"/>
             <result property="lastLoginTime" column="last_login_time" jdbcType="TIMESTAMP"/>
             <result property="token" column="token" jdbcType="VARCHAR"/>
@@ -22,6 +23,7 @@
         id,username,password,
         name,mail,phone,
         is_store,status,last_login_time,
+        is_lock,
         token,add_time
     </sql>
     <update id="updateHsUser" parameterType="com.example.springdemo.dao.entity.HsUser">

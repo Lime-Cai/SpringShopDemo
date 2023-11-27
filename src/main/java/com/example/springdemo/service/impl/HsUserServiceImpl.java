@@ -4,10 +4,14 @@ import com.example.springdemo.dao.mapper.HsUserMapper;
 import com.example.springdemo.dao.repository.HsUserRepository;
 import com.example.springdemo.dao.entity.HsUser;
 import com.example.springdemo.service.model.HsUserLoginLogService;
+import com.example.springdemo.service.redis.RedisCash;
+import com.example.springdemo.service.redis.RedisCashImpl;
 import com.example.springdemo.tools.SystemTools;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import com.example.springdemo.service.model.HsUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,28 +27,26 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class HsUserServiceImpl implements HsUserService {
 
+    private final RedisCash redisCash;
+
     private final HsUserRepository hsUserRepository;
     private final HsUserMapper hsUserMapper;
     private final HsUserLoginLogService hsUserLoginLogService;
 
     @Override
     public ResponseEntity<String> register(HsUser hsUser) {
+        log.info("hsUser {}",hsUser);
 
-        if (StringUtils.hasText(hsUser.getUsername()) || StringUtils.hasText(hsUser.getPassword())) {
+        if (!StringUtils.hasText(hsUser.getUsername()) || !StringUtils.hasText(hsUser.getPassword())) {
+            log.error("[ERROR] 账号空的 : [ {} ] [ {} ]", hsUser.getUsername(), hsUser.getPassword());
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase());
         }
 
-        if (hsUserMapper.selectOneByUsername(hsUser.getUsername()).isEmpty()) {
+        if (hsUserMapper.selectOneByUsername(hsUser.getUsername()).isPresent()) {
             log.error("[ERROR] 帳號重複 : [ {} ]", hsUser.getUsername());
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase());
         }
 
-        // TODO token要再思考
-        // 產生 token 如果重複再產生
-        //String token = SystemTools.uuidToken();
-        //while (hsUserMapper.selectOneByToken(token) != null) {
-        //    token = SystemTools.uuidToken();
-        //}
         HsUser user = hsUser.builder().
                 username(hsUser.getUsername()).
                 password(hsUser.getPassword()).
@@ -60,18 +62,17 @@ public class HsUserServiceImpl implements HsUserService {
     }
 
     @Override
-    public ResponseEntity<String> login(String userName, String password) {
-
-        Optional<HsUser> hsUserByUserName = hsUserMapper.selectOneByUsername(userName);
+    public ResponseEntity<String> login(final HttpServletResponse response, final String userName, final String password) {
+        Optional<HsUser> hsUser = hsUserMapper.selectOneByUsername(userName);
         // 没有这个账号
-        if (hsUserByUserName.isEmpty()) {
+        if (hsUser.isEmpty()) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(HttpStatus.UNAUTHORIZED.getReasonPhrase());
         }
 
         Optional<HsUser> user = hsUserMapper.selectOneByUsernameAndPassword(userName, password);
         // 有账号但密码不符合
         if (user.isEmpty()) {
-            HsUser failUser = hsUserByUserName.get();
+            HsUser failUser = hsUser.get();
             hsUserLoginLogService.saveLog(failUser, false);
             update(failUser);
             log.error("[ERROR] 登陸失敗 帳號 : [ {} ] ", failUser.getUsername());
@@ -82,9 +83,10 @@ public class HsUserServiceImpl implements HsUserService {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(HttpStatus.UNAUTHORIZED.getReasonPhrase());
         }
         HsUser resultUser = user.get();
+        final String token = SystemTools.uuidToken();
         // 登陸成功 更改用户token、更新登录时间
         resultUser.setLastLoginTime(LocalDateTime.now());
-        resultUser.setToken(SystemTools.uuidToken());
+        resultUser.setToken(token);
         hsUserMapper.updateHsUser(resultUser);
 
         if (resultUser.getStatus() == 9) {
@@ -92,11 +94,11 @@ public class HsUserServiceImpl implements HsUserService {
             log.error("[ERROR] 登陸成功 已被封鎖 帳號 : [ " + resultUser.getUsername() + " ]");
         }
         log.info("使用者 : [ {} ] 登陸成功 登陸時間 : [ {} ]", resultUser.getUsername(), LocalDateTime.now(ZoneId.systemDefault()));
+        redisCash.put(resultUser.getUsername(), token);
         hsUserLoginLogService.saveLog(resultUser, true);
 
-        // TODO 改成使用Security来获取凭证
         //登陸成功獲取 cookie token
-        //response.addCookie(SystemTools.setCookie(user));
+        response.addCookie(SystemTools.setCookie(token));
 
         return ResponseEntity.ok(HttpStatus.OK.getReasonPhrase());
     }

@@ -1,4 +1,4 @@
-package com.example.springdemo.dao.domain;
+package com.example.springdemo.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

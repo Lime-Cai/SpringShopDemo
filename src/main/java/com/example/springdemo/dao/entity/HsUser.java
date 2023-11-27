@@ -21,19 +21,20 @@ import lombok.NoArgsConstructor;
 /**
  * @TableName hs_user
  */
-@TableName(value = "hs_user")
+
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@TableName(value = "hs_user")
 public class HsUser implements Serializable {
     /**
      *
      */
     @TableId(type = IdType.AUTO)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     /**
@@ -100,7 +101,7 @@ public class HsUser implements Serializable {
     /**
      *
      */
-    @Column(name = "last_time")
+    @Column(name = "last_login_time")
     private LocalDateTime lastLoginTime;
 
     @TableField(exist = false)

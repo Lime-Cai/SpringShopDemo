@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.springdemo.dao.mapper.StoreAdminMapper">
 
-    <resultMap id="BaseResultMap" type="com.example.springdemo.dao.domain.StoreAdmin">
+    <resultMap id="BaseResultMap" type="com.example.springdemo.dao.entity.StoreAdmin">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="adminId" column="admin_id" jdbcType="INTEGER"/>
             <result property="mail" column="mail" jdbcType="VARCHAR"/>
