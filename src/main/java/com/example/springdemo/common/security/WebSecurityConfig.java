@@ -12,7 +12,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class webSecurityConfig {
+public class WebSecurityConfig {
 
     //@Bean
     public UserDetailsService userDetailsService() throws UsernameNotFoundException {

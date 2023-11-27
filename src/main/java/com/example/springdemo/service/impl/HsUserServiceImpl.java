@@ -34,7 +34,7 @@ public class HsUserServiceImpl implements HsUserService {
 
     @Override
     public ResponseEntity<String> register(HsUser hsUser) {
-        log.info("hsUser {}",hsUser);
+        log.info("hsUser {}", hsUser);
 
         if (!StringUtils.hasText(hsUser.getUsername()) || !StringUtils.hasText(hsUser.getPassword())) {
             log.error("[ERROR] 账号空的 : [ {} ] [ {} ]", hsUser.getUsername(), hsUser.getPassword());
@@ -50,7 +50,7 @@ public class HsUserServiceImpl implements HsUserService {
                 username(hsUser.getUsername()).
                 password(hsUser.getPassword()).
                 //token(token).
-                        status(0).
+                status(0).
                 addTime(LocalDateTime.now()).
                 lastLoginTime(LocalDateTime.now()).
                 isStore(0).build();

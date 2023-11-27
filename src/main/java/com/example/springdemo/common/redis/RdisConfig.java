@@ -11,7 +11,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 @RequiredArgsConstructor
-public class redisConfig {
+public class RdisConfig {
 
     private final ObjectMapper objectMapper;
     private final RedisTemplate<String, String> redisTemplate;

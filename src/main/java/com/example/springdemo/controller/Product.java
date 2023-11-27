@@ -14,12 +14,12 @@ import java.util.List;
 @Controller
 @RequestMapping("/api/product")
 
-public class product {
+public class Product {
 
     private final StoreProductService storeProductService;
     private final HsUserMapper hsUserMapper;
 
-    public product(StoreProductService storeProductService, HsUserMapper hsUserMapper) {
+    public Product(StoreProductService storeProductService, HsUserMapper hsUserMapper) {
         this.storeProductService = storeProductService;
         this.hsUserMapper = hsUserMapper;
     }
@@ -47,6 +47,6 @@ public class product {
     @GetMapping("/download")
     public String download(HttpServletResponse response, @CookieValue(value = "login_") String token) {
         storeProductService.download(response, token);
-        return "system/product/product";
+        return "system/Product/Product";
     }
 }

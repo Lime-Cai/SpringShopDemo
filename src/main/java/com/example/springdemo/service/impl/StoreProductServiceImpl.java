@@ -117,7 +117,7 @@ public class StoreProductServiceImpl implements StoreProductService {
 
         List<StoreProduct> list = storeProductRepository.findAll();
 
-        //List<ProductView.product> storeProductList = new LinkedList<>();
+        //List<ProductView.Product> storeProductList = new LinkedList<>();
 
 
         List<List<String>> sheetNameList = new LinkedList<>();
@@ -140,8 +140,8 @@ public class StoreProductServiceImpl implements StoreProductService {
         excelToole.ResponseToExcel(response, sheetNameList, headerName(), callViewList);
     }
 
-    //public ProductView.product toProductView(StoreProduct storeProduct) {
-    //    return ProductView.product.builder()
+    //public ProductView.Product toProductView(StoreProduct storeProduct) {
+    //    return ProductView.Product.builder()
     //            .type(storeProduct.getType_())
     //            .amount(storeProduct.getAmount())
     //            .describe(storeProduct.getDescribe_())
