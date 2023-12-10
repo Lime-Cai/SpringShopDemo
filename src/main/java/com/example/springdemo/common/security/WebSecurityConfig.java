@@ -2,8 +2,10 @@ package com.example.springdemo.common.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.SecurityFilterChain;
@@ -33,18 +35,14 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests(authorizeRequests ->
-                        authorizeRequests
-                                .requestMatchers("/api/login/", "/api/login/register").permitAll() // 允许所有人访问登录和注册
-                                .anyRequest().authenticated() // 其他所有请求需要认证
+        http.authorizeRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers("/api/login/", "/api/login/register").permitAll() // 允许所有人访问登录和注册
+                        .anyRequest().authenticated() // 其他所有请求需要认证
                 )
-                .formLogin() // 启用默认登录页面
-                .and()
-                .logout() // 启用默认注销功能
-                .and()
-                .csrf().disable()
-                .httpBasic().disable(); // 启用HTTP Basic认证
+                .formLogin(AbstractHttpConfigurer::disable) // 默认登录页面
+                .logout(AbstractHttpConfigurer::disable) // 默认注销功能
+                .csrf(Customizer.withDefaults()) // 跨站請求偽造
+                .httpBasic(Customizer.withDefaults()); // HTTP Basic认证
 
         return http.build();
     }

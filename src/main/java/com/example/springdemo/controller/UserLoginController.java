@@ -15,7 +15,7 @@ public class UserLoginController {
     private final HsUserService hsUserService;
 
     @GetMapping("/")
-    public ResponseEntity<String> login(final HttpServletResponse response, final String userName, final String password) {
+    public ResponseEntity<String> login(final HttpServletResponse response, @RequestParam final String userName, @RequestParam final String password) {
         return hsUserService.login(response, userName, password);
     }
 
