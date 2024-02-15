@@ -14,9 +14,9 @@ public interface RedisCash {
 
     String get(String key);
 
-    <T> T getAndRefresh(final String cacheName, final String key, final Class<T> valueType, final long timeout, final TimeUnit unit);
+    String getAndRefresh(final RedisTypeEnum typeEnum, final String key);
 
-    <T> void putObjectEnumDefaultTimeOut(RedisTypeEnum typeEnum, String key, T value) throws JsonProcessingException;
+    <T> void putObject(String key, Object value) throws JsonProcessingException;
 
     <T> T getObject(String key, Class<T> clazz) throws JsonProcessingException;
 }

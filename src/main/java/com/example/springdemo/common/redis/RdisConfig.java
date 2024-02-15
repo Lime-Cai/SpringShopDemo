@@ -16,7 +16,7 @@ public class RdisConfig {
     private final ObjectMapper objectMapper;
     private final RedisTemplate<String, String> redisTemplate;
 
-    //@Bean
+    @Bean
     public RedisCashImpl redisCash() {
         return new RedisCashImpl(redisTemplate, objectMapper);
     }
