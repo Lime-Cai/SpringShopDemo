@@ -1,49 +1,57 @@
 package com.example.springdemo.common.security;
 
+import com.example.springdemo.common.filter.AuthenticationFilter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 @Configuration
 @EnableWebSecurity
+@Slf4j
+@RequiredArgsConstructor
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
 
-    //@Bean
-    public UserDetailsService userDetailsService() throws UsernameNotFoundException {
-        // ... 实现用户详细信息服务
-        // 在这里，你需要根据用户名从数据库或其他地方加载用户信息
-        // 以下是一个简化的示例，实际情况应从数据库获取
-        //if ("admin".equals(username)) {
-        //    return User.builder()
-        //            .username("admin")
-        //            .password(passwordEncoder().encode("admin"))
-        //            .roles("ADMIN")
-        //            .build();
-        //} else {
-        //    throw new UsernameNotFoundException("User not found.");
-        //}
-        return null;
+    private final AuthenticationFailureHandler customAuthenticationFailureHandler;
+    private final AuthenticationSuccessHandler authenticationSuccessHandler;
+    private final AuthenticationFilter authenticationFilter;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/api/login/", "/api/login/register").permitAll() // 允许所有人访问登录和注册
-                        .anyRequest().authenticated() // 其他所有请求需要认证
+        http
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeRequests(authorizeRequests -> authorizeRequests
+                        .requestMatchers("/api/login/test").permitAll()
+                        .anyRequest().authenticated()
                 )
-                .formLogin(AbstractHttpConfigurer::disable) // 默认登录页面
-                .logout(AbstractHttpConfigurer::disable) // 默认注销功能
-                .csrf(Customizer.withDefaults()) // 跨站請求偽造
-                .httpBasic(Customizer.withDefaults()); // HTTP Basic认证
-
+                .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .formLogin()
+                .failureHandler(customAuthenticationFailureHandler)
+                .successHandler(authenticationSuccessHandler)
+                .and()
+                //.exceptionHandling(e -> {
+                    //　e.authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage()));
+                    // e.accessDeniedHandler(((request, response, accessDeniedException) -> response.sendError(HttpServletResponse.SC_FORBIDDEN, accessDeniedException.getMessage())));
+                //})
+                .logout()
+                .and().csrf().disable()
+                .cors()
+                .and().httpBasic().disable()
+        ;
         return http.build();
     }
 }
