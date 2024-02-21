@@ -18,5 +18,9 @@ public interface RedisCash {
 
     <T> void putObject(String key, Object value) throws JsonProcessingException;
 
+    <T> void putObject(String key, Object value, final long timeout, final TimeUnit timeUnit) throws JsonProcessingException;
+
     <T> T getObject(String key, Class<T> clazz) throws JsonProcessingException;
+
+    <T> T getAndRefresh(final RedisTypeEnum cacheName, final String key, final Class<T> valueType, final long timeout, final TimeUnit unit);
 }

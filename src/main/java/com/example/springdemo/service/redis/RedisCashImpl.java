@@ -2,16 +2,20 @@ package com.example.springdemo.service.redis;
 
 import com.example.springdemo.dao.entity.enums.RedisTypeEnum;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class RedisCashImpl implements RedisCash {
 
     private final RedisTemplate<String, String> redisTemplate;
@@ -55,13 +59,32 @@ public class RedisCashImpl implements RedisCash {
     @Override
     public <T> void putObject(String key, Object value) throws JsonProcessingException {
         String jsonValue = objectMapper.writeValueAsString(value);
-        redisTemplate.opsForValue().set(key, jsonValue);
-        putObject(key, value,300,TimeUnit.SECONDS);
+        //redisTemplate.opsForValue().set(key, jsonValue);
+        putObject(key, jsonValue,300,TimeUnit.SECONDS);
     }
-
+    @Override
     public <T> void putObject(String key, Object value, final long timeout, final TimeUnit timeUnit) throws JsonProcessingException {
         String jsonValue = objectMapper.writeValueAsString(value);
         redisTemplate.opsForValue().set(key, jsonValue, timeout, timeUnit);
+    }
+
+    @Override
+    public <T> T getAndRefresh(final RedisTypeEnum cacheName, final String key, final Class<T> valueType, final long timeout, final TimeUnit unit) {
+        return getAndRefresh(cacheName, key, objectMapper.getTypeFactory().constructType(valueType), timeout, unit);
+    }
+
+    public <T> T getAndRefresh(final RedisTypeEnum cacheName, final String key, final JavaType javaType, final long timeout, final TimeUnit unit) {
+        final String cacheKey = bindCacheKey(cacheName, key);
+        final String result = redisTemplate.opsForValue().get(cacheKey);
+        if (result != null) {
+            try {
+                redisTemplate.expire(cacheKey, timeout, unit);
+                return objectMapper.readValue(result, javaType);
+            } catch (final IOException e) {
+                log.error("ERROR {}", e.toString());
+            }
+        }
+        return null;
     }
 
     @Override
