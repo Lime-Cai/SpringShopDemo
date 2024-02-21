@@ -4,10 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
-
+import com.example.springdemo.dao.entity.enums.RolesEnums;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,6 +14,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * @TableName hs_user
@@ -103,6 +103,12 @@ public class HsUser implements Serializable {
      */
     @Column(name = "last_login_time")
     private LocalDateTime lastLoginTime;
+
+    /**
+     * 角色
+     */
+    @Column(name = "role")
+    private RolesEnums role;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

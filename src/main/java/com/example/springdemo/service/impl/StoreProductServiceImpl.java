@@ -1,7 +1,7 @@
 package com.example.springdemo.service.impl;
 
 import com.example.springdemo.tools.customizeDate;
-import com.example.springdemo.tools.excelToole;
+import com.example.springdemo.tools.ExcelToole;
 import com.example.springdemo.dao.entity.HsUser;
 import com.example.springdemo.dao.entity.StoreProduct;
 import com.example.springdemo.dao.mapper.HsUserMapper;
@@ -137,7 +137,7 @@ public class StoreProductServiceImpl implements StoreProductService {
             callView.add(String.valueOf(storeProduct.getCreatTime()));
             callViewList.add(sheetName);
         }
-        excelToole.ResponseToExcel(response, sheetNameList, headerName(), callViewList);
+        ExcelToole.ResponseToExcel(response, sheetNameList, headerName(), callViewList);
     }
 
     //public ProductView.Product toProductView(StoreProduct storeProduct) {

@@ -17,11 +17,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
-import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.when;
 
 class HsUserServiceImplTest {
     @InjectMocks
@@ -98,7 +99,7 @@ class HsUserServiceImplTest {
 
     @Test
     void testUpdate() {
-        hsUserServiceImpl.update(new HsUser(Integer.valueOf(0), "token", "username", "password", "name", "mail", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Boolean.TRUE, LocalDateTime.of(2023, Month.NOVEMBER, 21, 0, 12, 17), LocalDateTime.of(2023, Month.NOVEMBER, 21, 0, 12, 17)));
+        hsUserServiceImpl.update(hsUser);
     }
 
     @Test
@@ -110,7 +111,9 @@ class HsUserServiceImplTest {
     @Test
     void testFindAll() {
         List<HsUser> result = hsUserServiceImpl.findAll();
-        Assertions.assertEquals(List.of(new HsUser(Integer.valueOf(0), "token", "username", "password", "name", "mail", Integer.valueOf(0), Integer.valueOf(0), Integer.valueOf(0), Boolean.TRUE, LocalDateTime.of(2023, Month.NOVEMBER, 21, 0, 12, 17), LocalDateTime.of(2023, Month.NOVEMBER, 21, 0, 12, 17))), result);
+        List<HsUser> list = new ArrayList<>();
+        list.add(hsUser);
+        Assertions.assertEquals(list, result);
     }
 
     @Test

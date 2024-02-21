@@ -17,6 +17,8 @@ public interface HsUserService {
 
     Optional<HsUser> findById(int id);
 
+    Optional<HsUser> findByUsername(String username);
+
     List<HsUser> findAll();
 
     void delete(Integer id);

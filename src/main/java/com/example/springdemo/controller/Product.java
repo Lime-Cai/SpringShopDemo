@@ -4,10 +4,14 @@ import com.example.springdemo.dao.entity.StoreProduct;
 import com.example.springdemo.dao.mapper.HsUserMapper;
 import com.example.springdemo.service.model.StoreProductService;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -31,8 +35,8 @@ public class Product {
     }
 
     @PostMapping("/add")
-    public void add(StoreProduct storeProductEntity, @CookieValue(value = "login_") String token, Model model) {
-        storeProductService.add(token, storeProductEntity);
+    public void add(@AuthenticationPrincipal UserDetails authentication, StoreProduct storeProductEntity) {
+        storeProductService.add(authentication.getUsername(),storeProductEntity);
     }
 
     @PutMapping("/update/{token}")

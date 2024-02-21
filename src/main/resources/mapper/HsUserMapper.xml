@@ -17,6 +17,7 @@
             <result property="lastLoginTime" column="last_login_time" jdbcType="TIMESTAMP"/>
             <result property="token" column="token" jdbcType="VARCHAR"/>
             <result property="addTime" column="add_time" jdbcType="TIMESTAMP"/>
+            <result property="role" column="role" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -24,7 +25,7 @@
         name,mail,phone,
         is_store,status,last_login_time,
         is_lock,
-        token,add_time
+        token,add_time,role
     </sql>
     <update id="updateHsUser" parameterType="com.example.springdemo.dao.entity.HsUser">
         update hs_user
@@ -39,6 +40,7 @@
             <if test="token != null"> token = #{token,jdbcType=VARCHAR},</if>
             <if test="addTime != null"> add_time = #{addTime},</if>
             <if test="isStore != null"> is_store = #{isStore,jdbcType=NUMERIC},</if>
+            <if test="role != null"> role = #{role,jdbcType=VARCHAR},</if>
         </set>
         where username = #{username,jdbcType=VARCHAR}
     </update>
